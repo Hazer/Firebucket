@@ -3,7 +3,7 @@ package com.cremy.androidapptemplate.util;
 import android.content.res.Configuration;
 import android.util.Log;
 
-import com.cremy.shared.mvp.base.view.BaseView;
+import com.cremy.androidapptemplate.mvp.base.view.BaseViewMobile;
 
 /**
  * Created by remychantenay on 02/05/2016.
@@ -19,7 +19,7 @@ public final class OrientationUtils {
      * @param _view
      */
     public static void setUpOrientation(Configuration _config,
-                                              BaseView _view) {
+                                              BaseViewMobile _view) {
         Log.d(TAG, "onConfigurationChanged");
         if (_config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             _view.onLandscape();

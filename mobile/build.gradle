@@ -86,8 +86,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Shared')
 
-    final DAGGER_VERSION = '2.2'
-    final BUTTERKNIFE_VERSION = '8.0.1'
+    final DAGGER_VERSION = rootProject.DAGGER_VERSION
+    final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
 
     // Apt dependencies
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"

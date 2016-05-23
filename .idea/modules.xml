@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidAppTemplate.iml" filepath="$PROJECT_DIR$/AndroidAppTemplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/Shared/Shared.iml" filepath="$PROJECT_DIR$/Shared/Shared.iml" />
       <module fileurl="file://$PROJECT_DIR$/Shared/Shared.iml" filepath="$PROJECT_DIR$/Shared/Shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SharedTest/SharedTest.iml" filepath="$PROJECT_DIR$/SharedTest/SharedTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobile/mobile.iml" filepath="$PROJECT_DIR$/mobile/mobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/tv/tv.iml" filepath="$PROJECT_DIR$/tv/tv.iml" />
