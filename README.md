@@ -16,5 +16,5 @@
 
 
 # Project build.gradle
-2. Change *API_URL_BASE* for both release and dev
-3. Change *PACKAGE_NAME*
+2. Change API_URL_BASE for both release and dev
+3. Change PACKAGE_NAME for both release and dev

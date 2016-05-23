@@ -1,7 +1,7 @@
-package com.cremy.androidapptemplate.ui.presenter;
+package com.cremy.shared.ui.presenter;
 
-import com.cremy.androidapptemplate.mvp.MainMVP;
 import com.cremy.shared.data.DataManager;
+import com.cremy.shared.mvp.MainMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 
 import javax.inject.Inject;

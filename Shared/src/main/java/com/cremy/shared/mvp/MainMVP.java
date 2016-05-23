@@ -1,4 +1,4 @@
-package com.cremy.androidapptemplate.mvp;
+package com.cremy.shared.mvp;
 
 import com.cremy.shared.mvp.base.BaseMvpView;
 

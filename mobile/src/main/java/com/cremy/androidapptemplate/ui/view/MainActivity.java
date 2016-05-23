@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.cremy.androidapptemplate.R;
-import com.cremy.androidapptemplate.mvp.MainMVP;
 import com.cremy.androidapptemplate.mvp.base.view.BaseActivity;
-import com.cremy.androidapptemplate.ui.presenter.MainPresenter;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
+import com.cremy.shared.mvp.MainMVP;
+import com.cremy.shared.ui.presenter.MainPresenter;
 
 import javax.inject.Inject;
 
