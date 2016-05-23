@@ -54,7 +54,6 @@ android {
         //endregion
     }
 
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
         exclude 'META-INF/LICENSE.txt'
@@ -76,20 +75,24 @@ android {
 }
 
 dependencies {
-    /*wearApp project(':wear')
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
-    compile 'com.google.android.gms:play-services:8.4.0'*/
+    /*wearApp project(':wear')*/
+
+
+    //Release
+    final DAGGER_VERSION = rootProject.DAGGER_VERSION
+    final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
+    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Shared')
-
-    final DAGGER_VERSION = rootProject.DAGGER_VERSION
-    final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
 
     // Apt dependencies
     apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
     apt 'com.android.databinding:compiler:1.0-rc1'
 
+    provided "org.glassfish:javax.annotation:$GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
+
+    // Testing
+    androidTestCompile project(path: ':SharedTest')
 }

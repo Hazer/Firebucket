@@ -52,6 +52,15 @@ android {
         //endregion
     }
 
+    sourceSets {
+        def commonTestDir = 'src/commonTest/java'
+        test {
+            java.srcDir commonTestDir
+        }
+        androidTest {
+            java.srcDir commonTestDir
+        }
+    }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES.txt'
@@ -75,25 +84,9 @@ android {
 
 dependencies {
 
-    //region Testing
-    final HAMCREST_VERSION = rootProject.HAMCREST_VERSION
     final JUNIT_VERSION = rootProject.JUNIT_VERSION
     final MOCKITO_VERSION = rootProject.MOCKITO_VERSION
-
-    def jUnit = "junit:junit:$JUNIT_VERSION"
-    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
-
-    compile jUnit
-    compile mockito
-
-    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
-    //endregion
-
-    //region Release
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
+    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
     final SUPPORT_LIBRARY_VERSION = rootProject.SUPPORT_LIBRARY_VERSION
     final RETROFIT_VERSION = rootProject.RETROFIT_VERSION
     final OKHTTP_VERSION = rootProject.OKHTTP_VERSION
@@ -103,9 +96,8 @@ dependencies {
     final RXANDROID_VERSION = rootProject.RXANDROID_VERSION
     final GLIDE_VERSION = rootProject.GLIDE_VERSION
     final GRU_VERSION = rootProject.GREEN_ROBOT_UTILS_VERSION
-    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
 
-
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //region Dagger 2
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
@@ -115,6 +107,7 @@ dependencies {
     //endregion
 
     //region Support libraries
+    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
@@ -155,6 +148,13 @@ dependencies {
 
     testApt daggerCompiler
     //endregion
+
+    // Testing
+    def jUnit = "junit:junit:$JUNIT_VERSION"
+    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
+
+    compile jUnit
+    compile mockito
 
 
 }

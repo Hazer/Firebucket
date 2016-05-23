@@ -12,7 +12,7 @@ import javax.inject.Inject;
  * Created by remychantenay on 18/05/2016.
  */
 @ApplicationScope
-public final class DataManager {
+public class DataManager {
     private final static String TAG = "DataManager";
 
     //region DI

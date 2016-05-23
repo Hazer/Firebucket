@@ -85,14 +85,25 @@ android {
 
 dependencies {
 
-    //region Release
+    //Release
+    final DAGGER_VERSION = rootProject.DAGGER_VERSION
+    final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
+    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
     final LEANBACK_SUPPORT_VERSION = rootProject.LEANBACK_SUPPORT_VERSION
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Shared')
 
-    //region Leanback
+    //Leanback
     compile "com.android.support:leanback-v17:$LEANBACK_SUPPORT_VERSION"
-    //endregion
-    //endregion
+
+    // Apt dependencies
+    apt "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    apt 'com.android.databinding:compiler:1.0-rc1'
+
+    provided "org.glassfish:javax.annotation:$GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
+
+    // Testing
+    androidTestCompile project(path: ':SharedTest')
 }
