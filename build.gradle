@@ -32,6 +32,18 @@ project.ext.RXANDROID_VERSION = '1.1.0'
 project.ext.RETROFIT_VERSION = '2.0.2'
 project.ext.SUPPORT_LIBRARY_VERSION = '23.3.0'
 project.ext.GREEN_ROBOT_UTILS_VERSION = '1.0.5'
+
+project.ext.HAMCREST_VERSION = '1.3'
+project.ext.JUNIT_VERSION = '4.12'
+project.ext.MOCKITO_VERSION = '1.10.5'
+project.ext.DEXMAKER_VERSION = '1.4'
+project.ext.ESPRESSO_VERSION = '2.2.1'
+project.ext.RUNNER_VERSION = '0.4'
+
+project.ext.WEAR_SUPPORT_VERSION = '1.4.0'
+project.ext.WEAR_PLAY_SERVICES = '8.4.0'
+
+project.ext.LEANBACK_SUPPORT_VERSION = '23.3.0'
 //endregion
 
 
@@ -50,7 +62,6 @@ buildscript {
 
 allprojects {
 
-    //project.properties.put("VARIABLE", "1000")
     repositories {
         jcenter()
         flatDir{

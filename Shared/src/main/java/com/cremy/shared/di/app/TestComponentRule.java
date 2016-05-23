@@ -3,6 +3,7 @@ package com.cremy.shared.di.app;
 import android.content.Context;
 
 import com.cremy.shared.App;
+import com.cremy.shared.data.DataManager;
 import com.cremy.shared.di.app.component.AppTestComponent;
 import com.cremy.shared.di.app.component.DaggerAppTestComponent;
 import com.cremy.shared.di.app.module.AppTestModule;
@@ -39,9 +40,9 @@ public class TestComponentRule implements TestRule {
         return mContext;
     }
 
-/*    public DataHelper getMockDataHelper() {
-        return testComponent.provideDataHelper();
-    }*/ // TODO
+    public DataManager getMockDataHelper() {
+        return testComponent.provideDataManager();
+    }
 
     @Override
     public Statement apply(final Statement base, Description description) {

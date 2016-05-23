@@ -24,7 +24,7 @@ android {
         versionCode rootProject.VERSION_CODE_MOBILE
         versionName rootProject.VERSION_NAME_MOBILE
         // Test intrumentation runner
-        //testInstrumentationRunner "com.cremy.shared.runner.RxAndroidJUnitRunner"
+        testInstrumentationRunner "com.cremy.sharedtest.runner.RxAndroidJUnitRunner"
     }
     buildTypes {
 
@@ -77,8 +77,8 @@ android {
 
 dependencies {
     //region Release
-    final WEAR_SUPPORT_VERSION = '1.4.0'
-    final WEAR_PLAY_SERVICES = '8.4.0'
+    final WEAR_SUPPORT_VERSION = rootProject.WEAR_SUPPORT_VERSION
+    final WEAR_PLAY_SERVICES = rootProject.WEAR_PLAY_SERVICES
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Shared')

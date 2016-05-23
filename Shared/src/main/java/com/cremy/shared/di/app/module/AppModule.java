@@ -5,6 +5,10 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
+import com.cremy.shared.data.DataManager;
+import com.cremy.shared.data.local.TORENAMEServiceLocal;
+import com.cremy.shared.data.remote.TORENAMEService;
+import com.cremy.shared.data.remote.TORENAMEServiceFactory;
 import com.cremy.shared.di.scope.ApplicationScope;
 
 import dagger.Module;
@@ -34,27 +38,27 @@ public class AppModule {
     }
 
     //region Data
-/*    @Provides
+    @Provides
     @ApplicationScope
-    RecentService provideRecentService() {
-        return RecentServiceFactory.makeRecentService();
+    TORENAMEService provideTORENAMEService() {
+        return TORENAMEServiceFactory.makeService();
     }
 
     @Provides
     @ApplicationScope
-    RecentServiceLocal provideRecentServiceLocal() {
-        return new RecentServiceLocal();
-    }*/
+    TORENAMEServiceLocal provideTORENAMEServiceLocal() {
+        return new TORENAMEServiceLocal();
+    }
 
-/*    @Provides
+    @Provides
     @ApplicationScope
-    public DataHelper provideDataHelper(RecentService _recentService,
-                                        RecentServiceLocal _recentServiceLocal,
-                                        Context _context) {
-        return new DataHelper(_recentService,
-                _recentServiceLocal,
+    public DataManager provideDataHelper(TORENAMEService _TORENAMEService,
+                                         TORENAMEServiceLocal _TORENAMEServiceLocal,
+                                         Context _context) {
+        return new DataManager(_TORENAMEService,
+                _TORENAMEServiceLocal,
                 _context);
-    }*/
+    }
     //endregion
 
     //region SharedPreferences

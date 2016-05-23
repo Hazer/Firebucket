@@ -31,7 +31,7 @@ android {
         versionCode rootProject.VERSION_CODE_MOBILE
         versionName rootProject.VERSION_NAME_MOBILE
         // Test intrumentation runner
-        //testInstrumentationRunner "com.cremy.shared.runner.RxAndroidJUnitRunner"
+        testInstrumentationRunner "com.cremy.sharedtest.runner.RxAndroidJUnitRunner"
     }
     buildTypes {
 
@@ -85,7 +85,7 @@ android {
 dependencies {
 
     //region Release
-    final LEANBACK_SUPPORT_VERSION = '23.3.0'
+    final LEANBACK_SUPPORT_VERSION = rootProject.LEANBACK_SUPPORT_VERSION
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Shared')

@@ -25,7 +25,7 @@ android {
         versionCode rootProject.VERSION_CODE_MOBILE
         versionName rootProject.VERSION_NAME_MOBILE
         // Test intrumentation runner
-        //testInstrumentationRunner "com.cremy.shared.runner.RxAndroidJUnitRunner"
+        testInstrumentationRunner "com.cremy.sharedtest.runner.RxAndroidJUnitRunner"
     }
     buildTypes {
 
@@ -37,7 +37,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             buildConfigField "boolean", "LOG", "false"
-            buildConfigField "String", "API_URL_BASE", rootProject.API_URL_BASE_PROD
         }
         //endregion
 
@@ -51,7 +50,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             buildConfigField "boolean", "LOG", "true"
-            buildConfigField "String", "API_URL_BASE", rootProject.API_URL_BASE_DEV
         }
         //endregion
     }

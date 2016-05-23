@@ -5,7 +5,12 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
+import com.cremy.shared.data.DataManager;
+import com.cremy.shared.data.local.TORENAMEServiceLocal;
+import com.cremy.shared.data.remote.TORENAMEService;
 import com.cremy.shared.di.scope.ApplicationScope;
+
+import org.mockito.Mockito;
 
 import dagger.Module;
 import dagger.Provides;
@@ -35,26 +40,26 @@ public class AppTestModule {
     }
 
     //region Data
-/*    @Provides
+    @Provides
     @ApplicationScope
-    RecentService provideRecentService() {
-        return Mockito.mock(RecentService.class);
+    TORENAMEService provideTORENAMEService() {
+        return Mockito.mock(TORENAMEService.class);
     }
 
 
     @Provides
     @ApplicationScope
-    RecentServiceLocal provideRecentServiceLocal() {
-        return Mockito.mock(RecentServiceLocal.class);
+    TORENAMEServiceLocal provideTORENAMEServiceLocal() {
+        return Mockito.mock(TORENAMEServiceLocal.class);
     }
 
     @Provides
     @ApplicationScope
-    public DataHelper provideDataHelper(RecentService _recentService,
-                                        RecentServiceLocal _recentServiceLocal,
-                                        Context _context) {
-        return Mockito.mock(DataHelper.class);
-    }*/
+    public DataManager provideDataHelper(TORENAMEService _toRenameService,
+                                         TORENAMEServiceLocal _toRenameServiceLocal,
+                                         Context _context) {
+        return Mockito.mock(DataManager.class);
+    }
     //endregion
 
     //region SharedPreferences

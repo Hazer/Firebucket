@@ -25,10 +25,31 @@ android {
         versionName "1.00"
     }
     buildTypes {
+        //region RELEASE
         release {
-            minifyEnabled false
+            multiDexEnabled false
+            shrinkResources false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "LOG", "false"
+            buildConfigField "String", "API_URL_BASE", rootProject.API_URL_BASE_PROD
         }
+        //endregion
+
+        //region DEV
+        debug {
+            versionNameSuffix = rootProject.PACKAGE_NAME_DEV_SUFFIX
+
+            multiDexEnabled false
+            shrinkResources false
+            minifyEnabled false // replace runProguard true/false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            buildConfigField "boolean", "LOG", "true"
+            buildConfigField "String", "API_URL_BASE", rootProject.API_URL_BASE_DEV
+        }
+        //endregion
     }
 
 
@@ -115,9 +136,9 @@ dependencies {
     //endregion
 
     //region Testing
-    final HAMCREST_VERSION = '1.3'
-    final JUNIT_VERSION = '4.12'
-    final MOCKITO_VERSION = '1.10.5'
+    final HAMCREST_VERSION = rootProject.HAMCREST_VERSION
+    final JUNIT_VERSION = rootProject.JUNIT_VERSION
+    final MOCKITO_VERSION = rootProject.MOCKITO_VERSION
 
     def jUnit = "junit:junit:$JUNIT_VERSION"
     def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"

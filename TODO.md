@@ -1,11 +1,14 @@
 # General
 1. Rename path of app (from mobile module, the other ones should change automatically)
-2. For Mobile/Wear/TV replace AndroidAppTemplate on the proguard-rules.pro files
+2. Mobile/Wear/TV: replace AndroidAppTemplate on the proguard-rules.pro files
+3. Mobile/Wear/TV: change package name
 
 # Shared
 1. Change Shared -> res/strings.xml app_name value
+2. Complete DataManager/ServiceFactory etc...
 
-# Mobile
+# Launch Screen
+## Mobile
 1. Change drawable-xxhdpi-v4/launch_screen_image_logo_144.png
 2. Change drawable-xxhdpi-v4/launch_screen_image_logo_192.png
 

@@ -41,24 +41,24 @@ android {
 
 dependencies {
     final DAGGER_VERSION = rootProject.DAGGER_VERSION
-    final DEXMAKER_VERSION = '1.4'
-    final ESPRESSO_VERSION = '2.2.1'
-    final RUNNER_VERSION = '0.4'
+    final DEXMAKER_VERSION = rootProject.DEXMAKER_VERSION
+    final ESPRESSO_VERSION = rootProject.ESPRESSO_VERSION
+    final RUNNER_VERSION = rootProject.RUNNER_VERSION
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
 
     compile project(':Shared')
 
-    compile('com.android.support.test:rules:0.2') {
+    compile("com.android.support.test:rules:$RUNNER_VERSION") {
         exclude module: 'support-v4'
         exclude module: 'support-annotations'
     }
 
-    compile('com.android.support.test:runner:0.2') {
+    compile("com.android.support.test:runner:$RUNNER_VERSION") {
         exclude module: 'support-annotations'
     }
 
-    compile('com.android.support.test.espresso:espresso-core:2.0') {
+    compile("com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION") {
         exclude module: 'testing-support-lib'
         exclude module: 'support-v4'
         exclude module: 'support-annotations'
