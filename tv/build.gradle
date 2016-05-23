@@ -25,11 +25,11 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId PACKAGE_NAME
+        applicationId rootProject.PACKAGE_NAME
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode VERSION_CODE
-        versionName VERSION_NAME
+        versionCode rootProject.VERSION_CODE_MOBILE
+        versionName rootProject.VERSION_NAME_MOBILE
         // Test intrumentation runner
         //testInstrumentationRunner "com.cremy.shared.runner.RxAndroidJUnitRunner"
     }
@@ -43,13 +43,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             buildConfigField "boolean", "LOG", "false"
-            buildConfigField "String", "API_URL_BASE", "\"http://url_here/\""
+            buildConfigField "String", "API_URL_BASE", rootProject.API_URL_BASE_PROD
         }
         //endregion
 
         //region DEV
         debug {
-            versionNameSuffix = DEV_PACKAGE_NAME_SUFFIX
+            versionNameSuffix = rootProject.PACKAGE_NAME_DEV_SUFFIX
 
             multiDexEnabled false
             shrinkResources false
@@ -57,7 +57,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             buildConfigField "boolean", "LOG", "true"
-            buildConfigField "String", "API_URL_BASE", "\"http://url_here/\""
+            buildConfigField "String", "API_URL_BASE", rootProject.API_URL_BASE_DEV
         }
         //endregion
     }

@@ -1,5 +1,29 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+
+//region Gradle variables
+
+// Shared
+project.ext.PACKAGE_NAME="com.cremy.androidapptemplate"
+project.ext.PACKAGE_NAME_DEV_SUFFIX=".d"
+project.ext.API_URL_BASE_PROD="\"http://url_here/\""
+project.ext.API_URL_BASE_DEV="\"http://url_here/\""
+
+// Mobile
+project.ext.VERSION_CODE_MOBILE=1000
+project.ext.VERSION_NAME_MOBILE="1.0"
+
+// Wear
+project.ext.VERSION_CODE_WEAR=1000
+project.ext.VERSION_NAME_WEAR="1.0"
+
+// TV
+project.ext.VERSION_CODE_TV=1000
+project.ext.VERSION_NAME_TV="1.0"
+//endregion
+
+
+
 buildscript {
     repositories {
         jcenter()

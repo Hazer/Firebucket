@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.cremy.shared.App">
-        <activity android:name=".LaunchScreen">
+        <activity android:name=".LaunchScreen"
+            android:theme="@style/AppTheme.LaunchScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
