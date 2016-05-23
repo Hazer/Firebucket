@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/mobile-androidTest/mobile-androidTest.iml" filepath="$PROJECT_DIR$/mobile-androidTest/mobile-androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/tv/tv.iml" filepath="$PROJECT_DIR$/tv/tv.iml" />
       <module fileurl="file://$PROJECT_DIR$/wear/wear.iml" filepath="$PROJECT_DIR$/wear/wear.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wear-androidTest/wear-androidTest.iml" filepath="$PROJECT_DIR$/wear-androidTest/wear-androidTest.iml" />
     </modules>
   </component>
 </project>
