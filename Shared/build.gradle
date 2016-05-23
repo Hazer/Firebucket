@@ -52,7 +52,85 @@ android {
 }
 
 dependencies {
+
+    //region Release
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
+
+    final SUPPORT_LIBRARY_VERSION = '23.3.0'
+    final RETROFIT_VERSION = '2.0.2'
+    final OKHTTP_VERSION = '3.2.0'
+    final DAGGER_VERSION = '2.2'
+    final BUTTERKNIFE_VERSION = '8.0.1'
+    final RXJAVA_VERSION = '1.1.1'
+    final RXANDROID_VERSION = '1.1.0'
+    final GLIDE_VERSION = '3.7.0'
+
+    final GRU_VERSION = '1.0.5'
+
+    //region Dagger 2
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
+    compile  "com.google.dagger:dagger:$DAGGER_VERSION"
+    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+    apt daggerCompiler
+    //endregion
+
+    //region Support libraries
+    compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:palette-v7:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    //endregion
+
+    //region Retrofit 2
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
+    compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    //endregion
+
+    //region ButterKnife
+    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
+    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    //endregion
+
+    //region Android Data Binding
+    apt 'com.android.databinding:compiler:1.0-rc1'
+    //endregion
+
+    //region rxJava and rxAndroid
+    compile "io.reactivex:rxandroid:$RXANDROID_VERSION"
+    compile "io.reactivex:rxjava:$RXJAVA_VERSION"
+    //endregion
+
+    //region GreenRobotUtils
+    // https://github.com/remychantenay/GreenRobotUtils
+    compile "com.github.remychantenay:greenrobotutils:$GRU_VERSION"
+    //endregion
+
+    //region Glide
+    compile "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    //endregion
+
+
+    //endregion
+
+    //region Testing
+    final HAMCREST_VERSION = '1.3'
+    final JUNIT_VERSION = '4.12'
+    final MOCKITO_VERSION = '1.10.5'
+
+    def jUnit = "junit:junit:$JUNIT_VERSION"
+    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
+
+    compile jUnit
+    compile mockito
+
+    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
+    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
+    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
+
+    testApt daggerCompiler
+    //endregion
 }
