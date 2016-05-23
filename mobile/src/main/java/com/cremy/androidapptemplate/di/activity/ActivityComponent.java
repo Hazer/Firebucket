@@ -1,5 +1,6 @@
 package com.cremy.androidapptemplate.di.activity;
 
+import com.cremy.androidapptemplate.ui.view.MainActivity;
 import com.cremy.shared.di.activity.module.ActivityModule;
 import com.cremy.shared.di.app.component.AppComponent;
 import com.cremy.shared.di.scope.ActivityScope;
@@ -20,6 +21,6 @@ public interface ActivityComponent {
         !!! IMPORTANT !!!
         Every activity must be referenced below
      */
-/*    void inject(MainActivity view);
-    void inject(RecentDetailsActivity view);*/
+    void inject(MainActivity view);
+  /*  void inject(RecentDetailsActivity view);*/
 }

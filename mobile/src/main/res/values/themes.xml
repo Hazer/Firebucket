@@ -20,4 +20,11 @@
         <item name="android:windowBackground">@drawable/layer_launch_screen</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item> <!-- Status bar -->
     </style>
+
+
+    <style name="MainActivityTheme" parent="AppTheme">
+        <!-- I set my background here and not in the view XML so
+         the rendering will not draw the background twice -->
+        <item name="android:windowBackground">@color/colorBackground</item>
+    </style>
 </resources>

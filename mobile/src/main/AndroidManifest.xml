@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.cremy.shared.App">
-        <activity android:name=".LaunchScreen"
+        <activity android:name=".ui.view.LaunchScreen"
             android:theme="@style/AppTheme.LaunchScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -17,6 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.view.MainActivity"
+            android:theme="@style/MainActivityTheme"></activity>
     </application>
 
 </manifest>

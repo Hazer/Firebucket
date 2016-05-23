@@ -1,7 +1,7 @@
-package com.cremy.androidapptemplate;
+package com.cremy.androidapptemplate.ui.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * LaunchScreen is just here as a Branded LaunchScreen
@@ -14,5 +14,7 @@ public class LaunchScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         finish();
+
+        MainActivity.startMe(this);
     }
 }
