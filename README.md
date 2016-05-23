@@ -1,3 +1,5 @@
+# How-to start from this project:
+
 # General
 1. Rename path of app (from mobile module, the other ones should change automatically)
 2. Mobile/Wear/TV: replace AndroidAppTemplate on the proguard-rules.pro files

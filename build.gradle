@@ -39,6 +39,7 @@ project.ext.MOCKITO_VERSION = '1.10.5'
 project.ext.DEXMAKER_VERSION = '1.4'
 project.ext.ESPRESSO_VERSION = '2.2.1'
 project.ext.RUNNER_VERSION = '0.4'
+project.ext.GLASSFISH_JAVAX_ANNOTATION = '10.0-b28'
 
 project.ext.WEAR_SUPPORT_VERSION = '1.4.0'
 project.ext.WEAR_PLAY_SERVICES = '8.4.0'

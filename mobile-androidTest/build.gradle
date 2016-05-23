@@ -33,12 +33,13 @@ android {
 
 dependencies {
     final DAGGER_VERSION = rootProject.DAGGER_VERSION
+    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile  "com.google.dagger:dagger:$DAGGER_VERSION"
-    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+    provided "org.glassfish:javax.annotation:$GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
 
     compile project(':SharedTest')
     apt daggerCompiler

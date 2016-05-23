@@ -44,8 +44,11 @@ dependencies {
     final DEXMAKER_VERSION = rootProject.DEXMAKER_VERSION
     final ESPRESSO_VERSION = rootProject.ESPRESSO_VERSION
     final RUNNER_VERSION = rootProject.RUNNER_VERSION
+    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
+
+
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-    provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
+    provided "org.glassfish:javax.annotation:$GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
 
     compile project(':Shared')
 
