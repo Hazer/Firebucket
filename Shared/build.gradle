@@ -75,6 +75,22 @@ android {
 
 dependencies {
 
+    //region Testing
+    final HAMCREST_VERSION = rootProject.HAMCREST_VERSION
+    final JUNIT_VERSION = rootProject.JUNIT_VERSION
+    final MOCKITO_VERSION = rootProject.MOCKITO_VERSION
+
+    def jUnit = "junit:junit:$JUNIT_VERSION"
+    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
+
+    compile jUnit
+    compile mockito
+
+    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
+    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
+    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
+    //endregion
+
     //region Release
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -88,6 +104,8 @@ dependencies {
     final GLIDE_VERSION = rootProject.GLIDE_VERSION
     final GRU_VERSION = rootProject.GREEN_ROBOT_UTILS_VERSION
     final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
+
+
 
     //region Dagger 2
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
@@ -134,23 +152,9 @@ dependencies {
     //region Glide
     compile "com.github.bumptech.glide:glide:$GLIDE_VERSION"
     //endregion
-    //endregion
-
-    //region Testing
-    final HAMCREST_VERSION = rootProject.HAMCREST_VERSION
-    final JUNIT_VERSION = rootProject.JUNIT_VERSION
-    final MOCKITO_VERSION = rootProject.MOCKITO_VERSION
-
-    def jUnit = "junit:junit:$JUNIT_VERSION"
-    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
-
-    compile jUnit
-    compile mockito
-
-    testCompile "org.hamcrest:hamcrest-core:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
-    testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
 
     testApt daggerCompiler
     //endregion
+
+
 }
