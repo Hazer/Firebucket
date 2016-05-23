@@ -1,5 +1,6 @@
 # General
 1. Rename path of app (from mobile module, the other ones should change automatically)
+2. For Mobile/Wear/TV replace AndroidAppTemplate on the proguard-rules.pro files
 
 # Shared
 1. Change Shared -> res/strings.xml app_name value
