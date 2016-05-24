@@ -1,6 +1,7 @@
 package com.cremy.shared.mvp.base.presenter;
 
 import com.cremy.shared.mvp.base.BaseMvpView;
+import com.cremy.shared.utils.CrashReporter;
 
 /**
  * Mother of all presenters.
@@ -28,7 +29,11 @@ public class BasePresenter<T extends BaseMvpView> implements IBasePresenter<T> {
 
     @Override
     public void checkViewAttached() throws ViewNotAttachedException {
-        if (!isViewAttached()) throw new ViewNotAttachedException();
+        if (!isViewAttached()) {
+            Throwable throwable = new ViewNotAttachedException();
+            CrashReporter.report(throwable);
+            throw new ViewNotAttachedException();
+        }
     }
 
     public static class ViewNotAttachedException extends RuntimeException {

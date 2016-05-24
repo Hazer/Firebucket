@@ -11,7 +11,19 @@ import com.google.firebase.crash.FirebaseCrash;
 @ApplicationScope
 public class CrashReporter {
 
+    /**
+     * Allows to easily report an event
+     * @param _msg
+     */
     public static void log(final String _msg) {
         FirebaseCrash.log(_msg);
+    }
+
+    /**
+     * Allows to easily report an exception
+     * @param _throwable
+     */
+    public static void report(final Throwable _throwable) {
+        FirebaseCrash.report(_throwable);
     }
 }
