@@ -78,8 +78,6 @@ android {
 }
 
 dependencies {
-
-    //Release
     final DAGGER_VERSION = rootProject.DAGGER_VERSION
     final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
     final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION

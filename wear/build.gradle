@@ -20,7 +20,7 @@ android {
 
     defaultConfig {
         applicationId rootProject.PACKAGE_NAME
-        minSdkVersion 14
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode rootProject.VERSION_CODE_MOBILE
         versionName rootProject.VERSION_NAME_MOBILE
@@ -78,7 +78,6 @@ android {
 }
 
 dependencies {
-    //Release
     final DAGGER_VERSION = rootProject.DAGGER_VERSION
     final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
     final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
@@ -89,7 +88,7 @@ dependencies {
     compile project(':Shared')
 
     //Wear
-    compile "com.google.android.support:wearable:$WEAR_SUPPORT_VERSION"
+    compile "com.google.android.support:wearable:+"
     compile "com.google.android.gms:play-services-wearable:$PLAY_SERVICES_VERSION"
 
     // Apt dependencies
@@ -102,6 +101,7 @@ dependencies {
     // Testing
     androidTestCompile project(path: ':SharedTest')
 }
+
 
 // Add to the bottom of the file
 apply plugin: 'com.google.gms.google-services'

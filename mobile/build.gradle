@@ -75,7 +75,7 @@ android {
 }
 
 dependencies {
-    /*wearApp project(':wear')*/
+    wearApp project(':wear')
 
 
     //Release
