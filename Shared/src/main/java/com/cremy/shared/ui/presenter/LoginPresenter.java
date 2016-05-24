@@ -33,6 +33,11 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
 
     //region Login/Auth
     @Override
+    public boolean isUserExists() {
+        return this.dataManager.ifUserExists();
+    }
+
+    @Override
     public void createUser(String email, String password) {
         this.dataManager.createUserWithEmailAndPassword(email, password, this);
     }

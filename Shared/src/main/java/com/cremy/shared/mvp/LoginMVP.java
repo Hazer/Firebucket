@@ -19,6 +19,7 @@ public interface LoginMVP {
 
     //region Presenter
     interface Presenter extends OnCompleteListener<AuthResult> {
+        boolean isUserExists();
         void createUser(String email, String password);
         void onAuthSuccess(FirebaseUser user);
         void onAuthFail();

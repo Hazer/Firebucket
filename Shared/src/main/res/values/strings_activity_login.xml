@@ -2,7 +2,7 @@
     <string name="login">Login</string>
     <string name="signin">SignIn</string>
     <string name="hint_email_address">Email address</string>
-    <string name="hint_password">Email address</string>
+    <string name="hint_password">Password</string>
 
     <string name="login_subtitle">Provide your credentials and start to use Firebucket!</string>
 </resources>

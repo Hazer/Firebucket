@@ -7,7 +7,6 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
@@ -87,6 +86,10 @@ public class LoginActivity extends BaseActivity implements
 
         this.getExtras(getIntent());
         this.setUpToolbar();
+
+        if (this.presenter.isUserExists()) {
+            this.next();
+        }
     }
 
     @Override
@@ -160,7 +163,8 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     public void next() {
-        Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();
+        MainActivity.startMe(this);
+        this.finish();
     }
 
 
