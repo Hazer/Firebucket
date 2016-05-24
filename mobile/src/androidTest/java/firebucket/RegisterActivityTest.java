@@ -1,20 +1,28 @@
 package firebucket;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.ui.view.RegisterActivity;
+import com.cremy.shared.data.model.User;
 import com.cremy.shared.di.app.TestComponentRule;
+import com.cremy.sharedtest.utils.FirebaseOperationIdlingResource;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.junit.rules.TestRule;
 import org.junit.runner.RunWith;
+
+import java.util.Random;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -27,6 +35,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 public class RegisterActivityTest {
+
 
     //region Component and Rule set
     public final TestComponentRule component =
@@ -59,7 +68,7 @@ public class RegisterActivityTest {
 
     //region Empty credentials
     @Test
-    public void checkClickButtonWithEmptyEmailAndPassword() throws InterruptedException {
+    public void checkClickButtonWithEmptyCredentials() throws InterruptedException {
 
         main.launchActivity(null);
 
@@ -69,6 +78,55 @@ public class RegisterActivityTest {
 
         TextInputLayout textInputLayoutPassword = (TextInputLayout) main.getActivity().findViewById(R.id.registerFormPasswordTextInputLayout);
         assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
+    }
+    //endregion
+
+    //region Already existing credentials
+    @Test
+    public void checkClickButtonWithInvalidCredentials() throws InterruptedException {
+
+        main.launchActivity(null);
+
+        // We prepare the IdlingResource for the firebase asynchronous auth call
+        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource("1");
+        Espresso.registerIdlingResources(firebaseAuthIdlingResource);
+
+        component.getMockDataHelper().createUserWithEmailAndPassword(User.USER_TESTING_EMAIL,
+                User.USER_TESTING_PASSWORD_SUCCESS, new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                firebaseAuthIdlingResource.onStop();
+                assert !task.isSuccessful();
+            }
+        });
+
+        firebaseAuthIdlingResource.onStart();
+        Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);
+    }
+    //endregion
+
+    //region _NOT_ already existing credentials
+    @Test
+    public void checkClickButtonWithValidCredentials() throws InterruptedException {
+
+        main.launchActivity(null);
+
+        // We prepare the IdlingResource for the firebase asynchronous auth call
+        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource("2");
+        Espresso.registerIdlingResources(firebaseAuthIdlingResource);
+
+        component.getMockDataHelper().createUserWithEmailAndPassword(String.valueOf(
+                new Random().nextInt(5000)).concat(User.USER_TESTING_EMAIL),
+                User.USER_TESTING_PASSWORD_FAIL, new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                firebaseAuthIdlingResource.onStop();
+                assert task.isSuccessful();
+            }
+        });
+
+        firebaseAuthIdlingResource.onStart();
+        Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);
     }
     //endregion
 

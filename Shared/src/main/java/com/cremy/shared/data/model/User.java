@@ -4,6 +4,13 @@ public class User {
 
     public final static int RULE_LOGIN_PASSWORD_MIN_CHARS = 10;
 
+    //region Testing-purpose only
+    public final static String USER_TESTING_EMAIL = "test@test.com";
+
+    public final static String USER_TESTING_PASSWORD_SUCCESS = "testpassword";
+    public final static String USER_TESTING_PASSWORD_FAIL = "failpassword";
+    //endregion
+
     //region Variables
     public String username;
     //endregion

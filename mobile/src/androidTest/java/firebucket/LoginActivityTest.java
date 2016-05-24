@@ -10,6 +10,7 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.ui.view.LoginActivity;
+import com.cremy.shared.data.model.User;
 import com.cremy.shared.di.app.TestComponentRule;
 import com.cremy.sharedtest.utils.FirebaseOperationIdlingResource;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,11 +34,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
 
-    private final static String USER_EMAIL_SUCCESS = "test@test.com";
-    private final static String USER_PASSWORD_SUCCESS = "testpassword";
-
-    private final static String USER_EMAIL_FAIL = "fail@fail.com";
-    private final static String USER_PASSWORD_FAIL = "failpassword";
 
     //region Component and Rule set
     public final TestComponentRule component =
@@ -91,18 +87,19 @@ public class LoginActivityTest {
         main.launchActivity(null);
 
         // We prepare the IdlingResource for the firebase asynchronous auth call
-        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource();
+        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource("1");
         Espresso.registerIdlingResources(firebaseAuthIdlingResource);
 
-        component.getMockDataHelper().signInWithEmailAndPassword(USER_EMAIL_FAIL, USER_PASSWORD_FAIL, new OnCompleteListener() {
+        component.getMockDataHelper().signInWithEmailAndPassword(User.USER_TESTING_EMAIL,
+                User.USER_TESTING_PASSWORD_FAIL, new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                firebaseAuthIdlingResource.onOperationEnded();
+                firebaseAuthIdlingResource.onStop();
                 assert !task.isSuccessful();
             }
         });
 
-        firebaseAuthIdlingResource.onOperationStarted();
+        firebaseAuthIdlingResource.onStart();
         Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);
     }
     //endregion
@@ -114,18 +111,19 @@ public class LoginActivityTest {
         main.launchActivity(null);
 
         // We prepare the IdlingResource for the firebase asynchronous auth call
-        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource();
+        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource("2");
         Espresso.registerIdlingResources(firebaseAuthIdlingResource);
 
-        component.getMockDataHelper().signInWithEmailAndPassword(USER_EMAIL_SUCCESS, USER_PASSWORD_SUCCESS, new OnCompleteListener() {
+        component.getMockDataHelper().signInWithEmailAndPassword(User.USER_TESTING_EMAIL,
+                User.USER_TESTING_PASSWORD_SUCCESS, new OnCompleteListener() {
             @Override
             public void onComplete(@NonNull Task task) {
-                firebaseAuthIdlingResource.onOperationEnded();
+                firebaseAuthIdlingResource.onStop();
                 assert task.isSuccessful();
             }
         });
 
-        firebaseAuthIdlingResource.onOperationStarted();
+        firebaseAuthIdlingResource.onStart();
         Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);
     }
     //endregion

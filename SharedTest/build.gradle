@@ -74,6 +74,8 @@ dependencies {
     }
 
     compile "com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION"
+    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$ESPRESSO_VERSION"
+
     compile "com.android.support.test:rules:$RUNNER_VERSION"
     compile "com.crittercism.dexmaker:dexmaker:$DEXMAKER_VERSION"
     compile "com.crittercism.dexmaker:dexmaker-dx:$DEXMAKER_VERSION"

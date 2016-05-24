@@ -9,17 +9,22 @@ public class FirebaseOperationIdlingResource implements IdlingResource {
 
     private boolean idleNow = true;
     private ResourceCallback callback;
+    private String name = null;
+
+    public FirebaseOperationIdlingResource(final String _name) {
+        this.name = "FirebaseOperationIdlingResource".concat(_name);
+    }
 
     @Override
     public String getName() {
-        return "FirebaseOperationIdlingResource";
+        return this.name;
     }
 
-    public void onOperationStarted() {
+    public void onStart() {
         idleNow = false;
     }
 
-    public void onOperationEnded() {
+    public void onStop() {
         idleNow = true;
         if (callback != null) {
             callback.onTransitionToIdle();
