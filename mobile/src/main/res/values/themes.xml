@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    &lt;!&ndash; Base application theme. &ndash;&gt;
+    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>-->
+    </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -26,5 +26,11 @@
         <!-- I set my background here and not in the view XML so
          the rendering will not draw the background twice -->
         <item name="android:windowBackground">@color/colorBackground</item>
+    </style>
+
+    <style name="LoginActivityTheme" parent="AppTheme">
+        <!-- I set my background here and not in the view XML so
+         the rendering will not draw the background twice -->
+        <item name="android:windowBackground">@android:color/white</item>
     </style>
 </resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cremy.firebucket.ui.view.LoginActivity"
+    android:id="@+id/rootView">
+
+    <LinearLayout
+        android:id="@+id/loginForm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <com.cremy.shared.ui.widget.FirebucketTextView
+            style="@style/LoginActivityFormTitle"
+            android:text="@string/login"/>
+    </LinearLayout>
+
+</FrameLayout>
