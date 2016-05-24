@@ -90,13 +90,6 @@ public class LoginActivityTest {
 
         main.launchActivity(null);
 
-        onView(withId(com.cremy.firebucket.R.id.loginFormButton)).perform(ViewActions.click());
-        TextInputLayout textInputLayoutEmail = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormEmailTextInputLayout);
-        assert textInputLayoutEmail.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_email));
-
-        TextInputLayout textInputLayoutPassword = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormPasswordTextInputLayout);
-        assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
-
         // We prepare the IdlingResource for the firebase asynchronous auth call
         final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource();
         Espresso.registerIdlingResources(firebaseAuthIdlingResource);
@@ -119,13 +112,6 @@ public class LoginActivityTest {
     public void checkClickButtonWithValidCredentials() throws InterruptedException {
 
         main.launchActivity(null);
-
-        onView(withId(com.cremy.firebucket.R.id.loginFormButton)).perform(ViewActions.click());
-        TextInputLayout textInputLayoutEmail = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormEmailTextInputLayout);
-        assert textInputLayoutEmail.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_email));
-
-        TextInputLayout textInputLayoutPassword = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormPasswordTextInputLayout);
-        assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
 
         // We prepare the IdlingResource for the firebase asynchronous auth call
         final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource();
