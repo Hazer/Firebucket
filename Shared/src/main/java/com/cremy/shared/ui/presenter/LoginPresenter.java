@@ -7,6 +7,7 @@ import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.mvp.LoginMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
+import com.cremy.shared.utils.CrashReporter;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
@@ -66,6 +67,7 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     @Override
     public void onAuthFail() {
         checkViewAttached();
+        CrashReporter.log("Login: onAuthFail");
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth));
     }
     //endregion
