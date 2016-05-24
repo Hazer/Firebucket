@@ -1,4 +1,4 @@
-package com.cremy.firebucket;
+package firebucket;
 
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;

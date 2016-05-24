@@ -30,8 +30,6 @@ public class BasePresenter<T extends BaseMvpView> implements IBasePresenter<T> {
     @Override
     public void checkViewAttached() throws ViewNotAttachedException {
         if (!isViewAttached()) {
-            Throwable throwable = new ViewNotAttachedException();
-            CrashReporter.report(throwable);
             throw new ViewNotAttachedException();
         }
     }
@@ -39,6 +37,7 @@ public class BasePresenter<T extends BaseMvpView> implements IBasePresenter<T> {
     public static class ViewNotAttachedException extends RuntimeException {
         public ViewNotAttachedException() {
             super("Call Presenter.attachView(BaseView) before asking for data");
+            CrashReporter.report(new Exception("Call Presenter.attachView(BaseView) before asking for data"));
         }
     }
 }
