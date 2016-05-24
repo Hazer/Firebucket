@@ -1,7 +1,9 @@
 package firebucket;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -9,6 +11,9 @@ import android.support.test.runner.AndroidJUnit4;
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.ui.view.LoginActivity;
 import com.cremy.shared.di.app.TestComponentRule;
+import com.cremy.sharedtest.utils.FirebaseOperationIdlingResource;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -27,6 +32,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
  */
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
+
+    private final static String USER_EMAIL_SUCCESS = "test@test.com";
+    private final static String USER_PASSWORD_SUCCESS = "testpassword";
+
+    private final static String USER_EMAIL_FAIL = "fail@fail.com";
+    private final static String USER_PASSWORD_FAIL = "failpassword";
 
     //region Component and Rule set
     public final TestComponentRule component =
@@ -59,7 +70,7 @@ public class LoginActivityTest {
 
     //region Empty credentials
     @Test
-    public void checkClickButtonWithEmptyEmailAndPassword() throws InterruptedException {
+    public void checkClickButtonWithEmptyCredentials() throws InterruptedException {
 
 
         main.launchActivity(null);
@@ -70,6 +81,66 @@ public class LoginActivityTest {
 
         TextInputLayout textInputLayoutPassword = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormPasswordTextInputLayout);
         assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
+    }
+    //endregion
+
+    //region Invalid credentials
+    @Test
+    public void checkClickButtonWithInvalidCredentials() throws InterruptedException {
+
+        main.launchActivity(null);
+
+        onView(withId(com.cremy.firebucket.R.id.loginFormButton)).perform(ViewActions.click());
+        TextInputLayout textInputLayoutEmail = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormEmailTextInputLayout);
+        assert textInputLayoutEmail.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_email));
+
+        TextInputLayout textInputLayoutPassword = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormPasswordTextInputLayout);
+        assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
+
+        // We prepare the IdlingResource for the firebase asynchronous auth call
+        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource();
+        Espresso.registerIdlingResources(firebaseAuthIdlingResource);
+
+        component.getMockDataHelper().signInWithEmailAndPassword(USER_EMAIL_FAIL, USER_PASSWORD_FAIL, new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                firebaseAuthIdlingResource.onOperationEnded();
+                assert !task.isSuccessful();
+            }
+        });
+
+        firebaseAuthIdlingResource.onOperationStarted();
+        Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);
+    }
+    //endregion
+
+    //region Valid credentials
+    @Test
+    public void checkClickButtonWithValidCredentials() throws InterruptedException {
+
+        main.launchActivity(null);
+
+        onView(withId(com.cremy.firebucket.R.id.loginFormButton)).perform(ViewActions.click());
+        TextInputLayout textInputLayoutEmail = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormEmailTextInputLayout);
+        assert textInputLayoutEmail.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_email));
+
+        TextInputLayout textInputLayoutPassword = (TextInputLayout) main.getActivity().findViewById(R.id.loginFormPasswordTextInputLayout);
+        assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
+
+        // We prepare the IdlingResource for the firebase asynchronous auth call
+        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource();
+        Espresso.registerIdlingResources(firebaseAuthIdlingResource);
+
+        component.getMockDataHelper().signInWithEmailAndPassword(USER_EMAIL_SUCCESS, USER_PASSWORD_SUCCESS, new OnCompleteListener() {
+            @Override
+            public void onComplete(@NonNull Task task) {
+                firebaseAuthIdlingResource.onOperationEnded();
+                assert task.isSuccessful();
+            }
+        });
+
+        firebaseAuthIdlingResource.onOperationStarted();
+        Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);
     }
     //endregion
 

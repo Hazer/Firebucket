@@ -61,7 +61,6 @@ public class RegisterActivityTest {
     @Test
     public void checkClickButtonWithEmptyEmailAndPassword() throws InterruptedException {
 
-
         main.launchActivity(null);
 
         onView(withId(R.id.registerFormButton)).perform(ViewActions.click());
