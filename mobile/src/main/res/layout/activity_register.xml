@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.cremy.firebucket.ui.view.LoginActivity"
+    tools:context="com.cremy.firebucket.ui.view.RegisterActivity"
     android:id="@+id/rootView">
 
     <LinearLayout
-        android:id="@+id/loginForm"
+        android:id="@+id/registerForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/material_design_keyline_one"
@@ -15,14 +15,14 @@
         android:layout_gravity="center">
         <com.cremy.shared.ui.widget.FirebucketTextView
             style="@style/LoginActivityFormTitle"
-            android:text="@string/signin"/>
+            android:text="@string/register"/>
 
         <com.cremy.shared.ui.widget.FirebucketTextView
             style="@style/LoginActivityFormSubtitle"
-            android:text="@string/login_subtitle"/>
+            android:text="@string/register_subtitle"/>
 
         <com.cremy.shared.ui.widget.FirebucketTextInputLayout
-            android:id="@+id/loginFormEmailTextInputLayout"
+            android:id="@+id/registerFormEmailTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.cremy.shared.ui.widget.FirebucketTextInputEditText
@@ -33,7 +33,7 @@
         </com.cremy.shared.ui.widget.FirebucketTextInputLayout>
 
         <com.cremy.shared.ui.widget.FirebucketTextInputLayout
-            android:id="@+id/loginFormPasswordTextInputLayout"
+            android:id="@+id/registerFormPasswordTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.cremy.shared.ui.widget.FirebucketTextInputEditText
@@ -44,7 +44,7 @@
         </com.cremy.shared.ui.widget.FirebucketTextInputLayout>
 
         <com.cremy.shared.ui.widget.FirebucketButton
-            android:id="@+id/loginFormButton"
+            android:id="@+id/registerFormButton"
             style="@style/LoginActivityFormButton"
             android:text="@string/button_go"
             android:layout_gravity="right"/>

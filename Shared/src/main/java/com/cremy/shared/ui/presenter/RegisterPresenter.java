@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.mvp.LoginMVP;
+import com.cremy.shared.mvp.RegisterMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
 import com.google.android.gms.tasks.Task;
@@ -17,25 +17,25 @@ import javax.inject.Inject;
 /**
  * Created by remychantenay on 08/05/2016.
  */
-public class LoginPresenter extends BasePresenter<LoginMVP.View>
-        implements LoginMVP.Presenter {
-    private final static String TAG = "LoginPresenter";
+public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
+        implements RegisterMVP.Presenter {
+    private final static String TAG = "RegisterPresenter";
 
     //region DI
     DataManager dataManager;
     Context appContext;
     @Inject
-    public LoginPresenter(DataManager _dataManager,
-                          Context _appContext) {
+    public RegisterPresenter(DataManager _dataManager,
+                             Context _appContext) {
         this.dataManager = _dataManager;
         this.appContext = _appContext;
     }
     //endregion
 
-    //region Login/Auth
+    //region Registration/Auth
     @Override
-    public void signInUser(String email, String password) {
-        this.dataManager.signInWithEmailAndPassword(email, password, this);
+    public void createUser(String email, String password) {
+        this.dataManager.createUserWithEmailAndPassword(email, password, this);
     }
 
     @Override
@@ -50,16 +50,20 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     @Override
     public void onAuthSuccess(FirebaseUser user) {
         checkViewAttached();
+        final String username = usernameFromEmail(user.getEmail());
 
-        // We tell to the view to go next
+        // 1. We'll write the new user into the database
+        this.dataManager.writeUserInDatabase(user.getUid(), username);
+
+        // 2. We tell to the view to go next
         this.view.next();
     }
 
     @Override
     public void onAuthFail(Exception e) {
         checkViewAttached();
-        CrashReporter.log("Login: onAuthFail | "+ e.getMessage());
-        this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_signin));
+        CrashReporter.log("Register: onAuthFail | "+ e.getMessage());
+        this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));
     }
     //endregion
 

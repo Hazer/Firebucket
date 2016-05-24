@@ -21,7 +21,7 @@ public class AuthService extends BaseFirebaseDatabaseService{
     }
 
     /**
-     * Allows to create a user with a given email address and password
+     * Allows to _create_ a user with a given email address and password
      * @param _email
      * @param _password
      * @param _onCompleteListener
@@ -30,6 +30,19 @@ public class AuthService extends BaseFirebaseDatabaseService{
                                                final String _password,
                                                OnCompleteListener _onCompleteListener) {
         this.firebaseAuth.createUserWithEmailAndPassword(_email, _password)
+                .addOnCompleteListener(_onCompleteListener);
+    }
+
+    /**
+     * Allows to _signin_ a user with a given email address and password
+     * @param _email
+     * @param _password
+     * @param _onCompleteListener
+     */
+    public void signInWithEmailAndPassword(final String _email,
+                                               final String _password,
+                                               OnCompleteListener _onCompleteListener) {
+        this.firebaseAuth.signInWithEmailAndPassword(_email, _password)
                 .addOnCompleteListener(_onCompleteListener);
     }
 

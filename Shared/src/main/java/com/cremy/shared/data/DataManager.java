@@ -42,6 +42,12 @@ public class DataManager {
         this.authService.createUserWithEmailAndPassword(_email, _password, _onCompleteListener);
     }
 
+    public void signInWithEmailAndPassword(final String _email,
+                                               final String _password,
+                                               OnCompleteListener _onCompleteListener) {
+        this.authService.signInWithEmailAndPassword(_email, _password, _onCompleteListener);
+    }
+
     public boolean ifUserExists() {
        return this.authService.ifUserExists();
     }

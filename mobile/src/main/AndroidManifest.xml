@@ -23,6 +23,9 @@
 
         <activity android:name="com.cremy.firebucket.ui.view.LoginActivity"
             android:theme="@style/LoginActivityTheme"></activity>
+
+        <activity android:name="com.cremy.firebucket.ui.view.RegisterActivity"
+            android:theme="@style/RegisterActivityTheme"></activity>
     </application>
 
 </manifest>

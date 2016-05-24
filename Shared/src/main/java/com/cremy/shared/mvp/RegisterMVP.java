@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * Created by remychantenay on 08/05/2016.
  */
-public interface LoginMVP {
+public interface RegisterMVP {
 
     //region View
     interface View extends BaseMvpView {
@@ -19,7 +19,7 @@ public interface LoginMVP {
 
     //region Presenter
     interface Presenter extends OnCompleteListener<AuthResult> {
-        void signInUser(String email, String password);
+        void createUser(String email, String password);
         void onAuthSuccess(FirebaseUser user);
         void onAuthFail(Exception e);
     }

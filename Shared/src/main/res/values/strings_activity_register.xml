@@ -1,0 +1,4 @@
+<resources>
+    <string name="register">Register</string>
+    <string name="register_subtitle">Welcome!\nProvide your credentials and start to use Firebucket!</string>
+</resources>
