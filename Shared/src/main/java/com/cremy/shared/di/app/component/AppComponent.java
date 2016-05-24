@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 import com.cremy.shared.App;
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.data.remote.TORENAMEService;
+import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.app.module.AppModule;
 import com.cremy.shared.di.scope.ApplicationScope;
 
@@ -30,7 +30,7 @@ public interface AppComponent {
     App provideApp();
     SharedPreferences provideSharedPreferences();
     DataManager provideDataManager();
-    TORENAMEService provideTORENAMEService();
+    TaskService provideTaskService();
     //endregion
 
 }

@@ -1,16 +1,10 @@
 package com.cremy.shared.data;
 
-import com.cremy.shared.BuildConfig;
 import com.cremy.shared.data.local.TaskServiceLocal;
+import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.TaskService;
-import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
-
-import okhttp3.OkHttpClient;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * This class allows to get the TaskService
@@ -18,12 +12,32 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class ServiceFactory {
 
+    //region AuthServices
+    /**
+     * Allows to make the _auth_ service
+     * @return
+     */
+    public static AuthService makeAuthService() {
 
+        // 1. We get the database instance
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        // 2. We get the auth instance
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        AuthService authService = new AuthService(firebaseDatabase, firebaseAuth);
+        return authService;
+    }
+    //endregion
+
+    //region TaskServices
     /**
      * Allows to make the task service
      * @return
      */
-    public static TaskService makeService() {
+    public static TaskService makeTaskService() {
+
+        // 1. We get the database instance
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseDatabase.setPersistenceEnabled(true);
 
@@ -35,8 +49,9 @@ public class ServiceFactory {
      * Allows to make the task service
      * @return
      */
-    public static TaskServiceLocal makeServiceLocal() {
+    public static TaskServiceLocal makeTaskServiceLocal() {
         TaskServiceLocal taskServiceLocal = new TaskServiceLocal();
         return taskServiceLocal;
     }
+    //endregion
 }

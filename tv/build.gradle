@@ -1,12 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
-//region Variables
-final VERSION_CODE = 1000
-final VERSION_NAME = "1.00"
-final DEV_PACKAGE_NAME_SUFFIX = ".d"
-final PACKAGE_NAME = "com.cremy.androidapptemplate"
-//endregion
 
 android {
 
@@ -107,3 +101,6 @@ dependencies {
     // Testing
     androidTestCompile project(path: ':SharedTest')
 }
+
+// Add to the bottom of the file
+apply plugin: 'com.google.gms.google-services'

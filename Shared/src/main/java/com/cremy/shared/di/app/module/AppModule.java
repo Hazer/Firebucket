@@ -6,9 +6,10 @@ import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.data.local.TORENAMEServiceLocal;
-import com.cremy.shared.data.remote.TORENAMEService;
-import com.cremy.shared.data.remote.TORENAMEServiceFactory;
+import com.cremy.shared.data.local.TaskServiceLocal;
+import com.cremy.shared.data.remote.AuthService;
+import com.cremy.shared.data.remote.TaskService;
+import com.cremy.shared.data.ServiceFactory;
 import com.cremy.shared.di.scope.ApplicationScope;
 
 import dagger.Module;
@@ -40,23 +41,31 @@ public class AppModule {
     //region Data
     @Provides
     @ApplicationScope
-    TORENAMEService provideTORENAMEService() {
-        return TORENAMEServiceFactory.makeService();
+    TaskService provideTaskService() {
+        return ServiceFactory.makeTaskService();
     }
 
     @Provides
     @ApplicationScope
-    TORENAMEServiceLocal provideTORENAMEServiceLocal() {
-        return new TORENAMEServiceLocal();
+    TaskServiceLocal provideTaskServiceLocal() {
+        return ServiceFactory.makeTaskServiceLocal();
     }
 
     @Provides
     @ApplicationScope
-    public DataManager provideDataHelper(TORENAMEService _TORENAMEService,
-                                         TORENAMEServiceLocal _TORENAMEServiceLocal,
+    AuthService provideAuthService() {
+        return ServiceFactory.makeAuthService();
+    }
+
+    @Provides
+    @ApplicationScope
+    public DataManager provideDataHelper(TaskService _TaskService,
+                                         TaskServiceLocal _TaskServiceLocal,
+                                         AuthService _authService,
                                          Context _context) {
-        return new DataManager(_TORENAMEService,
-                _TORENAMEServiceLocal,
+        return new DataManager(_TaskService,
+                _TaskServiceLocal,
+                _authService,
                 _context);
     }
     //endregion

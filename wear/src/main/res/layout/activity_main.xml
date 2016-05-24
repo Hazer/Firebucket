@@ -7,5 +7,5 @@
     android:layout_height="match_parent"
     app:rectLayout="@layout/rect_activity_main"
     app:roundLayout="@layout/round_activity_main"
-    tools:context="com.cremy.androidapptemplate.MainActivity"
+    tools:context="com.cremy.firebucket.MainActivity"
     tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>

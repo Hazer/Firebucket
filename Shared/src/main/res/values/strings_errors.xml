@@ -1,8 +1,3 @@
 <resources>
-    <string name="app_name">Firebucket</string>
-
-    <string name="no_network">Please, check your connection</string>
-    <string name="retry">RETRY</string>
-    <string name="done">DONE</string>
-    <string name="cancel">CANCEL</string>
+    <string name="error_firebase_auth">Oops, an error occured while trying to signin.</string>
 </resources>

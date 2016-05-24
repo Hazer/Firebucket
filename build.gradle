@@ -4,10 +4,10 @@
 //region Gradle variables
 
 // Shared
-project.ext.PACKAGE_NAME="com.cremy.androidapptemplate"
+project.ext.PACKAGE_NAME="com.cremy.firebucket"
 project.ext.PACKAGE_NAME_DEV_SUFFIX=".d"
-project.ext.API_URL_BASE_PROD="\"http://url_here/\""
-project.ext.API_URL_BASE_DEV="\"http://url_here/\""
+project.ext.API_URL_BASE_PROD="\"https://cremy-firebucket-e898d.firebaseio.com/\""
+project.ext.API_URL_BASE_DEV="\"https://cremy-firebucket-e898d.firebaseio.com/\""
 
 // Mobile
 project.ext.VERSION_CODE_MOBILE=1000
@@ -42,7 +42,7 @@ project.ext.RUNNER_VERSION = '0.4'
 project.ext.GLASSFISH_JAVAX_ANNOTATION = '10.0-b28'
 
 project.ext.WEAR_SUPPORT_VERSION = '1.4.0'
-project.ext.WEAR_PLAY_SERVICES = '8.4.0'
+project.ext.PLAY_SERVICES_VERSION = '9.0.0'
 
 project.ext.LEANBACK_SUPPORT_VERSION = '23.3.0'
 //endregion
@@ -58,6 +58,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
+        classpath 'com.google.gms:google-services:3.0.0'
     }
 }
 

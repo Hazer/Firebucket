@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cremy.androidapptemplate">
+    package="com.cremy.firebucket">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name="com.cremy.shared.App">
-        <activity android:name=".ui.view.LaunchScreen"
+        <activity android:name="com.cremy.firebucket.ui.view.LaunchScreen"
             android:theme="@style/AppTheme.LaunchScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.view.MainActivity"
+        <activity android:name="com.cremy.firebucket.ui.view.MainActivity"
             android:theme="@style/MainActivityTheme"></activity>
     </application>
 

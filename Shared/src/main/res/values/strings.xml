@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">App Name</string>
+    <string name="app_name">Firebucket</string>
 
     <string name="no_network">Please, check your connection</string>
     <string name="retry">RETRY</string>

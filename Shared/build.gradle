@@ -96,6 +96,7 @@ dependencies {
     final RXANDROID_VERSION = rootProject.RXANDROID_VERSION
     final GLIDE_VERSION = rootProject.GLIDE_VERSION
     final GRU_VERSION = rootProject.GREEN_ROBOT_UTILS_VERSION
+    final PLAY_SERVICES_VERSION = rootProject.PLAY_SERVICES_VERSION
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -144,6 +145,12 @@ dependencies {
 
     //region Glide
     compile "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    //endregion
+
+    //region Firebase
+    compile "com.google.firebase:firebase-core:$PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-database:$PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-auth:$PLAY_SERVICES_VERSION"
     //endregion
 
     testApt daggerCompiler

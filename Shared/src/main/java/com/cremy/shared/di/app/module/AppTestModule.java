@@ -6,8 +6,10 @@ import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.data.local.TORENAMEServiceLocal;
-import com.cremy.shared.data.remote.TORENAMEService;
+import com.cremy.shared.data.ServiceFactory;
+import com.cremy.shared.data.local.TaskServiceLocal;
+import com.cremy.shared.data.remote.AuthService;
+import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 
 import org.mockito.Mockito;
@@ -42,21 +44,28 @@ public class AppTestModule {
     //region Data
     @Provides
     @ApplicationScope
-    TORENAMEService provideTORENAMEService() {
-        return Mockito.mock(TORENAMEService.class);
+    TaskService provideTaskService() {
+        return Mockito.mock(TaskService.class);
     }
 
 
     @Provides
     @ApplicationScope
-    TORENAMEServiceLocal provideTORENAMEServiceLocal() {
-        return Mockito.mock(TORENAMEServiceLocal.class);
+    TaskServiceLocal provideTaskServiceLocal() {
+        return Mockito.mock(TaskServiceLocal.class);
     }
 
     @Provides
     @ApplicationScope
-    public DataManager provideDataHelper(TORENAMEService _toRenameService,
-                                         TORENAMEServiceLocal _toRenameServiceLocal,
+    AuthService provideAuthService() {
+        return  Mockito.mock(AuthService.class);
+    }
+
+    @Provides
+    @ApplicationScope
+    public DataManager provideDataHelper(TaskService _taskService,
+                                         TaskServiceLocal _taskServiceLocal,
+                                         AuthService _authService,
                                          Context _context) {
         return Mockito.mock(DataManager.class);
     }

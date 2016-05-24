@@ -1,20 +1,24 @@
-# How-to start from this project:
+# FireBucket
+![Firebase](https://raw.githubusercontent.com/remychantenay/SampleFirebase/master/blob/header.jpg)
 
-# General
-1. Rename path of app (from mobile module, the other ones should change automatically)
-2. Mobile/Wear/TV: replace AndroidAppTemplate on the proguard-rules.pro files
-3. Mobile/Wear/TV: change package name
+Glimpse into the astonishing future of BaaS- [Firebase](https://www.firebase.com/) with a very simple bucket list app.
 
-# Shared
-1. Change Shared -> res/strings.xml app_name value
-2. Complete DataManager/ServiceFactory etc...
+## Firebase modules used
+* Database
+* Crash reporting
+* Remote Config
+* Analytics
 
-# Launch Screen
-## Mobile
-1. Change drawable-xxhdpi-v4/launch_screen_image_logo_144.png
-2. Change drawable-xxhdpi-v4/launch_screen_image_logo_192.png
+## Tools
+* Firebase
+* Dependency Injection (Dagger 2)
+* ButterKnife
+* Otto
+* Jackson
 
+## Pattern
+* MVP: Model-View-Presenter
+* MVVM: Model-View-ViewModel (using Android Data Binding)
 
-# Project build.gradle
-2. Change API_URL_BASE for both release and dev
-3. Change PACKAGE_NAME for both release and dev
+## Structure
+__Work in progress...__
