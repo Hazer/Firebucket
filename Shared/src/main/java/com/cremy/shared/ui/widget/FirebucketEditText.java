@@ -11,7 +11,7 @@ import android.util.AttributeSet;
  */
 public final class FirebucketEditText extends CustomEditText {
 
-    protected static final String FONT_PATH = "fonts/fabada-regular.ttf";
+    protected static final String FONT_PATH = "fonts/robotoregular.ttf";
 
     private static Typeface TYPEFACE = null;
 

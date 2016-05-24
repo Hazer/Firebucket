@@ -13,11 +13,13 @@ public interface LoginMVP {
     //region View
     interface View extends BaseMvpView {
         void next();
+        boolean checkForm();
     }
     //endregion
 
     //region Presenter
     interface Presenter extends OnCompleteListener<AuthResult> {
+        void createUser(String email, String password);
         void onAuthSuccess(FirebaseUser user);
         void onAuthFail();
     }

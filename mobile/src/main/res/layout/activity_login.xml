@@ -10,11 +10,45 @@
         android:id="@+id/loginForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/material_design_keyline_one"
         android:orientation="vertical"
         android:layout_gravity="center">
         <com.cremy.shared.ui.widget.FirebucketTextView
             style="@style/LoginActivityFormTitle"
             android:text="@string/login"/>
+
+        <com.cremy.shared.ui.widget.FirebucketTextView
+            style="@style/LoginActivityFormSubtitle"
+            android:text="@string/login_subtitle"/>
+
+        <com.cremy.shared.ui.widget.FirebucketTextInputLayout
+            android:id="@+id/loginFormEmailTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.cremy.shared.ui.widget.FirebucketTextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LoginActivityFormEmailEditText"
+                android:hint="@string/hint_email_address" />
+        </com.cremy.shared.ui.widget.FirebucketTextInputLayout>
+
+        <com.cremy.shared.ui.widget.FirebucketTextInputLayout
+            android:id="@+id/loginFormPasswordTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.cremy.shared.ui.widget.FirebucketTextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/LoginActivityFormPasswordEditText"
+                android:hint="@string/hint_password" />
+        </com.cremy.shared.ui.widget.FirebucketTextInputLayout>
+
+        <com.cremy.shared.ui.widget.FirebucketButton
+            android:id="@+id/loginFormButton"
+            style="@style/LoginActivityFormButton"
+            android:text="@string/signin"
+            android:layout_gravity="right"/>
+
     </LinearLayout>
 
 </FrameLayout>

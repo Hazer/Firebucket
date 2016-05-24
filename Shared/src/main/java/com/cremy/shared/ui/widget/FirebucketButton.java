@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class FirebucketButton extends Button {
 
-    protected static final String FONT_PATH = "fonts/fabada-regular.ttf";
+    protected static final String FONT_PATH = "fonts/robotoregular.ttf";
 
     private static Typeface TYPEFACE = null;
 

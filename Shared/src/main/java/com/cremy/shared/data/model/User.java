@@ -1,8 +1,8 @@
 package com.cremy.shared.data.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
-
 public class User {
+
+    public final static int RULE_LOGIN_PASSWORD_MIN_CHARS = 10;
 
     //region Variables
     public String username;

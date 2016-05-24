@@ -2,27 +2,32 @@ package com.cremy.shared.ui.widget;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.design.widget.TextInputEditText;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
-public final class FirebucketTextView extends TextView {
+/**
+ * IMPORTANT : Right now, using this widget directly from the layout don't allow AppCompat to give
+ * the colorAccent tint to widgets for pre-lollipop devices, so the best is to get the typeface
+ * dynamically
+ */
+public final class FirebucketTextInputEditText extends TextInputEditText {
 
     protected static final String FONT_PATH = "fonts/robotoregular.ttf";
 
     private static Typeface TYPEFACE = null;
 
-        public FirebucketTextView(Context context) {
+        public FirebucketTextInputEditText(Context context) {
               super(context);
               applyTypeface(context);
         }
 
-	    public FirebucketTextView(Context context, AttributeSet attrs) {
+	    public FirebucketTextInputEditText(Context context, AttributeSet attrs) {
 	        super(context, attrs);
 	        applyTypeface(context);
 
 	    }
 
-	    public FirebucketTextView(Context context, AttributeSet attrs, int defStyle) {
+	    public FirebucketTextInputEditText(Context context, AttributeSet attrs, int defStyle) {
 	        super(context, attrs, defStyle);
 	        applyTypeface(context);
 	     	

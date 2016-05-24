@@ -3,6 +3,7 @@ package com.cremy.firebucket.ui.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
+import com.cremy.shared.data.model.User;
 import com.cremy.shared.mvp.LoginMVP;
 import com.cremy.shared.ui.presenter.LoginPresenter;
 
@@ -18,6 +20,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements
         LoginMVP.View {
@@ -26,6 +29,22 @@ public class LoginActivity extends BaseActivity implements
     //region View binding
     @BindView(R.id.rootView)
     FrameLayout rootView;
+
+    @BindView(R.id.loginFormEmailTextInputLayout)
+    TextInputLayout loginFormEmailTextInputLayout;
+    @BindView(R.id.loginFormPasswordTextInputLayout)
+    TextInputLayout loginFormPasswordTextInputLayout;
+    //endregion
+
+    //region View listeners
+    @OnClick(R.id.loginFormButton)
+    public void clickLoginFormButton() {
+        if (this.checkForm()) {
+            final String email = this.loginFormEmailTextInputLayout.getEditText().getText().toString().trim();
+            final String password = this.loginFormPasswordTextInputLayout.getEditText().getText().toString().trim();
+            this.presenter.createUser(email, password);
+        }
+    }
     //endregion
 
     //region DI
@@ -143,4 +162,26 @@ public class LoginActivity extends BaseActivity implements
     public void next() {
         Toast.makeText(this, "TODO", Toast.LENGTH_SHORT).show();
     }
+
+
+    @Override
+    public boolean checkForm() {
+        final String email = this.loginFormEmailTextInputLayout.getEditText().getText().toString().trim();
+        final String password = this.loginFormPasswordTextInputLayout.getEditText().getText().toString().trim();
+        if (email.isEmpty()) {
+            this.loginFormEmailTextInputLayout.setError(getResources().getString(R.string.error_login_invalid_email));
+            this.loginFormEmailTextInputLayout.setErrorEnabled(true);
+            return false;
+        }
+        if (password.isEmpty()
+                || password.length() < User.RULE_LOGIN_PASSWORD_MIN_CHARS) {
+            this.loginFormPasswordTextInputLayout.setError(getResources().getString(R.string.error_login_invalid_password));
+            this.loginFormPasswordTextInputLayout.setErrorEnabled(true);
+            return false;
+        }
+
+        return true;
+    }
+
+
 }

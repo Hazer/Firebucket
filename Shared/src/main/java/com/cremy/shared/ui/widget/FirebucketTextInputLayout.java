@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * Created by remychantenay on 06/10/2015.
  */
 public class FirebucketTextInputLayout extends TextInputLayout {
-    protected static final String FONT_PATH = "fonts/fabada-regular.ttf";
+    protected static final String FONT_PATH = "fonts/robotoregular.ttf";
 
     public FirebucketTextInputLayout(Context context) {
         super(context);

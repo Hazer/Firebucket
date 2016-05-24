@@ -1,3 +1,6 @@
 <resources>
     <string name="error_firebase_auth">Oops, an error occured while trying to signin.</string>
+
+    <string name="error_login_invalid_email">Please provide a valid email address</string>
+    <string name="error_login_invalid_password">Please provide a valid password</string>
 </resources>

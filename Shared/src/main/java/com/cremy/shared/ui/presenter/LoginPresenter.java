@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.mvp.LoginMVP;
-import com.cremy.shared.mvp.MainMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -32,8 +31,12 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     }
     //endregion
 
+    //region Login/Auth
+    @Override
+    public void createUser(String email, String password) {
+        this.dataManager.createUserWithEmailAndPassword(email, password, this);
+    }
 
-    //region Auth event
     @Override
     public void onComplete(@NonNull Task<AuthResult> task) {
         if (task.isSuccessful()) {
@@ -61,7 +64,6 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth));
     }
     //endregion
-
 
     //region Other
     private String usernameFromEmail(String email) {

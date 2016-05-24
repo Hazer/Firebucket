@@ -162,6 +162,4 @@ dependencies {
 
     compile jUnit
     compile mockito
-
-
 }
