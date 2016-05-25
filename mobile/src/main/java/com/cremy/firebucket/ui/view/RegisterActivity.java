@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
@@ -30,6 +32,12 @@ public class RegisterActivity extends BaseActivity implements
     @BindView(R.id.rootViewRegister)
     FrameLayout rootViewRegister;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.registerForm)
+    LinearLayout registerForm;
+
     @BindView(R.id.registerFormEmailTextInputLayout)
     TextInputLayout registerFormEmailTextInputLayout;
     @BindView(R.id.registerFormPasswordTextInputLayout)
@@ -40,6 +48,8 @@ public class RegisterActivity extends BaseActivity implements
     @OnClick(R.id.registerFormButton)
     public void clickRegisterFormButton() {
         if (this.checkForm()) {
+            this.showLoading();
+
             final String email = this.registerFormEmailTextInputLayout.getEditText().getText().toString().trim();
             final String password = this.registerFormPasswordTextInputLayout.getEditText().getText().toString().trim();
             this.presenter.createUser(email, password);
@@ -130,12 +140,14 @@ public class RegisterActivity extends BaseActivity implements
 
     @Override
     public void showLoading() {
-
+        this.progressBar.setVisibility(View.VISIBLE);
+        this.registerForm.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        this.progressBar.setVisibility(View.GONE);
+        this.registerForm.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -154,12 +166,15 @@ public class RegisterActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
+        this.hideLoading();
         SnackBarUtils.showSimpleSnackbar(this.rootViewRegister, _message);
     }
 
 
     @Override
     public void next() {
+        this.hideLoading();
+
         MainActivity.startMe(this);
         this.finish();
     }

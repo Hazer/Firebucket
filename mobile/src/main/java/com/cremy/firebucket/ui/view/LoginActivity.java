@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
@@ -30,6 +32,12 @@ public class LoginActivity extends BaseActivity implements
     @BindView(R.id.rootViewLogin)
     FrameLayout rootViewLogin;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
+    @BindView(R.id.loginForm)
+    LinearLayout loginForm;
+
     @BindView(R.id.loginFormEmailTextInputLayout)
     TextInputLayout loginFormEmailTextInputLayout;
     @BindView(R.id.loginFormPasswordTextInputLayout)
@@ -40,6 +48,7 @@ public class LoginActivity extends BaseActivity implements
     @OnClick(R.id.loginFormButton)
     public void clickLoginFormButton() {
         if (this.checkForm()) {
+            this.showLoading();
             final String email = this.loginFormEmailTextInputLayout.getEditText().getText().toString().trim();
             final String password = this.loginFormPasswordTextInputLayout.getEditText().getText().toString().trim();
             this.presenter.signInUser(email, password);
@@ -130,12 +139,14 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     public void showLoading() {
-
+        this.progressBar.setVisibility(View.VISIBLE);
+        this.loginForm.setVisibility(View.GONE);
     }
 
     @Override
     public void hideLoading() {
-
+        this.progressBar.setVisibility(View.GONE);
+        this.loginForm.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -154,12 +165,14 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
+        this.hideLoading();
         SnackBarUtils.showSimpleSnackbar(this.rootViewLogin, _message);
     }
 
 
     @Override
     public void next() {
+        this.hideLoading();
         MainActivity.startMe(this);
         this.closeActivity();
     }
