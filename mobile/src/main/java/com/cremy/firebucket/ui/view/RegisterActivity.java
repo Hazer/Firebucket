@@ -27,8 +27,8 @@ public class RegisterActivity extends BaseActivity implements
 
 
     //region View binding
-    @BindView(R.id.rootView)
-    FrameLayout rootView;
+    @BindView(R.id.rootViewRegister)
+    FrameLayout rootViewRegister;
 
     @BindView(R.id.registerFormEmailTextInputLayout)
     TextInputLayout registerFormEmailTextInputLayout;
@@ -140,7 +140,7 @@ public class RegisterActivity extends BaseActivity implements
 
     @Override
     public void showNoNetwork() {
-        SnackBarUtils.showActionSnackbar(this.rootView,
+        SnackBarUtils.showActionSnackbar(this.rootViewRegister,
                 getResources().getString(R.string.no_network),
                 getResources().getString(R.string.retry),
                 new View.OnClickListener() {
@@ -154,7 +154,7 @@ public class RegisterActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
-        SnackBarUtils.showSimpleSnackbar(this.rootView, _message);
+        SnackBarUtils.showSimpleSnackbar(this.rootViewRegister, _message);
     }
 
 

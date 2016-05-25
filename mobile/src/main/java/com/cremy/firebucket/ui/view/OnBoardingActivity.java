@@ -23,8 +23,8 @@ public class OnBoardingActivity extends BaseActivity implements
 
 
     //region View binding
-    @BindView(R.id.rootView)
-    FrameLayout rootView;
+    @BindView(R.id.rootViewOnBoarding)
+    FrameLayout rootViewOnBoarding;
     //endregion
 
     //region View listeners
@@ -136,7 +136,7 @@ public class OnBoardingActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
-        SnackBarUtils.showSimpleSnackbar(this.rootView, _message);
+        SnackBarUtils.showSimpleSnackbar(this.rootViewOnBoarding, _message);
     }
 
 

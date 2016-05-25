@@ -23,8 +23,8 @@ public class MainActivity extends BaseActivity implements
 
 
     //region View binding
-    @BindView(R.id.rootView)
-    FrameLayout rootView;
+    @BindView(R.id.rootViewMain)
+    FrameLayout rootViewMain;
     //endregion
 
     //region DI
@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void showNoNetwork() {
-        SnackBarUtils.showActionSnackbar(this.rootView,
+        SnackBarUtils.showActionSnackbar(this.rootViewMain,
                 getResources().getString(R.string.no_network),
                 getResources().getString(R.string.retry),
                 new View.OnClickListener() {
@@ -134,7 +134,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
-        SnackBarUtils.showSimpleSnackbar(this.rootView, _message);
+        SnackBarUtils.showSimpleSnackbar(this.rootViewMain, _message);
     }
 
 }

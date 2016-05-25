@@ -27,8 +27,8 @@ public class LoginActivity extends BaseActivity implements
 
 
     //region View binding
-    @BindView(R.id.rootView)
-    FrameLayout rootView;
+    @BindView(R.id.rootViewLogin)
+    FrameLayout rootViewLogin;
 
     @BindView(R.id.loginFormEmailTextInputLayout)
     TextInputLayout loginFormEmailTextInputLayout;
@@ -140,7 +140,7 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     public void showNoNetwork() {
-        SnackBarUtils.showActionSnackbar(this.rootView,
+        SnackBarUtils.showActionSnackbar(this.rootViewLogin,
                 getResources().getString(R.string.no_network),
                 getResources().getString(R.string.retry),
                 new View.OnClickListener() {
@@ -154,7 +154,7 @@ public class LoginActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
-        SnackBarUtils.showSimpleSnackbar(this.rootView, _message);
+        SnackBarUtils.showSimpleSnackbar(this.rootViewLogin, _message);
     }
 
 
