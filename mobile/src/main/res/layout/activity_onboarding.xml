@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.cremy.firebucket.ui.view.OnBoardingActivity"
+    android:id="@+id/rootView">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <com.cremy.shared.ui.widget.FirebucketTextView
+            style="@style/OnBoardingActivityTitle"
+            android:text="@string/onboarding_title"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.cremy.shared.ui.widget.FirebucketButton
+            android:id="@+id/buttonLogin"
+            style="@style/OnBoardingActivityLoginButton"
+            android:text="@string/login"
+            android:layout_gravity="center_horizontal"/>
+
+        <com.cremy.shared.ui.widget.FirebucketTextView
+            android:id="@+id/linkRegister"
+            style="@style/OnBoardingActivityRegisterLink"
+            android:text="@string/onboarding_register_link"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+
+</FrameLayout>

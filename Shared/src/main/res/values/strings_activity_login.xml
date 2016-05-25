@@ -1,5 +1,5 @@
 <resources>
-    <string name="signin">SignIn</string>
+    <string name="login">Login</string>
     <string name="button_go">GO!</string>
     <string name="hint_email_address">Email address</string>
     <string name="hint_password">Password</string>

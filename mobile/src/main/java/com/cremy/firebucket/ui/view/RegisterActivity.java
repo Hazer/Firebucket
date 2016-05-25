@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -163,6 +164,11 @@ public class RegisterActivity extends BaseActivity implements
         this.finish();
     }
 
+    @Override
+    public void previous() {
+        OnBoardingActivity.startMe(this);
+        this.closeActivity();
+    }
 
     @Override
     public boolean checkForm() {
@@ -181,6 +187,21 @@ public class RegisterActivity extends BaseActivity implements
         }
 
         return true;
+    }
+
+
+    public boolean onKeyDown(int paramInt, KeyEvent paramKeyEvent)
+    {
+        if ((paramKeyEvent.getAction() != 0) || ((paramInt != 4) && (paramInt != 3))) {
+            // Volume keys, ...
+        }
+	  /* back button pressed */
+        else {
+            this.previous();
+            return false;
+        }
+
+        return super.onKeyDown(paramInt, paramKeyEvent);
     }
 
 

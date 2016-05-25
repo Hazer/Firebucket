@@ -52,7 +52,7 @@ public class LoginActivityTest {
     public void checkViewsAreDisplayed() throws InterruptedException {
 
         main.launchActivity(null);
-        onView(withText(com.cremy.shared.R.string.signin)).check(matches(isDisplayed()));
+        onView(withText(com.cremy.shared.R.string.login)).check(matches(isDisplayed()));
         onView(withText(com.cremy.shared.R.string.login_subtitle)).check(matches(isDisplayed()));
         onView(withText(com.cremy.shared.R.string.button_go)).check(matches(isDisplayed()));
 

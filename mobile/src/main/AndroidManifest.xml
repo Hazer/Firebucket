@@ -26,6 +26,9 @@
 
         <activity android:name="com.cremy.firebucket.ui.view.RegisterActivity"
             android:theme="@style/RegisterActivityTheme"></activity>
+        <activity android:name="com.cremy.firebucket.ui.view.OnBoardingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/OnBoardingActivityTheme"></activity>
     </application>
 
 </manifest>

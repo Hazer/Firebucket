@@ -13,6 +13,7 @@ public interface LoginMVP {
     //region View
     interface View extends BaseMvpView {
         void next();
+        void previous();
         boolean checkForm();
     }
     //endregion

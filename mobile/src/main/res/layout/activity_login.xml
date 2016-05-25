@@ -15,7 +15,7 @@
         android:layout_gravity="center">
         <com.cremy.shared.ui.widget.FirebucketTextView
             style="@style/LoginActivityFormTitle"
-            android:text="@string/signin"/>
+            android:text="@string/login"/>
 
         <com.cremy.shared.ui.widget.FirebucketTextView
             style="@style/LoginActivityFormSubtitle"

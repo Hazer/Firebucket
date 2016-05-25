@@ -15,6 +15,6 @@ public class LaunchScreen extends AppCompatActivity {
 
         finish();
 
-        LoginActivity.startMe(this);
+        OnBoardingActivity.startMe(this);
     }
 }
