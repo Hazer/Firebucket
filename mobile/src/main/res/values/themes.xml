@@ -28,13 +28,13 @@
         <item name="android:windowBackground">@color/colorBackground</item>
     </style>
 
-    <style name="LoginActivityTheme" parent="AppTheme">
+    <style name="LoginActivityTheme" parent="AppTheme.NoActionBar">
         <!-- I set my background here and not in the view XML so
          the rendering will not draw the background twice -->
         <item name="android:windowBackground">@android:color/white</item>
     </style>
 
-    <style name="RegisterActivityTheme" parent="AppTheme">
+    <style name="RegisterActivityTheme" parent="AppTheme.NoActionBar">
         <!-- I set my background here and not in the view XML so
          the rendering will not draw the background twice -->
         <item name="android:windowBackground">@android:color/white</item>
