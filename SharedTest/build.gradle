@@ -40,46 +40,39 @@ android {
 }
 
 dependencies {
-    final DAGGER_VERSION = rootProject.DAGGER_VERSION
-    final DEXMAKER_VERSION = rootProject.DEXMAKER_VERSION
-    final ESPRESSO_VERSION = rootProject.ESPRESSO_VERSION
-    final RUNNER_VERSION = rootProject.RUNNER_VERSION
-    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
-
-
-    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-    provided "org.glassfish:javax.annotation:$GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$rootProject.DAGGER_VERSION"
+    provided "org.glassfish:javax.annotation:$rootProject.GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
 
     compile project(':Shared')
 
-    compile("com.android.support.test:rules:$RUNNER_VERSION") {
+    compile("com.android.support.test:rules:$rootProject.RUNNER_VERSION") {
         exclude module: 'support-v4'
         exclude module: 'support-annotations'
     }
 
-    compile("com.android.support.test:runner:$RUNNER_VERSION") {
+    compile("com.android.support.test:runner:$rootProject.RUNNER_VERSION") {
         exclude module: 'support-annotations'
     }
 
-    compile("com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION") {
+    compile("com.android.support.test.espresso:espresso-core:$rootProject.ESPRESSO_VERSION") {
         exclude module: 'testing-support-lib'
         exclude module: 'support-v4'
         exclude module: 'support-annotations'
         exclude group: 'javax.inject'
     }
-    compile("com.android.support.test.espresso:espresso-contrib:$ESPRESSO_VERSION") {
+    compile("com.android.support.test.espresso:espresso-contrib:$rootProject.ESPRESSO_VERSION") {
         exclude group: 'com.android.support', module: 'appcompat'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
 
-    compile "com.android.support.test.espresso:espresso-intents:$ESPRESSO_VERSION"
-    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$ESPRESSO_VERSION"
+    compile "com.android.support.test.espresso:espresso-intents:$rootProject.ESPRESSO_VERSION"
+    androidTestCompile "com.android.support.test.espresso:espresso-idling-resource:$rootProject.ESPRESSO_VERSION"
 
-    compile "com.android.support.test:rules:$RUNNER_VERSION"
-    compile "com.crittercism.dexmaker:dexmaker:$DEXMAKER_VERSION"
-    compile "com.crittercism.dexmaker:dexmaker-dx:$DEXMAKER_VERSION"
-    compile "com.crittercism.dexmaker:dexmaker-mockito:$DEXMAKER_VERSION"
+    compile "com.android.support.test:rules:$rootProject.RUNNER_VERSION"
+    compile "com.crittercism.dexmaker:dexmaker:$rootProject.DEXMAKER_VERSION"
+    compile "com.crittercism.dexmaker:dexmaker-dx:$rootProject.DEXMAKER_VERSION"
+    compile "com.crittercism.dexmaker:dexmaker-mockito:$rootProject.DEXMAKER_VERSION"
 
     // APT dependencies
     apt daggerCompiler

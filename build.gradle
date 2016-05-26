@@ -23,6 +23,7 @@ project.ext.VERSION_NAME_TV="1.0"
 //endregion
 
 //region Gradle dependencies versions
+project.ext.ANDROID_DATA_BINDING_VERSION='2.0.0'
 project.ext.DAGGER_VERSION='2.2'
 project.ext.OKHTTP_VERSION='3.2.0'
 project.ext.BUTTERKNIFE_VERSION = '8.0.1'

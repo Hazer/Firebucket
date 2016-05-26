@@ -84,82 +84,68 @@ android {
 
 dependencies {
 
-    final JUNIT_VERSION = rootProject.JUNIT_VERSION
-    final MOCKITO_VERSION = rootProject.MOCKITO_VERSION
-    final GLASSFISH_JAVAX_ANNOTATION = rootProject.GLASSFISH_JAVAX_ANNOTATION
-    final SUPPORT_LIBRARY_VERSION = rootProject.SUPPORT_LIBRARY_VERSION
-    final RETROFIT_VERSION = rootProject.RETROFIT_VERSION
-    final OKHTTP_VERSION = rootProject.OKHTTP_VERSION
-    final DAGGER_VERSION = rootProject.DAGGER_VERSION
-    final BUTTERKNIFE_VERSION = rootProject.BUTTERKNIFE_VERSION
-    final RXJAVA_VERSION = rootProject.RXJAVA_VERSION
-    final RXANDROID_VERSION = rootProject.RXANDROID_VERSION
-    final GLIDE_VERSION = rootProject.GLIDE_VERSION
-    final GRU_VERSION = rootProject.GREEN_ROBOT_UTILS_VERSION
-    final PLAY_SERVICES_VERSION = rootProject.PLAY_SERVICES_VERSION
-
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //region Dagger 2
-    def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
-    compile  "com.google.dagger:dagger:$DAGGER_VERSION"
-    provided "org.glassfish:javax.annotation:$GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$rootProject.DAGGER_VERSION"
+    compile  "com.google.dagger:dagger:$rootProject.DAGGER_VERSION"
+    provided "org.glassfish:javax.annotation:$rootProject.GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
     apt daggerCompiler
     //endregion
 
     //region Support libraries
-    compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:support-v4:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:palette-v7:$SUPPORT_LIBRARY_VERSION"
-    compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:appcompat-v7:$rootProject.SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-v4:$rootProject.SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:design:$rootProject.SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:recyclerview-v7:$rootProject.SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:cardview-v7:$rootProject.SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:palette-v7:$rootProject.SUPPORT_LIBRARY_VERSION"
+    compile "com.android.support:support-annotations:$rootProject.SUPPORT_LIBRARY_VERSION"
     //endregion
 
     //region Retrofit 2
-    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
-    compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
-    compile "com.squareup.okhttp3:logging-interceptor:$OKHTTP_VERSION"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.RETROFIT_VERSION"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.OKHTTP_VERSION"
     //endregion
 
     //region ButterKnife
-    compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
-    apt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
+    compile "com.jakewharton:butterknife:$rootProject.BUTTERKNIFE_VERSION"
+    apt "com.jakewharton:butterknife-compiler:$rootProject.BUTTERKNIFE_VERSION"
     //endregion
 
     //region Android Data Binding
-    apt 'com.android.databinding:compiler:1.0-rc1'
+    apt "com.android.databinding:compiler:$rootProject.ANDROID_DATA_BINDING_VERSION"
     //endregion
 
     //region rxJava and rxAndroid
-    compile "io.reactivex:rxandroid:$RXANDROID_VERSION"
-    compile "io.reactivex:rxjava:$RXJAVA_VERSION"
+    compile "io.reactivex:rxandroid:$rootProject.RXANDROID_VERSION"
+    compile "io.reactivex:rxjava:$rootProject.RXJAVA_VERSION"
     //endregion
 
     //region GreenRobotUtils
     // https://github.com/remychantenay/GreenRobotUtils
-    compile "com.github.remychantenay:greenrobotutils:$GRU_VERSION"
+    compile "com.github.remychantenay:greenrobotutils:$rootProject.GREEN_ROBOT_UTILS_VERSION"
     //endregion
 
     //region Glide
-    compile "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    compile "com.github.bumptech.glide:glide:$rootProject.GLIDE_VERSION"
     //endregion
 
     //region Firebase
-    compile "com.google.firebase:firebase-core:$PLAY_SERVICES_VERSION"
-    compile "com.google.firebase:firebase-database:$PLAY_SERVICES_VERSION"
-    compile "com.google.firebase:firebase-auth:$PLAY_SERVICES_VERSION"
-    compile "com.google.firebase:firebase-crash:$PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-core:$rootProject.PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-database:$rootProject.PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-auth:$rootProject.PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-crash:$rootProject.PLAY_SERVICES_VERSION"
     //endregion
 
     testApt daggerCompiler
     //endregion
 
     // Testing
-    def jUnit = "junit:junit:$JUNIT_VERSION"
-    def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
+    def jUnit = "junit:junit:$rootProject.JUNIT_VERSION"
+    def mockito = "org.mockito:mockito-core:$rootProject.MOCKITO_VERSION"
 
     compile jUnit
     compile mockito
