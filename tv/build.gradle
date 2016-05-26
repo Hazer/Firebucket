@@ -1,23 +1,10 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-
+apply from: '../android_common.gradle'
 
 android {
 
-    aaptOptions {
-        // If jpg/png images are already optimised by an external tool (e.g. ImageAlpha/pngquant)
-        // ... disabling the cruncher is actually a great id to reduce build time and ensure
-        // ... images optimisation
-        cruncherEnabled = false
-    }
-
-    dataBinding {
-        enabled = true
-    }
-
     publishNonDefault true
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId rootProject.PACKAGE_NAME
@@ -57,24 +44,6 @@ android {
         //endregion
     }
 
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/MANIFEST.MF'
-
-        // Needed by Dagger/Espresso couple
-        exclude 'META-INF/maven/com.google.dagger/dagger/pom.properties'
-        exclude 'META-INF/maven/com.google.dagger/dagger/pom.xml'
-    }
-
-    //Needed because of this https://github.com/square/okio/issues/58
-    lintOptions {
-        warning 'InvalidPackage'
-    }
 }
 
 dependencies {

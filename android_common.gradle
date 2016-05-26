@@ -1,0 +1,40 @@
+
+
+// This gradle file must be applied in all android modules
+// By adding "apply from: '../android_common.gradle'" at the top of the build.gradle module files
+android {
+
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    aaptOptions {
+        // If jpg/png images are already optimised by an external tool (e.g. ImageAlpha/pngquant)
+        // ... disabling the cruncher is actually a great id to reduce build time and ensure
+        // ... images optimisation
+        cruncherEnabled = false
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/MANIFEST.MF'
+
+        // Needed by Dagger/Espresso couple
+        exclude 'META-INF/maven/com.google.dagger/dagger/pom.properties'
+        exclude 'META-INF/maven/com.google.dagger/dagger/pom.xml'
+    }
+
+
+    //Needed because of this https://github.com/square/okio/issues/58
+    lintOptions {
+        warning 'InvalidPackage'
+    }
+}

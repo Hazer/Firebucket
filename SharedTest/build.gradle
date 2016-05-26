@@ -1,10 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
+apply from: '../android_common.gradle'
 
 android {
     defaultPublishConfig "debug"
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -19,24 +18,6 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES.txt'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/MANIFEST.MF'
-
-        // Needed by Dagger/Espresso couple
-        exclude 'META-INF/maven/com.google.dagger/dagger/pom.properties'
-        exclude 'META-INF/maven/com.google.dagger/dagger/pom.xml'
-    }
-
-    //Needed because of this https://github.com/square/okio/issues/58
-    lintOptions {
-        warning 'InvalidPackage'
-    }
 }
 
 dependencies {
