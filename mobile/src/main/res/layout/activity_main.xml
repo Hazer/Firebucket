@@ -16,7 +16,7 @@
         app:elevation="@dimen/material_design_fab_elevation"
         app:borderWidth="0dp"
         app:backgroundTint="?colorAccent"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_add_white"
         android:layout_gravity="end|bottom"
         android:visibility="visible"
         tools:visibility="visible"
