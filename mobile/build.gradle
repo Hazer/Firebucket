@@ -10,38 +10,10 @@ android {
 
     defaultConfig {
         applicationId rootProject.PACKAGE_NAME
-        minSdkVersion 14
-        targetSdkVersion 23
         versionCode rootProject.VERSION_CODE_MOBILE
         versionName rootProject.VERSION_NAME_MOBILE
         // Test intrumentation runner
         testInstrumentationRunner "com.cremy.sharedtest.runner.RxAndroidJUnitRunner"
-    }
-    buildTypes {
-
-        //region RELEASE
-        release {
-            multiDexEnabled false
-            shrinkResources false
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            buildConfigField "boolean", "LOG", "false"
-        }
-        //endregion
-
-        //region DEV
-        debug {
-            versionNameSuffix = rootProject.PACKAGE_NAME_DEV_SUFFIX
-
-            multiDexEnabled false
-            shrinkResources false
-            minifyEnabled false // replace runProguard true/false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-            buildConfigField "boolean", "LOG", "true"
-        }
-        //endregion
     }
 
 }
