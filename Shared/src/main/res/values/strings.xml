@@ -5,4 +5,7 @@
     <string name="retry">RETRY</string>
     <string name="done">DONE</string>
     <string name="cancel">CANCEL</string>
+
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
 </resources>

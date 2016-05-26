@@ -3,6 +3,7 @@ package com.cremy.shared.data;
 import android.content.Context;
 
 import com.cremy.shared.data.local.TaskServiceLocal;
+import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
@@ -55,6 +56,13 @@ public class DataManager {
     public void writeUserInDatabase(final String _userId,
                                     final String _name) {
         this.authService.writeUserInDatabase(_userId, _name);
+    }
+    //endregion
+
+    //region Task
+    public void writeTaskInDatabase(final Task _task,
+                                    OnCompleteListener _onCompleteListener) {
+        this.taskService.writeTaskInDatabase(_task, _onCompleteListener);
     }
     //endregion
 

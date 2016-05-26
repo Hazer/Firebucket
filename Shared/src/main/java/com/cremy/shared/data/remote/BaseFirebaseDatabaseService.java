@@ -1,5 +1,6 @@
 package com.cremy.shared.data.remote;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -7,10 +8,16 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class BaseFirebaseDatabaseService {
 
-    protected FirebaseDatabase firebaseDatabase;
+    public final static String FIREBASE_CHILD_KEY_USERS = "users";
+    public final static String FIREBASE_CHILD_KEY_TASKS = "tasks";
 
-    public BaseFirebaseDatabaseService(FirebaseDatabase _firebaseDatabase) {
+    protected FirebaseDatabase firebaseDatabase;
+    protected FirebaseAuth firebaseAuth;
+
+    public BaseFirebaseDatabaseService(FirebaseDatabase _firebaseDatabase,
+                                       FirebaseAuth _firebaseAuth) {
         this.firebaseDatabase = _firebaseDatabase;
+        this.firebaseAuth = _firebaseAuth;
     }
 
 }

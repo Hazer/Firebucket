@@ -40,8 +40,10 @@ public class ServiceFactory {
         // 1. We get the database instance
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         firebaseDatabase.setPersistenceEnabled(true);
+        // 2. We get the auth instance
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
-        TaskService taskService = new TaskService(firebaseDatabase);
+        TaskService taskService = new TaskService(firebaseDatabase,firebaseAuth);
         return taskService;
     }
 

@@ -10,14 +10,10 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class AuthService extends BaseFirebaseDatabaseService{
 
-    public final static String FIREBASE_CHILD_KEY_USERS = "users";
-
-    private FirebaseAuth firebaseAuth;
 
     public AuthService(FirebaseDatabase _firebaseDatabase,
                        FirebaseAuth _firebaseAuth) {
-        super(_firebaseDatabase);
-        this.firebaseAuth = _firebaseAuth;
+        super(_firebaseDatabase, _firebaseAuth);
     }
 
     /**

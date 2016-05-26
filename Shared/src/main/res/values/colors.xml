@@ -4,6 +4,8 @@
     <color name="colorPrimary">#c63a3a</color>
     <color name="colorPrimaryDark">#a12f2f</color>
     <color name="colorAccent">#ffcb2b</color>
+
+
     <!--Other-->
     <color name="colorRipple">#e5e5e5</color>
     <color name="transparent">#00000000</color>

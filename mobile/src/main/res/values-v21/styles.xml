@@ -1,0 +1,9 @@
+<resources>
+
+
+    <!-- Every view with RippleView as parent will benefit the ripple foreground (>=API 21) -->
+    <style name="RippleView">
+        <item name="android:foreground">@drawable/ripple_foreground_grey</item>
+    </style>
+
+</resources>

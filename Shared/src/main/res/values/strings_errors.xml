@@ -1,7 +1,14 @@
 <resources>
+
+<!--    Firebase-->
     <string name="error_firebase_auth_signin">Oops, an error occured while trying to SignIn.</string>
     <string name="error_firebase_auth_register">Oops, an error occured while trying to register.</string>
 
+<!--    Login-->
     <string name="error_login_invalid_email">Please provide a valid email address</string>
     <string name="error_login_invalid_password">Please provide a valid password</string>
+
+<!--    Create Task-->
+    <string name="error_create_task_date_picking_too_early">You can\'t come back in the past.</string>
+    <string name="error_create_task_invalid_title">Please, provide a title for the task.</string>
 </resources>

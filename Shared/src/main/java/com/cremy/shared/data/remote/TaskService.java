@@ -1,5 +1,8 @@
 package com.cremy.shared.data.remote;
 
+import com.cremy.shared.data.model.Task;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -7,11 +10,25 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class TaskService extends BaseFirebaseDatabaseService {
 
-
-    public TaskService(FirebaseDatabase _firebaseDatabase) {
-        super(_firebaseDatabase);
+    public TaskService(FirebaseDatabase _firebaseDatabase,
+                       FirebaseAuth _firebaseAuth) {
+        super(_firebaseDatabase, _firebaseAuth);
     }
 
+    /**
+     * Allows to create/write a task in the database
+     * @param _task
+     * @param _onCompleteListener
+     */
+    public void writeTaskInDatabase(Task _task, OnCompleteListener _onCompleteListener) {
+        this.firebaseDatabase.
+                getReference()
+                .child(FIREBASE_CHILD_KEY_USERS)
+                .child(this.firebaseAuth.getCurrentUser().getUid())
+                .child(FIREBASE_CHILD_KEY_TASKS)
+                .child(_task.getTitle())
+                .setValue(_task).addOnCompleteListener(_onCompleteListener);
+    }
     /**
      * Allows to _remove_ a given task from the database
      * @param _task
