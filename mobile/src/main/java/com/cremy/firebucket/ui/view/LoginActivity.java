@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.cremy.firebucket.BuildConfig;
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
@@ -44,7 +45,7 @@ public class LoginActivity extends BaseActivity implements
     TextInputLayout loginFormPasswordTextInputLayout;
     //endregion
 
-    //region View listeners
+    //region View events
     @OnClick(R.id.loginFormButton)
     public void clickLoginFormButton() {
         if (this.checkForm()) {
@@ -96,6 +97,11 @@ public class LoginActivity extends BaseActivity implements
 
         this.getExtras(getIntent());
         this.setUpToolbar();
+
+        if (BuildConfig.LOG) {
+            this.loginFormEmailTextInputLayout.getEditText().setText("test@test.com");
+            this.loginFormPasswordTextInputLayout.getEditText().setText("testpassword");
+        }
     }
 
     @Override

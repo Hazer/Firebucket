@@ -45,4 +45,10 @@
          the rendering will not draw the background twice -->
         <item name="android:windowBackground">@android:color/white</item>
     </style>
+
+    <style name="CreateTaskActivityTheme" parent="AppTheme.NoActionBar">
+        <!-- I set my background here and not in the view XML so
+         the rendering will not draw the background twice -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
 </resources>

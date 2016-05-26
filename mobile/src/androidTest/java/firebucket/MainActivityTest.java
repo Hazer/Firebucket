@@ -4,6 +4,7 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.cremy.firebucket.R;
 import com.cremy.firebucket.ui.view.MainActivity;
 import com.cremy.shared.di.app.TestComponentRule;
 
@@ -16,7 +17,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
  * Created by remychantenay on 21/05/2016.
@@ -36,11 +37,11 @@ public class MainActivityTest {
     public TestRule chain = RuleChain.outerRule(component).around(main);
     //endregion
 
-    //region Test TextView
+    //region Test FloatingActionButton
     @Test
-    public void checkTextView() throws InterruptedException {
+    public void checkFloatingActionButton() throws InterruptedException {
         main.launchActivity(null);
-        onView(withText("Hello world!")).check(matches(isDisplayed()));
+        onView(withId(R.id.fab)).check(matches(isDisplayed()));
     }
     //endregion
 }

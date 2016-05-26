@@ -1,5 +1,6 @@
 package com.cremy.firebucket.di.activity;
 
+import com.cremy.firebucket.ui.view.CreateTaskActivity;
 import com.cremy.firebucket.ui.view.LoginActivity;
 import com.cremy.firebucket.ui.view.MainActivity;
 import com.cremy.firebucket.ui.view.OnBoardingActivity;
@@ -28,4 +29,5 @@ public interface ActivityComponent {
     void inject(LoginActivity view);
     void inject(RegisterActivity view);
     void inject(OnBoardingActivity view);
+    void inject(CreateTaskActivity view);
 }

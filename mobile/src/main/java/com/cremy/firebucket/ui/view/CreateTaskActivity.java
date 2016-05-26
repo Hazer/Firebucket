@@ -3,15 +3,17 @@ package com.cremy.firebucket.ui.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
-import com.cremy.shared.mvp.MainMVP;
-import com.cremy.shared.ui.presenter.MainPresenter;
+import com.cremy.shared.mvp.CreateTaskMVP;
+import com.cremy.shared.ui.presenter.CreateTaskPresenter;
 
 import javax.inject.Inject;
 
@@ -19,25 +21,28 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements
-        MainMVP.View {
+public class CreateTaskActivity extends BaseActivity implements
+        CreateTaskMVP.View {
 
 
     //region View binding
-    @BindView(R.id.rootViewMain)
-    FrameLayout rootViewMain;
+    @BindView(R.id.rootViewCreateTask)
+    CoordinatorLayout rootViewCreateTask;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     //endregion
 
     //region View events
-    @OnClick(R.id.fab)
-    public void clickFab() {
-        this.nextCreateTask();
+    @OnClick(R.id.fabCreateTask)
+    public void clickFabCreateTask() {
+        // todo
     }
     //endregion
 
     //region DI
     @Inject
-    MainPresenter presenter;
+    CreateTaskPresenter presenter;
     @Override
     public void injectDependencies() {
         activityComponent().inject(this);
@@ -58,8 +63,7 @@ public class MainActivity extends BaseActivity implements
      * @param _context
      */
     public static void startMe(Context _context) {
-        Intent intent = new Intent(_context, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        Intent intent = new Intent(_context, CreateTaskActivity.class);
         _context.startActivity(intent);
     }
 
@@ -67,7 +71,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_create_task);
         ButterKnife.bind(this);
 
         this.injectDependencies();
@@ -108,7 +112,9 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void setUpToolbar() {
-
+        this.setSupportActionBar(this.toolbar);
+        this.getSupportActionBar().setTitle("");
+        ActivityUtils.setToolbarCustomWhiteBackArrow(this, this.getSupportActionBar());
     }
 
     @Override
@@ -128,7 +134,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void showNoNetwork() {
-        SnackBarUtils.showActionSnackbar(this.rootViewMain,
+        SnackBarUtils.showActionSnackbar(this.rootViewCreateTask,
                 getResources().getString(R.string.no_network),
                 getResources().getString(R.string.retry),
                 new View.OnClickListener() {
@@ -142,13 +148,6 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void showMessage(String _message) {
-        SnackBarUtils.showSimpleSnackbar(this.rootViewMain, _message);
+        SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, _message);
     }
-
-
-    @Override
-    public void nextCreateTask() {
-        CreateTaskActivity.startMe(this);
-    }
-
 }

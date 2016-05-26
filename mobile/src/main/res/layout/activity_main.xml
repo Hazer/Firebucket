@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.cremy.firebucket.ui.view.MainActivity"
     android:id="@+id/rootViewMain">
 
-    <TextView
-        android:id="@+id/text"
+
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello world!"/>
-
+        android:clickable="true"
+        android:id="@+id/fab"
+        app:elevation="@dimen/material_design_fab_elevation"
+        app:borderWidth="0dp"
+        app:backgroundTint="?colorAccent"
+        android:src="@drawable/ic_add"
+        android:layout_gravity="end|bottom"
+        android:visibility="visible"
+        tools:visibility="visible"
+        android:layout_margin="@dimen/material_design_keyline_one"
+        />
 </FrameLayout>

@@ -5,11 +5,10 @@ import com.cremy.shared.mvp.base.BaseMvpView;
 /**
  * Created by remychantenay on 08/05/2016.
  */
-public interface MainMVP {
+public interface CreateTaskMVP {
 
     //region View
     interface View extends BaseMvpView {
-        void nextCreateTask();
     }
     //endregion
 
