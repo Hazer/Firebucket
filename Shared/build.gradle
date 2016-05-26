@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: '../android_common.gradle'
+apply from: '../dependencies_common.gradle'
 android {
 
     defaultPublishConfig "debug"
@@ -55,12 +56,6 @@ dependencies {
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    //region Dagger 2
-    def daggerCompiler = "com.google.dagger:dagger-compiler:$rootProject.DAGGER_VERSION"
-    compile  "com.google.dagger:dagger:$rootProject.DAGGER_VERSION"
-    provided "org.glassfish:javax.annotation:$rootProject.GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
-    apt daggerCompiler
-    //endregion
 
     //region Support libraries
     compile "com.android.support:appcompat-v7:$rootProject.SUPPORT_LIBRARY_VERSION"
@@ -109,7 +104,6 @@ dependencies {
     compile "com.google.firebase:firebase-crash:$rootProject.PLAY_SERVICES_VERSION"
     //endregion
 
-    testApt daggerCompiler
     //endregion
 
     // Testing

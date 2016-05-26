@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: '../android_common.gradle'
+apply from: '../dependencies_common.gradle'
 
 android {
     defaultPublishConfig "debug"
@@ -21,8 +22,6 @@ android {
 }
 
 dependencies {
-    def daggerCompiler = "com.google.dagger:dagger-compiler:$rootProject.DAGGER_VERSION"
-    provided "org.glassfish:javax.annotation:$rootProject.GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
 
     compile project(':Shared')
 
@@ -55,6 +54,4 @@ dependencies {
     compile "com.crittercism.dexmaker:dexmaker-dx:$rootProject.DEXMAKER_VERSION"
     compile "com.crittercism.dexmaker:dexmaker-mockito:$rootProject.DEXMAKER_VERSION"
 
-    // APT dependencies
-    apt daggerCompiler
 }

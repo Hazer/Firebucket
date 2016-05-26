@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: '../android_common.gradle'
+apply from: '../dependencies_common.gradle'
 
 android {
 
@@ -54,11 +55,9 @@ dependencies {
     compile "com.android.support:leanback-v17:$rootProject.LEANBACK_SUPPORT_VERSION"
 
     // Apt dependencies
-    apt "com.google.dagger:dagger-compiler:$rootProject.DAGGER_VERSION"
     apt "com.jakewharton:butterknife-compiler:$rootProject.BUTTERKNIFE_VERSION"
     apt "com.android.databinding:compiler:$rootProject.ANDROID_DATA_BINDING_VERSION"
 
-    provided "org.glassfish:javax.annotation:$rootProject.GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
 
     // Testing
     androidTestCompile project(path: ':SharedTest')

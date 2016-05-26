@@ -1,0 +1,14 @@
+
+
+// This gradle file must be applied in every module
+// By adding "apply from: '../dependencies_common.gradle'" at the top of the build.gradle module files
+dependencies {
+
+   //region Dagger2
+    def daggerCompiler = "com.google.dagger:dagger-compiler:$rootProject.DAGGER_VERSION"
+    compile  "com.google.dagger:dagger:$rootProject.DAGGER_VERSION"
+    provided "org.glassfish:javax.annotation:$rootProject.GLASSFISH_JAVAX_ANNOTATION" //Required by Dagger2
+    apt daggerCompiler
+    testApt daggerCompiler
+    //endregion
+}
