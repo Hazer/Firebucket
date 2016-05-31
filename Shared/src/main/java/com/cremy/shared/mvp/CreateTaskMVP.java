@@ -13,6 +13,7 @@ public interface CreateTaskMVP {
 
     //region View
     interface View extends BaseMvpView {
+        void createTask();
         void next();
 
         boolean isTaskTitleValid();

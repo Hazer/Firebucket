@@ -3,6 +3,7 @@ package com.cremy.shared.data.remote;
 import com.cremy.shared.data.model.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -21,12 +22,20 @@ public class TaskService extends BaseFirebaseDatabaseService {
      * @param _onCompleteListener
      */
     public void writeTaskInDatabase(Task _task, OnCompleteListener _onCompleteListener) {
-        this.firebaseDatabase.
+
+        // 1. We set the position on the right child
+        DatabaseReference targetChild =  this.firebaseDatabase.
                 getReference()
                 .child(FIREBASE_CHILD_KEY_USERS)
                 .child(this.firebaseAuth.getCurrentUser().getUid())
-                .child(FIREBASE_CHILD_KEY_TASKS)
-                .child(_task.getTitle())
+                .child(FIREBASE_CHILD_KEY_TASKS);
+
+        // 2. We push and get the child key
+        String key = targetChild
+                .push().getKey();
+
+        // 3. We now set the new task
+        targetChild.child(key)
                 .setValue(_task).addOnCompleteListener(_onCompleteListener);
     }
     /**

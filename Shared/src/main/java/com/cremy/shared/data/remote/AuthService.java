@@ -3,7 +3,9 @@ package com.cremy.shared.data.remote;
 import com.cremy.shared.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -57,15 +59,18 @@ public class AuthService extends BaseFirebaseDatabaseService{
      * @param _name
      */
     public void writeUserInDatabase(final String _userId,
-                                    final String _name) {
+                                    final String _name,
+                                    ValueEventListener _valueEventListener) {
 
         User user = new User(_name);
 
-        this.firebaseDatabase.
+        DatabaseReference targetChild = this.firebaseDatabase.
                 getReference()
                 .child(FIREBASE_CHILD_KEY_USERS)
-                .child(_userId)
-                .setValue(user);
+                .child(_userId);
+
+        targetChild.addListenerForSingleValueEvent(_valueEventListener);
+        targetChild.setValue(user);
     }
 
 }

@@ -11,6 +11,8 @@ import com.cremy.shared.utils.CrashReporter;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 import javax.inject.Inject;
 
@@ -48,15 +50,24 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     }
 
     @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        // 2. We tell to the view to go next
+        this.view.next();
+    }
+
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+        CrashReporter.log("Register: onCancelled | "+ databaseError.getMessage());
+        this.view.showMessage(databaseError.getMessage());
+    }
+
+    @Override
     public void onAuthSuccess(FirebaseUser user) {
         checkViewAttached();
         final String username = usernameFromEmail(user.getEmail());
 
         // 1. We'll write the new user into the database
-        this.dataManager.writeUserInDatabase(user.getUid(), username);
-
-        // 2. We tell to the view to go next
-        this.view.next();
+        this.dataManager.writeUserInDatabase(user.getUid(), username, this);
     }
 
     @Override

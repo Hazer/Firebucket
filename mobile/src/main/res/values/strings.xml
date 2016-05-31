@@ -1,3 +1,4 @@
 <resources>
-
+    <string name="general_progress_dialog_title">Loading</string>
+    <string name="general_progress_dialog_content">Please wait...</string>
 </resources>

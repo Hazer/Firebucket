@@ -1,6 +1,7 @@
 package com.cremy.firebucket.ui.view;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
+import com.cremy.greenrobotutils.library.util.KeyboardUtils;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.mvp.CreateTaskMVP;
 import com.cremy.shared.ui.presenter.CreateTaskPresenter;
@@ -33,7 +35,7 @@ import butterknife.OnClick;
 public class CreateTaskActivity extends BaseActivity implements
         CreateTaskMVP.View,
 DatePickerDialog.OnDateSetListener{
-
+    public ProgressDialog progress;
 
     //region View binding
     @BindView(R.id.rootViewCreateTask)
@@ -60,7 +62,7 @@ DatePickerDialog.OnDateSetListener{
     public void clickFabCreateTask() {
         if (this.isTaskTitleValid()) {
             this.presenter.setTaskTitle(createTaskTitleTextInputLayout.getEditText().getText().toString());
-            this.presenter.createTask();
+            this.createTask();
         } else {
             this.showMessage(getResources().getString(R.string.error_create_task_invalid_title));
         }
@@ -172,12 +174,15 @@ DatePickerDialog.OnDateSetListener{
 
     @Override
     public void showLoading() {
-
+        progress = ProgressDialog.show(this, getResources().getString(R.string.general_progress_dialog_title), getResources().getString(R.string.general_progress_dialog_content), true);
+        KeyboardUtils.hideKeyboard(this, this.createTaskTitleTextInputLayout.getEditText());
     }
 
     @Override
     public void hideLoading() {
-
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 
     @Override
@@ -188,7 +193,7 @@ DatePickerDialog.OnDateSetListener{
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        presenter.createTask();
+                        createTask();
                     }
                 }
         );
@@ -200,7 +205,14 @@ DatePickerDialog.OnDateSetListener{
     }
 
     @Override
+    public void createTask() {
+        this.showLoading();
+        presenter.createTask();
+    }
+
+    @Override
     public void next() {
+        this.hideLoading();
         this.closeActivity();
     }
 

@@ -8,6 +8,7 @@ import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.database.ValueEventListener;
 
 import javax.inject.Inject;
 
@@ -54,8 +55,9 @@ public class DataManager {
     }
 
     public void writeUserInDatabase(final String _userId,
-                                    final String _name) {
-        this.authService.writeUserInDatabase(_userId, _name);
+                                    final String _name,
+                                    ValueEventListener _valueEventListener) {
+        this.authService.writeUserInDatabase(_userId, _name, _valueEventListener);
     }
     //endregion
 
