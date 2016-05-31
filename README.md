@@ -27,14 +27,17 @@ This project is nothing more than a way to put into practice what I've learn.
 * MVVM: Model-View-ViewModel (using Android Data Binding)
 
 ## Structure
-* *mobile*: contain all the code specific to the mobile application only
-* *wear*: code specific to the wearable devices (Android Wear 2.0)
-* *tv*: Android TV app
-* *Shared*: this module host the code shared by the three module above
-* *SharedTest*: contain very specific testing classes used by all the modules
+* **mobile**: contain all the code specific to the mobile application only
+* **wear**: code specific to the wearable devices (Android Wear 2.0)
+* **tv**: Android TV app
+* **Shared**: this module host the code shared by the three module above
+* **SharedTest**: contain very specific testing classes used by all the modules
 
 ## Testing
-__Work in progress...__
+* **Espresso** for instrumented testing
+* **Mockito** to mock some classes such as the *DataManager*
+* **Harmcrest** to create custom assertions for the tests
+* **JUnit**, because JUnit
 
 ## Android Wear 2.0
 __Work in progress...__
