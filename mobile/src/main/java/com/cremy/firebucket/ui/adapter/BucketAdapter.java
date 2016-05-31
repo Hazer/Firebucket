@@ -112,10 +112,9 @@ public final class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.Bind
     public void onBindViewHolder(BindingHolder holder, int position) {
         final int viewType = getItemViewType(position);
 
-        // TODO: Complete if other types are needed
         if (viewType == TYPE_HEADER) {
             ItemBucketHeaderBinding itemBucketHeaderBinding = (ItemBucketHeaderBinding) holder.binding;
-            itemBucketHeaderBinding.setViewModel(new BucketHeaderViewModel(this.context, "TODO", position));
+            itemBucketHeaderBinding.setViewModel(new BucketHeaderViewModel(this.context, this.model.get(position), position));
         }
         else {
             ItemBucketTaskBinding itemBucketTaskBinding = (ItemBucketTaskBinding) holder.binding;
@@ -132,6 +131,9 @@ public final class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.Bind
     @Override
     public int getItemViewType(int position) {
 
+        if (this.model.get(position).getDisplayedDeadline()==null) {
+            return TYPE_HEADER;
+        }
         return TYPE_DEFAULT; // Default value
     }
 
