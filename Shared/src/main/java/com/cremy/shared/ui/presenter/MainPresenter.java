@@ -20,4 +20,9 @@ public final class MainPresenter extends BasePresenter<MainMVP.View>
         dataManager = _dataManager;
     }
     //endregion
+
+    @Override
+    public void loadBucket() {
+
+    }
 }

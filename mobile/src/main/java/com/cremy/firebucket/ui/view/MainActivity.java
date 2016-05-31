@@ -2,15 +2,22 @@ package com.cremy.firebucket.ui.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.firebucket.util.OrientationUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
+import com.cremy.shared.data.model.Task;
 import com.cremy.shared.mvp.MainMVP;
+import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.ui.presenter.MainPresenter;
 
 import javax.inject.Inject;
@@ -26,6 +33,8 @@ public class MainActivity extends BaseActivity implements
     //region View binding
     @BindView(R.id.rootViewMain)
     FrameLayout rootViewMain;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
     //endregion
 
     //region View events
@@ -75,6 +84,8 @@ public class MainActivity extends BaseActivity implements
 
         this.getExtras(getIntent());
         this.setUpToolbar();
+
+        OrientationUtils.setUpOrientation(getResources().getConfiguration(), this);
     }
 
     @Override
@@ -88,12 +99,18 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onLandscape() {
-
+        this.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
     }
 
     @Override
     public void onPortrait() {
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
 
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        OrientationUtils.setUpOrientation(newConfig, this);
     }
 
     @Override
@@ -134,7 +151,7 @@ public class MainActivity extends BaseActivity implements
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // TODO
+                        loadData();
                     }
                 }
         );
@@ -149,6 +166,35 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void nextCreateTask() {
         CreateTaskActivity.startMe(this);
+    }
+
+    @Override
+    public void loadData() {
+        try {
+            // 1. We check that the view is correctly attached to the presenter
+            this.presenter.checkViewAttached();
+
+            // 2. We load the data
+            this.showLoading();
+            this.presenter.loadBucket();
+        } catch (BasePresenter.ViewNotAttachedException e) {
+            e.printStackTrace();
+            this.showMessage(e.getMessage());
+        }
+    }
+    @Override
+    public void showBucket(Task _tasks) {
+
+    }
+
+    @Override
+    public void showBucketEmpty() {
+
+    }
+
+    @Override
+    public void showError() {
+
     }
 
 }
