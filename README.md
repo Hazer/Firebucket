@@ -27,11 +27,11 @@ This project is nothing more than a way to put into practice what I've learn.
 * MVVM: Model-View-ViewModel (using Android Data Binding)
 
 ## Structure
-* _mobile_: contain all the code specific to the mobile application only
-* _wear_: code specific to the wearable devices (Android Wear 2.0)
-* _tv_: Android TV app
-* _Shared_: this module host the code shared by the three module above
-* _SharedTest_: contain very specific testing classes used by all the modules
+* *mobile*: contain all the code specific to the mobile application only
+* *wear*: code specific to the wearable devices (Android Wear 2.0)
+* *tv*: Android TV app
+* *Shared*: this module host the code shared by the three module above
+* *SharedTest*: contain very specific testing classes used by all the modules
 
 ## Testing
 __Work in progress...__
