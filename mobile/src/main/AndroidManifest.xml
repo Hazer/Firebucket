@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.cremy.firebucket.ui.view.MainActivity"
+        <activity android:name=".ui.view.BucketActivity"
             android:theme="@style/MainActivityTheme"></activity>
 
         <activity android:name="com.cremy.firebucket.ui.view.LoginActivity"

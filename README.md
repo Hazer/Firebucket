@@ -23,8 +23,8 @@ This project is nothing more than a way to put into practice what I've learn.
 * Jackson
 
 ## Pattern
-* MVP: Model-View-Presenter
-* MVVM: Model-View-ViewModel (using Android Data Binding)
+* **MVP**: Model-View-Presenter
+* **MVVM**: Model-View-ViewModel (using Android Data Binding)
 
 ## Structure
 * **mobile**: contain all the code specific to the mobile application only

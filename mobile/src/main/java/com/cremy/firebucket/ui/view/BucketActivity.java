@@ -13,12 +13,15 @@ import android.widget.FrameLayout;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.firebucket.ui.adapter.BucketAdapter;
 import com.cremy.firebucket.util.OrientationUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.shared.data.model.Task;
-import com.cremy.shared.mvp.MainMVP;
+import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
-import com.cremy.shared.ui.presenter.MainPresenter;
+import com.cremy.shared.ui.presenter.BucketPresenter;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -26,8 +29,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity implements
-        MainMVP.View {
+public class BucketActivity extends BaseActivity implements
+        BucketMVP.View {
 
 
     //region View binding
@@ -46,7 +49,7 @@ public class MainActivity extends BaseActivity implements
 
     //region DI
     @Inject
-    MainPresenter presenter;
+    BucketPresenter presenter;
     @Override
     public void injectDependencies() {
         activityComponent().inject(this);
@@ -62,12 +65,14 @@ public class MainActivity extends BaseActivity implements
     }
     //endregion
 
+    private BucketAdapter adapter = null;
+
     /**
      * Allows to start this activity
      * @param _context
      */
     public static void startMe(Context _context) {
-        Intent intent = new Intent(_context, MainActivity.class);
+        Intent intent = new Intent(_context, BucketActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         _context.startActivity(intent);
     }
@@ -182,9 +187,16 @@ public class MainActivity extends BaseActivity implements
             this.showMessage(e.getMessage());
         }
     }
-    @Override
-    public void showBucket(Task _tasks) {
 
+    @Override
+    public void showBucket(ArrayList<Task> _tasks) {
+        if (this.adapter==null) {
+            this.adapter = new BucketAdapter(this, _tasks);
+            this.recyclerView.setAdapter(this.adapter);
+        }
+        else {
+            this.adapter.setItems(_tasks);
+        }
     }
 
     @Override

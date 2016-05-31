@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.cremy.firebucket.R;
-import com.cremy.firebucket.ui.view.MainActivity;
+import com.cremy.firebucket.ui.view.BucketActivity;
 import com.cremy.shared.di.app.TestComponentRule;
 
 import org.junit.Rule;
@@ -23,13 +23,13 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
  * Created by remychantenay on 21/05/2016.
  */
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class BucketActivityTest {
 
     //region Component and Rule set
     public final TestComponentRule component =
             new TestComponentRule(InstrumentationRegistry.getTargetContext());
-    public final ActivityTestRule<MainActivity> main =
-            new ActivityTestRule<>(MainActivity.class, false, false);
+    public final ActivityTestRule<BucketActivity> main =
+            new ActivityTestRule<>(BucketActivity.class, false, false);
 
     // TestComponentRule needs to go first to make sure the Dagger AppTestComponent is set
     // in the Application before any Activity is launched.

@@ -179,7 +179,7 @@ public class LoginActivity extends BaseActivity implements
     @Override
     public void next() {
         this.hideLoading();
-        MainActivity.startMe(this);
+        BucketActivity.startMe(this);
         this.closeActivity();
     }
 

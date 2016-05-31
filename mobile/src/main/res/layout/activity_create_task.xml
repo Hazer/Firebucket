@@ -117,6 +117,7 @@
                     android:text="@string/create_task_option_item_priority_title"/>
 
                 <TextView
+                    android:id="@+id/createTaskOptionItemPrioritySubtitle"
                     style="@style/CreateTaskActivityOptionItemSubtitle"
                     android:text="@string/create_task_option_item_priority_value_default"/>
             </LinearLayout>

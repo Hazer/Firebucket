@@ -175,7 +175,7 @@ public class RegisterActivity extends BaseActivity implements
     public void next() {
         this.hideLoading();
 
-        MainActivity.startMe(this);
+        BucketActivity.startMe(this);
         this.finish();
     }
 
