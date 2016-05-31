@@ -13,7 +13,7 @@ Glimpse into the astonishing future of BaaS- [Firebase](https://www.firebase.com
 * Firebase
 * Dependency Injection (Dagger 2)
 * ButterKnife
-* Otto
+* RxJava
 * Jackson
 
 ## Pattern
