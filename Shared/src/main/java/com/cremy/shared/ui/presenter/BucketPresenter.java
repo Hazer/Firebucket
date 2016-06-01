@@ -16,7 +16,7 @@ import javax.inject.Inject;
  */
 public final class BucketPresenter extends BasePresenter<BucketMVP.View>
         implements BucketMVP.Presenter {
-    private final static String TAG = "MainPresenter";
+    private final static String TAG = "BucketPresenter";
 
     //region DI
     DataManager dataManager;
