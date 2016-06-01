@@ -1,8 +1,6 @@
 package com.cremy.shared.mvp;
 
 import com.cremy.shared.mvp.base.BaseMvpView;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ValueEventListener;
 
@@ -20,11 +18,10 @@ public interface RegisterMVP {
     //endregion
 
     //region Presenter
-    interface Presenter extends OnCompleteListener<AuthResult>,
-            ValueEventListener {
+    interface Presenter extends ValueEventListener {
         void createUser(String email, String password);
         void onAuthSuccess(FirebaseUser user);
-        void onAuthFail(Exception e);
+        void onAuthFail(Throwable e);
     }
     //endregion
 

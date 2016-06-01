@@ -1,20 +1,22 @@
 package com.cremy.shared.ui.presenter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.mvp.RegisterMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -34,20 +36,31 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     }
     //endregion
 
+    Observable<AuthResult> authObservable;
+
     //region Registration/Auth
     @Override
     public void createUser(String email, String password) {
-        this.dataManager.createUserWithEmailAndPassword(email, password, this);
+        this.authObservable = this.dataManager.createUserWithEmailAndPassword(email, password);
+        this.authObservable.observeOn(AndroidSchedulers.mainThread());
+        this.authObservable.subscribe(new Subscriber<AuthResult>() {
+            @Override
+            public void onCompleted() {
+                // Not needed here
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                onAuthFail(e);
+            }
+
+            @Override
+            public void onNext(AuthResult authResult) {
+                onAuthSuccess(authResult.getUser());
+            }
+        });
     }
 
-    @Override
-    public void onComplete(@NonNull Task<AuthResult> task) {
-        if (task.isSuccessful()) {
-            this.onAuthSuccess(task.getResult().getUser());
-        } else {
-            this.onAuthFail(task.getException());
-        }
-    }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -71,7 +84,7 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     }
 
     @Override
-    public void onAuthFail(Exception e) {
+    public void onAuthFail(Throwable e) {
         checkViewAttached();
         CrashReporter.log("Register: onAuthFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));

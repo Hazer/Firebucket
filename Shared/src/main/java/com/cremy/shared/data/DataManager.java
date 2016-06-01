@@ -41,10 +41,9 @@ public class DataManager {
     //endregion
 
     //region Auth
-    public void createUserWithEmailAndPassword(final String _email,
-                                               final String _password,
-                                               OnCompleteListener _onCompleteListener) {
-        this.authService.createUserWithEmailAndPassword(_email, _password, _onCompleteListener);
+    public Observable<AuthResult> createUserWithEmailAndPassword(final String _email,
+                                               final String _password) {
+        return this.authService.createUserWithEmailAndPassword(_email, _password);
     }
 
     public Observable<AuthResult> signInWithEmailAndPassword(final String _email,

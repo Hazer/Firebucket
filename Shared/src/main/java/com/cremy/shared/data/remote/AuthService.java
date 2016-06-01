@@ -2,7 +2,6 @@ package com.cremy.shared.data.remote;
 
 import com.cremy.shared.data.FirebaseRxHandler;
 import com.cremy.shared.data.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -27,13 +26,15 @@ public class AuthService extends BaseFirebaseDatabaseService {
      * Allows to _create_ a user with a given email address and password
      * @param _email
      * @param _password
-     * @param _onCompleteListener
      */
-    public void createUserWithEmailAndPassword(final String _email,
-                                               final String _password,
-                                               OnCompleteListener _onCompleteListener) {
-        this.firebaseAuth.createUserWithEmailAndPassword(_email, _password)
-                .addOnCompleteListener(_onCompleteListener);
+    public Observable<AuthResult> createUserWithEmailAndPassword(final String _email,
+                                               final String _password) {
+        return Observable.create(new Observable.OnSubscribe<AuthResult>() {
+            @Override
+            public void call(final Subscriber<? super AuthResult> subscriber) {
+                FirebaseRxHandler.assignOnTask(subscriber, firebaseAuth.createUserWithEmailAndPassword(_email, _password));
+            }
+        });
     }
 
     /**
