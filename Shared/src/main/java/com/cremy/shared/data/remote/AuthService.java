@@ -10,7 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 /**
  * Created by remychantenay on 18/05/2016.
  */
-public class AuthService extends BaseFirebaseDatabaseService{
+public class AuthService extends BaseFirebaseDatabaseService {
 
 
     public AuthService(FirebaseDatabase _firebaseDatabase,

@@ -1,6 +1,7 @@
 package com.cremy.shared.data.remote;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
@@ -13,6 +14,11 @@ public class BaseFirebaseDatabaseService {
 
     protected FirebaseDatabase firebaseDatabase;
     protected FirebaseAuth firebaseAuth;
+
+    /**
+     * The target node for a given service
+     */
+    protected DatabaseReference childReference;
 
     public BaseFirebaseDatabaseService(FirebaseDatabase _firebaseDatabase,
                                        FirebaseAuth _firebaseAuth) {

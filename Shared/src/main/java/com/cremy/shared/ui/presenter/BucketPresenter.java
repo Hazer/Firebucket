@@ -3,7 +3,6 @@ package com.cremy.shared.ui.presenter;
 import android.util.Log;
 
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
@@ -31,9 +30,16 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     BucketMVP.Model model;
     //endregion
 
+
+    @Override
+    public void detachView() {
+        this.dataManager.removeBucketListener(this);
+        super.detachView();
+    }
+
     @Override
     public void loadBucket() {
-        // todo
+        this.dataManager.addBucketListener(this);
     }
 
     @Override
@@ -58,9 +64,9 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
         this.checkViewAttached();
         try {
             Log.d(TAG, _dataSnapshot.toString());
-            final Bucket newData = _dataSnapshot.getValue(Bucket.class);
+            // TODO
+            //this.model = _dataSnapshot.getValue(Bucket.class);
 
-            this.model = newData;
             this.showBucket();
 
         } catch (ClassCastException e) {

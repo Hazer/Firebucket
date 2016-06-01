@@ -91,6 +91,8 @@ public class BucketActivity extends BaseActivity implements
         this.setUpToolbar();
 
         OrientationUtils.setUpOrientation(getResources().getConfiguration(), this);
+
+        this.loadData();
     }
 
     @Override

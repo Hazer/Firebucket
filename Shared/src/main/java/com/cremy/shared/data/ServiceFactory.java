@@ -21,7 +21,7 @@ public class ServiceFactory {
 
         // 1. We get the database instance
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
+        //firebaseDatabase.setPersistenceEnabled(true);
         // 2. We get the auth instance
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -39,7 +39,7 @@ public class ServiceFactory {
 
         // 1. We get the database instance
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        firebaseDatabase.setPersistenceEnabled(true);
+        //firebaseDatabase.setPersistenceEnabled(true);
         // 2. We get the auth instance
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 

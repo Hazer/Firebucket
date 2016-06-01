@@ -68,6 +68,16 @@ public class DataManager {
     }
     //endregion
 
+    //region Bucket
+    public void addBucketListener(ValueEventListener _valueEventListener) {
+        this.taskService.addBucketListener(_valueEventListener);
+    }
+
+    public void removeBucketListener(ValueEventListener _valueEventListener) {
+        this.taskService.removeBucketListener(_valueEventListener);
+    }
+    //endregion
+
     //region Local
     /**
      * Allows to save the recents locally

@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -14,6 +15,12 @@ public class TaskService extends BaseFirebaseDatabaseService {
     public TaskService(FirebaseDatabase _firebaseDatabase,
                        FirebaseAuth _firebaseAuth) {
         super(_firebaseDatabase, _firebaseAuth);
+
+        this.childReference = this.firebaseDatabase.
+                getReference()
+                .child(FIREBASE_CHILD_KEY_USERS)
+                .child(this.firebaseAuth.getCurrentUser().getUid())
+                .child(FIREBASE_CHILD_KEY_TASKS);
     }
 
     /**
@@ -23,19 +30,12 @@ public class TaskService extends BaseFirebaseDatabaseService {
      */
     public void writeTaskInDatabase(Task _task, OnCompleteListener _onCompleteListener) {
 
-        // 1. We set the position on the right child
-        DatabaseReference targetChild =  this.firebaseDatabase.
-                getReference()
-                .child(FIREBASE_CHILD_KEY_USERS)
-                .child(this.firebaseAuth.getCurrentUser().getUid())
-                .child(FIREBASE_CHILD_KEY_TASKS);
-
-        // 2. We push and get the child key
-        String key = targetChild
+        // 1. We push and get the child key
+        String key = this.childReference
                 .push().getKey();
 
         // 3. We now set the new task
-        targetChild.child(key)
+        this.childReference.child(key)
                 .setValue(_task).addOnCompleteListener(_onCompleteListener);
     }
     /**
@@ -56,5 +56,15 @@ public class TaskService extends BaseFirebaseDatabaseService {
 
         Log.d(TAG, "Task removed.");
     }*/
+    //endregion
+
+    //region Bucket
+    public void addBucketListener(ValueEventListener _valueEventListener) {
+        this.childReference.addValueEventListener(_valueEventListener);
+    }
+
+    public void removeBucketListener(ValueEventListener _valueEventListener) {
+        this.childReference.removeEventListener(_valueEventListener);
+    }
     //endregion
 }
