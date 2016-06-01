@@ -34,14 +34,12 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     }
     //endregion
 
-    Observable<AuthResult> authObservable;
-
     //region Login/Auth
     @Override
     public void signInUser(String email, String password) {
-        this.authObservable = this.dataManager.signInWithEmailAndPassword(email, password);
-        this.authObservable.observeOn(AndroidSchedulers.mainThread());
-        this.authObservable.subscribe(new Subscriber<AuthResult>() {
+        Observable<AuthResult> authObservable = this.dataManager.signInWithEmailAndPassword(email, password);
+        authObservable.observeOn(AndroidSchedulers.mainThread());
+        authObservable.subscribe(new Subscriber<AuthResult>() {
             @Override
             public void onCompleted() {
                 // Not needed here

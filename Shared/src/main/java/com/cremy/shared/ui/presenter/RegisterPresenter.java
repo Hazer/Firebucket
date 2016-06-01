@@ -41,9 +41,9 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     //region Registration/Auth
     @Override
     public void createUser(String email, String password) {
-        this.authObservable = this.dataManager.createUserWithEmailAndPassword(email, password);
-        this.authObservable.observeOn(AndroidSchedulers.mainThread());
-        this.authObservable.subscribe(new Subscriber<AuthResult>() {
+        Observable<AuthResult> authObservable = this.dataManager.createUserWithEmailAndPassword(email, password);
+            authObservable.observeOn(AndroidSchedulers.mainThread());
+            authObservable.subscribe(new Subscriber<AuthResult>() {
             @Override
             public void onCompleted() {
                 // Not needed here
