@@ -20,15 +20,12 @@ public class TaskPriority {
     //endregion
 
     //region Variables
-    private int id;
-    private String label;
+    private int id = PRIORITY_NORMAL_ID;
+    private String label = PRIORITY_NORMAL_LABEL;
     //endregion
 
     //region Constructors
     public TaskPriority() {
-        // Default constructor required for calls to DataSnapshot.getValue(TaskPriority.class)
-        this.id = PRIORITY_NORMAL_ID;
-        this.label = PRIORITY_NORMAL_LABEL;
     }
     public TaskPriority(int _id) {
         this.id = _id;

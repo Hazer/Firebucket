@@ -15,14 +15,13 @@ public class Task implements CreateTaskMVP.Model {
     //region Variables
     private String title;
     private TaskPriority priority = new TaskPriority();
-    private String deadline;
+    private String deadline = CustomDateUtils.getNow();
     private String displayedDeadline;
     //endregion
 
     //region Constructors
     public Task() {
         // Default constructor required for calls to DataSnapshot.getValue(Task.class)
-        this.deadline = CustomDateUtils.getNow();
     }
     public Task(String _title) {
         this.title = _title;

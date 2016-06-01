@@ -1,11 +1,16 @@
 package com.cremy.shared.data.remote;
 
+import com.cremy.shared.data.FirebaseRxHandler;
 import com.cremy.shared.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -35,13 +40,15 @@ public class AuthService extends BaseFirebaseDatabaseService {
      * Allows to _signin_ a user with a given email address and password
      * @param _email
      * @param _password
-     * @param _onCompleteListener
      */
-    public void signInWithEmailAndPassword(final String _email,
-                                               final String _password,
-                                               OnCompleteListener _onCompleteListener) {
-        this.firebaseAuth.signInWithEmailAndPassword(_email, _password)
-                .addOnCompleteListener(_onCompleteListener);
+    public Observable<AuthResult> signInWithEmailAndPassword(final String _email,
+                                                             final String _password) {
+        return Observable.create(new Observable.OnSubscribe<AuthResult>() {
+            @Override
+            public void call(final Subscriber<? super AuthResult> subscriber) {
+                FirebaseRxHandler.assignOnTask(subscriber, firebaseAuth.signInWithEmailAndPassword(_email, _password));
+            }
+        });
     }
 
     /**

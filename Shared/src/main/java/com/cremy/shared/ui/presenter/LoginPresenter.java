@@ -1,18 +1,20 @@
 package com.cremy.shared.ui.presenter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.mvp.LoginMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -35,28 +37,35 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     //region Login/Auth
     @Override
     public void signInUser(String email, String password) {
-        this.dataManager.signInWithEmailAndPassword(email, password, this);
-    }
+        Observable<AuthResult> observable = this.dataManager.signInWithEmailAndPassword(email, password);
+        observable.observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Subscriber<AuthResult>() {
+            @Override
+            public void onCompleted() {
+                // Not needed here
+            }
 
-    @Override
-    public void onComplete(@NonNull Task<AuthResult> task) {
-        if (task.isSuccessful()) {
-            this.onAuthSuccess(task.getResult().getUser());
-        } else {
-            this.onAuthFail(task.getException());
-        }
+            @Override
+            public void onError(Throwable e) {
+                onAuthFail(e);
+            }
+
+            @Override
+            public void onNext(AuthResult authResult) {
+                onAuthSuccess(authResult.getUser());
+            }
+        });
     }
 
     @Override
     public void onAuthSuccess(FirebaseUser user) {
         checkViewAttached();
-
         // We tell to the view to go next
         this.view.next();
     }
 
     @Override
-    public void onAuthFail(Exception e) {
+    public void onAuthFail(Throwable e) {
         checkViewAttached();
         CrashReporter.log("Login: onAuthFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_signin));

@@ -63,12 +63,13 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     public void onDataChange(DataSnapshot _dataSnapshot) {
         this.checkViewAttached();
         try {
-            Log.d(TAG, _dataSnapshot.toString());
-            // TODO
-            //this.model = _dataSnapshot.getValue(Bucket.class);
+            if (_dataSnapshot.exists()) {
+                Log.d(TAG, _dataSnapshot.toString());
+                // TODO
+                //this.model = _dataSnapshot.getValue(Bucket.class);
 
-            this.showBucket();
-
+                this.showBucket();
+            }
         } catch (ClassCastException e) {
             e.printStackTrace();
             this.view.showError();

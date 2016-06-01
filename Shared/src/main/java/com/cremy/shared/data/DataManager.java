@@ -8,9 +8,12 @@ import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.ValueEventListener;
 
 import javax.inject.Inject;
+
+import rx.Observable;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -44,10 +47,9 @@ public class DataManager {
         this.authService.createUserWithEmailAndPassword(_email, _password, _onCompleteListener);
     }
 
-    public void signInWithEmailAndPassword(final String _email,
-                                               final String _password,
-                                               OnCompleteListener _onCompleteListener) {
-        this.authService.signInWithEmailAndPassword(_email, _password, _onCompleteListener);
+    public Observable<AuthResult> signInWithEmailAndPassword(final String _email,
+                                                             final String _password) {
+        return this.authService.signInWithEmailAndPassword(_email, _password);
     }
 
     public boolean ifUserExists() {

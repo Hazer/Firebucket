@@ -4,7 +4,6 @@ import com.cremy.greenrobotutils.library.storage.gson.GSONBaseModel;
 import com.cremy.shared.mvp.BucketMVP;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 /**
@@ -20,8 +19,7 @@ implements BucketMVP.Model{
 
     //region Constructors
     public Bucket() {
-        super();
-        this.tasks = new HashMap<String, Task>();
+
     }
     //endregion
 
