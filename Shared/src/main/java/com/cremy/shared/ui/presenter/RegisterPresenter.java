@@ -4,13 +4,12 @@ import android.content.Context;
 
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
+import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.mvp.RegisterMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 
 import javax.inject.Inject;
 
@@ -62,17 +61,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     }
 
 
-    @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        // 2. We tell to the view to go next
-        this.view.next();
-    }
-
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-        CrashReporter.log("Register: onCancelled | "+ databaseError.getMessage());
-        this.view.showMessage(databaseError.getMessage());
-    }
 
     @Override
     public void onAuthSuccess(FirebaseUser user) {
@@ -80,7 +68,25 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
         final String username = usernameFromEmail(user.getEmail());
 
         // 1. We'll write the new user into the database
-        this.dataManager.writeUserInDatabase(user.getUid(), username, this);
+        Observable<Bucket> observable = this.dataManager.writeUserInDatabase(user.getUid(), username);
+        observable.observeOn(AndroidSchedulers.mainThread());
+        observable.subscribe(new Subscriber<Bucket>() {
+            @Override
+            public void onCompleted() {
+                // Not needed here
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                CrashReporter.log("Register: onCancelled | "+ e.getMessage());
+                view.showMessage(e.getMessage());
+            }
+
+            @Override
+            public void onNext(Bucket bucket) {
+                view.next();
+            }
+        });
     }
 
     @Override

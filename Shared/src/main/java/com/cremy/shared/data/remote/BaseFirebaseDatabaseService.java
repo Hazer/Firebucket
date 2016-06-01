@@ -1,8 +1,24 @@
 package com.cremy.shared.data.remote;
 
+import android.support.annotation.NonNull;
+
+import com.cremy.shared.exceptions.FirebaseRxDataCastException;
+import com.cremy.shared.exceptions.FirebaseRxDataException;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import rx.Observable;
+import rx.Subscriber;
 
 /**
  * Created by remychantenay on 24/05/2016.
@@ -24,6 +40,119 @@ public class BaseFirebaseDatabaseService {
                                        FirebaseAuth _firebaseAuth) {
         this.firebaseDatabase = _firebaseDatabase;
         this.firebaseAuth = _firebaseAuth;
+    }
+
+
+    @NonNull
+    public static <T> Observable<T> observeSingleValue(@NonNull final Query query, @NonNull final Class<T> clazz) {
+        return Observable.create(new Observable.OnSubscribe<T>() {
+            @Override
+            public void call(final Subscriber<? super T> subscriber) {
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        T value = dataSnapshot.getValue(clazz);
+                        if (value != null) {
+                            if (!subscriber.isUnsubscribed()) {
+                                subscriber.onNext(value);
+                            }
+                        } else {
+                            if (!subscriber.isUnsubscribed()) {
+                                subscriber.onError(new FirebaseRxDataCastException("Unable to cast firebase data response to " + clazz.getSimpleName()));
+                            }
+                        }
+
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onCompleted();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onError(new FirebaseRxDataException(error));
+                        }
+                    }
+                });
+
+            }
+        });
+    }
+
+    @NonNull
+    public static <T> Observable<List<T>> observeValuesList(@NonNull final Query query, @NonNull final Class<T> clazz) {
+        return Observable.create(new Observable.OnSubscribe<List<T>>() {
+            @Override
+            public void call(final Subscriber<? super List<T>> subscriber) {
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<T> items = new ArrayList<T>();
+                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                            T value = childSnapshot.getValue(clazz);
+                            if (value == null) {
+                                if (!subscriber.isUnsubscribed()) {
+                                    subscriber.onError(new FirebaseRxDataCastException("Unable to cast firebase data response to " + clazz.getSimpleName()));
+                                }
+                            } else {
+                                items.add(value);
+                            }
+                        }
+
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onNext(items);
+                            subscriber.onCompleted();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onError(new FirebaseRxDataException(error));
+                        }
+                    }
+                });
+            }
+
+        });
+    }
+
+    @NonNull
+    public static <T> Observable<Map<String, T>> observeValuesMap(@NonNull final Query query, @NonNull final Class<T> clazz) {
+        return Observable.create(new Observable.OnSubscribe<Map<String, T>>() {
+            @Override
+            public void call(final Subscriber<? super Map<String, T>> subscriber) {
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Map<String, T> items = new HashMap<String, T>();
+                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                            T value = childSnapshot.getValue(clazz);
+                            if (value == null) {
+                                if (!subscriber.isUnsubscribed()) {
+                                    subscriber.onError(new FirebaseRxDataCastException("unable to cast firebase data response to " + clazz.getSimpleName()));
+                                }
+                            } else {
+                                items.put(childSnapshot.getKey(), value);
+                            }
+                        }
+
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onNext(items);
+                            subscriber.onCompleted();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onError(new FirebaseRxDataException(error));
+                        }
+                    }
+                });
+            }
+
+        });
     }
 
 }

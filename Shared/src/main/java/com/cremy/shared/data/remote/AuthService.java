@@ -1,12 +1,12 @@
 package com.cremy.shared.data.remote;
 
 import com.cremy.shared.data.FirebaseRxHandler;
+import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.User;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -66,9 +66,8 @@ public class AuthService extends BaseFirebaseDatabaseService {
      * @param _userId
      * @param _name
      */
-    public void writeUserInDatabase(final String _userId,
-                                    final String _name,
-                                    ValueEventListener _valueEventListener) {
+    public Observable<Bucket> writeUserInDatabase(final String _userId,
+                                                  final String _name) {
 
         User user = new User(_name);
 
@@ -77,8 +76,11 @@ public class AuthService extends BaseFirebaseDatabaseService {
                 .child(FIREBASE_CHILD_KEY_USERS)
                 .child(_userId);
 
-        targetChild.addListenerForSingleValueEvent(_valueEventListener);
         targetChild.setValue(user);
+        return observeSingleValue(targetChild, Bucket.class);
+
+/*        targetChild.addListenerForSingleValueEvent(_valueEventListener);
+        targetChild.setValue(user);*/
     }
 
 }

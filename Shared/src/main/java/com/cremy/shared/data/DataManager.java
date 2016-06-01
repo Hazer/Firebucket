@@ -3,6 +3,7 @@ package com.cremy.shared.data;
 import android.content.Context;
 
 import com.cremy.shared.data.local.TaskServiceLocal;
+import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.TaskService;
@@ -55,10 +56,9 @@ public class DataManager {
        return this.authService.ifUserExists();
     }
 
-    public void writeUserInDatabase(final String _userId,
-                                    final String _name,
-                                    ValueEventListener _valueEventListener) {
-        this.authService.writeUserInDatabase(_userId, _name, _valueEventListener);
+    public Observable<Bucket> writeUserInDatabase(final String _userId,
+                                    final String _name) {
+        return this.authService.writeUserInDatabase(_userId, _name);
     }
     //endregion
 
