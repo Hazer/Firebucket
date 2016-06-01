@@ -1,0 +1,5 @@
+<resources>
+    <string name="bucket_activity_placeholder_button_text">TRY AGAIN</string>
+    <string name="bucket_activity_placeholder_title_text_empty">Congrats, your bucket list is empty!</string>
+    <string name="bucket_activity_placeholder_title_text_error">Oops, an error occurred while getting your Bucket.</string>
+</resources>

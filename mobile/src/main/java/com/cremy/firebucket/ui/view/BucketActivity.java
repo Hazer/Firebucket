@@ -10,11 +10,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.firebucket.ui.adapter.BucketAdapter;
 import com.cremy.firebucket.util.OrientationUtils;
+import com.cremy.firebucket.util.ui.widget.MaterialDesignFlatButton;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.mvp.BucketMVP;
@@ -38,12 +40,23 @@ public class BucketActivity extends BaseActivity implements
     FrameLayout rootViewMain;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+
+    @BindView(R.id.placeholderLayout)
+    FrameLayout placeholderLayout;
+    @BindView(R.id.placeholderTitle)
+    TextView placeholderTitle;
+    @BindView(R.id.placeholderButton)
+    MaterialDesignFlatButton placeholderButton;
     //endregion
 
     //region View events
     @OnClick(R.id.fab)
     public void clickFab() {
         this.nextCreateTask();
+    }
+    @OnClick(R.id.placeholderButton)
+    public void onClicklaceholderButton(View view) {
+        this.loadData();
     }
     //endregion
 
@@ -81,7 +94,7 @@ public class BucketActivity extends BaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_bucket);
         ButterKnife.bind(this);
 
         this.injectDependencies();
@@ -203,12 +216,20 @@ public class BucketActivity extends BaseActivity implements
 
     @Override
     public void showBucketEmpty() {
-
+        this.hideLoading();
+        this.recyclerView.setVisibility(View.GONE);
+        this.placeholderLayout.setVisibility(View.VISIBLE);
+        this.placeholderButton.setText(getResources().getString(R.string.bucket_activity_placeholder_button_text));
+        this.placeholderTitle.setText(getResources().getString(R.string.bucket_activity_placeholder_title_text_empty));
     }
 
     @Override
     public void showError() {
-
+        this.hideLoading();
+        this.recyclerView.setVisibility(View.GONE);
+        this.placeholderLayout.setVisibility(View.VISIBLE);
+        this.placeholderButton.setText(getResources().getString(R.string.bucket_activity_placeholder_button_text));
+        this.placeholderTitle.setText(getResources().getString(R.string.bucket_activity_placeholder_title_text_error));
     }
 
 }
