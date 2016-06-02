@@ -16,7 +16,7 @@
 
         <View
             android:layout_width="5dp"
-            android:layout_height="70dp"
+            android:layout_height="75dp"
             android:layout_gravity="left"
             android:background="@{viewModel.getTaskPriorityColor}"
             tools:background="@color/taskPriorityNormal"/>

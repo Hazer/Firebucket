@@ -3,11 +3,14 @@ package com.cremy.firebucket.ui.view;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -18,6 +21,7 @@ import com.cremy.firebucket.ui.adapter.BucketAdapter;
 import com.cremy.firebucket.util.OrientationUtils;
 import com.cremy.firebucket.util.ui.widget.MaterialDesignFlatButton;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
+import com.cremy.greenrobotutils.library.ui.recyclerview.RecyclerViewUtils;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
@@ -106,6 +110,8 @@ public class BucketActivity extends BaseActivity implements
         OrientationUtils.setUpOrientation(getResources().getConfiguration(), this);
 
         this.loadData();
+
+        this.initRecyclerView();
     }
 
     @Override
@@ -116,6 +122,64 @@ public class BucketActivity extends BaseActivity implements
 
     //endregion
 
+
+    @Override
+    public void initRecyclerView() {
+        ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                //Remove swiped item from list and notify the RecyclerView
+                /*if (topicUnreadAdapter != null) {
+                    if (topicUnreadAdapter.isSwipeable(viewHolder.getAdapterPosition())) {
+                        if (NetworkInfoUtil.checkNetworkState(getActivity())) {
+                            topicUnreadAdapter.markAsRead(viewHolder.getAdapterPosition());
+                        }
+                        else {
+                            SnackBarUtils.showSimpleSnackbar(rootView, getResources().getString(R.string.general_network_unreachable));
+                        }
+                    }
+                }*/
+            }
+
+            @Override
+            public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    if (adapter != null) {
+                        if (adapter.isSwipeable(viewHolder.getAdapterPosition())) {
+                            // Get RecyclerView item from the ViewHolder
+                            View itemView = viewHolder.itemView;
+
+                            // 1. We draw a rectangle with a filled color
+                            Paint p = RecyclerViewUtils.drawRectOnSwipe(itemView,
+                                    c,
+                                    adapter.getItem(viewHolder.getAdapterPosition()).getPriority().getColor(BucketActivity.this),
+                                    dX);
+
+                            if (dX > 0) // If RIGHT swiped
+                            {
+/*                                // 2. And and this color rectangle, draw a resource bitmap
+                                RecyclerViewUtils.drawBitmap(itemView,
+                                        c,
+                                        getResources(),
+                                        R.drawable.icon_seen_white,
+                                        p);*/
+                            }
+
+                            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+                        }
+                    }
+                }
+            }
+        };
+
+        RecyclerViewUtils.setItemTouchCallback(this.recyclerView, simpleItemTouchCallback);
+    }
 
     @Override
     public void onLandscape() {

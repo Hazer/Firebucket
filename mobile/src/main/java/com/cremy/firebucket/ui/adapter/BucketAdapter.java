@@ -151,4 +151,16 @@ public final class BucketAdapter extends RecyclerView.Adapter<BucketAdapter.Bind
             this.binding = binding;
         }
     }
+
+    /**
+     * The item will NOT be swipeable if already seen or has unseen posts
+     * @param _index
+     * @return
+     */
+    public boolean isSwipeable(final int _index) {
+        if (getItemViewType(_index)==TYPE_HEADER) {
+            return false;
+        }
+        return true;
+    }
 }
