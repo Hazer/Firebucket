@@ -30,5 +30,4 @@ public class BucketTaskViewModel extends BaseObservable {
         return this.model.getPriority().getColor(this.context);
     }
     //endregion
-
 }

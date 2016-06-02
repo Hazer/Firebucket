@@ -17,9 +17,8 @@
     </style>
 
     <style name="BucketActivityItemTaskPriorityBadge" >
-        <item name="android:layout_width">12dp</item>
-        <item name="android:layout_height">12dp</item>
-        <item name="android:background">@drawable/drawable_task_priority_badge</item>
+        <item name="android:layout_width">5dp</item>
+        <item name="android:layout_height">match_parent</item>
     </style>
 
 </resources>
