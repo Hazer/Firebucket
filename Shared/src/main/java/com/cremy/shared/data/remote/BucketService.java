@@ -4,11 +4,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import javax.inject.Inject;
+
 /**
  * Created by remychantenay on 18/05/2016.
  */
 public class BucketService extends BaseFirebaseDatabaseService {
 
+    @Inject
     public BucketService(FirebaseDatabase _firebaseDatabase,
                          FirebaseAuth _firebaseAuth) {
         super(_firebaseDatabase, _firebaseAuth);

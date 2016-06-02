@@ -5,11 +5,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+import javax.inject.Inject;
+
 /**
  * Created by remychantenay on 18/05/2016.
  */
 public class TaskService extends BaseFirebaseDatabaseService {
 
+    @Inject
     public TaskService(FirebaseDatabase _firebaseDatabase,
                        FirebaseAuth _firebaseAuth) {
         super(_firebaseDatabase, _firebaseAuth);

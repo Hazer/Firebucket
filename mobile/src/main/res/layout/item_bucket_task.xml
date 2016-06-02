@@ -37,6 +37,5 @@
                 tools:text="Item subtitle"/>
         </LinearLayout>
 
-
     </FrameLayout>
 </layout>

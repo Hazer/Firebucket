@@ -1,6 +1,7 @@
 package com.cremy.shared.data.remote;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.cremy.shared.exceptions.FirebaseRxDataCastException;
 import com.cremy.shared.exceptions.FirebaseRxDataException;
@@ -24,6 +25,7 @@ import rx.Subscriber;
  * Created by remychantenay on 24/05/2016.
  */
 public class BaseFirebaseDatabaseService {
+    private final static String TAG = "BaseFirebaseDatabase";
 
     public final static String FIREBASE_CHILD_KEY_USERS = "users";
     public final static String FIREBASE_CHILD_KEY_TASKS = "tasks";
@@ -51,6 +53,7 @@ public class BaseFirebaseDatabaseService {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.d(TAG, dataSnapshot.toString());
                         T value = dataSnapshot.getValue(clazz);
                         if (value != null) {
                             if (!subscriber.isUnsubscribed()) {
@@ -74,7 +77,6 @@ public class BaseFirebaseDatabaseService {
                         }
                     }
                 });
-
             }
         });
     }
@@ -87,6 +89,7 @@ public class BaseFirebaseDatabaseService {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.d(TAG, dataSnapshot.toString());
                         List<T> items = new ArrayList<T>();
                         for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                             T value = childSnapshot.getValue(clazz);

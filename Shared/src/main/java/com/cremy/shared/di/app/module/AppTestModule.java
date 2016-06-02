@@ -6,11 +6,10 @@ import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.data.local.TaskServiceLocal;
 import com.cremy.shared.data.remote.AuthService;
-import com.cremy.shared.data.remote.BucketService;
-import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.mockito.Mockito;
 
@@ -44,21 +43,17 @@ public class AppTestModule {
     //region Data
     @Provides
     @ApplicationScope
-    TaskService provideTaskService() {
-        return Mockito.mock(TaskService.class);
+    public FirebaseDatabase provideFirebaseDatabase() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        return firebaseDatabase;
     }
 
     @Provides
     @ApplicationScope
-    BucketService provideBucketService() {
-        return Mockito.mock(BucketService.class);
-    }
-
-
-    @Provides
-    @ApplicationScope
-    TaskServiceLocal provideTaskServiceLocal() {
-        return Mockito.mock(TaskServiceLocal.class);
+    public FirebaseAuth provideFirebaseAuth() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        return firebaseAuth;
     }
 
     @Provides

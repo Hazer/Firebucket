@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import com.cremy.shared.App;
 import com.cremy.shared.data.DataManager;
+import com.cremy.shared.data.local.TaskServiceLocal;
+import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.app.module.AppModule;
@@ -31,7 +33,10 @@ public interface AppComponent {
     App provideApp();
     SharedPreferences provideSharedPreferences();
     DataManager provideDataManager();
+
+    TaskServiceLocal provideTaskServiceLocal();
     TaskService provideTaskService();
+    AuthService provideAuthService();
     BucketService provideBucketService();
     //endregion
 

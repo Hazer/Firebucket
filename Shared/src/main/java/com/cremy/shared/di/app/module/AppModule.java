@@ -5,12 +5,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
-import com.cremy.shared.data.ServiceFactory;
-import com.cremy.shared.data.local.TaskServiceLocal;
-import com.cremy.shared.data.remote.AuthService;
-import com.cremy.shared.data.remote.BucketService;
-import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 import dagger.Module;
 import dagger.Provides;
@@ -41,26 +38,17 @@ public class AppModule {
     //region Data
     @Provides
     @ApplicationScope
-    TaskService provideTaskService() {
-        return ServiceFactory.makeTaskService();
+    public FirebaseDatabase provideFirebaseDatabase() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseDatabase.setPersistenceEnabled(true);
+        return firebaseDatabase;
     }
 
     @Provides
     @ApplicationScope
-    BucketService provideBucketService() {
-        return ServiceFactory.makeBucketService();
-    }
-
-    @Provides
-    @ApplicationScope
-    TaskServiceLocal provideTaskServiceLocal() {
-        return ServiceFactory.makeTaskServiceLocal();
-    }
-
-    @Provides
-    @ApplicationScope
-    AuthService provideAuthService() {
-        return ServiceFactory.makeAuthService();
+    public FirebaseAuth provideFirebaseAuth() {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        return firebaseAuth;
     }
 
     //endregion

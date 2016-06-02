@@ -8,6 +8,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 
@@ -17,6 +19,7 @@ import rx.Subscriber;
 public class AuthService extends BaseFirebaseDatabaseService {
 
 
+    @Inject
     public AuthService(FirebaseDatabase _firebaseDatabase,
                        FirebaseAuth _firebaseAuth) {
         super(_firebaseDatabase, _firebaseAuth);
