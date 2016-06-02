@@ -28,6 +28,7 @@ public interface BucketMVP {
     interface Presenter extends ValueEventListener {
         void loadBucket();
         void showBucket();
+        void removeTask(Task _task);
     }
     //endregion
 

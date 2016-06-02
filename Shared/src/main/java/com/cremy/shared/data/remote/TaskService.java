@@ -35,27 +35,22 @@ public class TaskService extends BaseFirebaseDatabaseService {
         String key = this.childReference
                 .push().getKey();
 
+        // 2. We add the key as id within the model as well
+        _task.setId(key);
+
         // 3. We now set the new task
         this.childReference.child(key)
                 .setValue(_task).addOnCompleteListener(_onCompleteListener);
     }
-    /**
-     * Allows to _remove_ a given task from the database
+   /* *
+     * Allows to remove a given task from the database
      * @param _task
      */
-   /* public void removeTask(Task _task) {
+    public void removeTask(Task _task) {
 
-        // 1. We add the task
-        this.firebaseDatabase.getReference()
-                .child(FIREBASE_CHILD_KEY_TASK_LIST)
-                .child(FIREBASE_CHILD_KEY_TASK)
-                .child(_task.getTitle())
+        this.childReference
+                .child(_task.getId())
                 .removeValue();
-
-        // 2. We update the timeLastUpdate
-        this.updateTimeLastUpdate(_firebase);
-
-        Log.d(TAG, "Task removed.");
-    }*/
+    }
     //endregion
 }

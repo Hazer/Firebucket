@@ -13,6 +13,7 @@ import java.util.Calendar;
 public class Task implements CreateTaskMVP.Model {
 
     //region Variables
+    private String id;
     private String title;
     private TaskPriority priority = new TaskPriority();
     private String deadline = CustomDateUtils.getNow();
@@ -56,6 +57,14 @@ public class Task implements CreateTaskMVP.Model {
     @Override
     public void setTitle(String _title) {
         this.title = _title;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     //endregion
 

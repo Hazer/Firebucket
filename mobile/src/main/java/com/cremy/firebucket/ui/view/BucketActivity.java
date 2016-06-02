@@ -135,16 +135,11 @@ public class BucketActivity extends BaseActivity implements
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 //Remove swiped item from list and notify the RecyclerView
-                /*if (topicUnreadAdapter != null) {
-                    if (topicUnreadAdapter.isSwipeable(viewHolder.getAdapterPosition())) {
-                        if (NetworkInfoUtil.checkNetworkState(getActivity())) {
-                            topicUnreadAdapter.markAsRead(viewHolder.getAdapterPosition());
-                        }
-                        else {
-                            SnackBarUtils.showSimpleSnackbar(rootView, getResources().getString(R.string.general_network_unreachable));
-                        }
+                if (adapter != null) {
+                    if (adapter.isSwipeable(viewHolder.getAdapterPosition())) {
+                        presenter.removeTask(adapter.getItem(viewHolder.getAdapterPosition()));
                     }
-                }*/
+                }
             }
 
             @Override

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.data.model.Bucket;
+import com.cremy.shared.data.model.Task;
 import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
@@ -41,6 +42,11 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     @Override
     public void loadBucket() {
         this.dataManager.startBucketListening(this);
+    }
+
+    @Override
+    public void removeTask(Task _task) {
+        this.dataManager.removeTaskFromDatabase(_task);
     }
 
     @Override

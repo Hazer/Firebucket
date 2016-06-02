@@ -71,6 +71,10 @@ public class DataManager {
                                     OnCompleteListener _onCompleteListener) {
         this.taskService.writeTaskInDatabase(_task, _onCompleteListener);
     }
+
+    public void removeTaskFromDatabase(final Task _task) {
+        this.taskService.removeTask(_task);
+    }
     //endregion
 
     //region Bucket
