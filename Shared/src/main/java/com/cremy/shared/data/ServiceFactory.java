@@ -2,6 +2,7 @@ package com.cremy.shared.data;
 
 import com.cremy.shared.data.local.TaskServiceLocal;
 import com.cremy.shared.data.remote.AuthService;
+import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.TaskService;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -54,6 +55,24 @@ public class ServiceFactory {
     public static TaskServiceLocal makeTaskServiceLocal() {
         TaskServiceLocal taskServiceLocal = new TaskServiceLocal();
         return taskServiceLocal;
+    }
+    //endregion
+
+    //region BucketServices
+    /**
+     * Allows to make the task service
+     * @return
+     */
+    public static BucketService makeBucketService() {
+
+        // 1. We get the database instance
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        //firebaseDatabase.setPersistenceEnabled(true);
+        // 2. We get the auth instance
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+        BucketService bucketService = new BucketService(firebaseDatabase,firebaseAuth);
+        return bucketService;
     }
     //endregion
 }

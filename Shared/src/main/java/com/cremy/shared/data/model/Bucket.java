@@ -37,7 +37,7 @@ implements BucketMVP.Model{
 
     @Override
     public ArrayList<Task> toList() {
-        return (ArrayList<Task>) this.tasks.values();
+        return new ArrayList<Task>(this.tasks.values()) ;
     }
 
 }

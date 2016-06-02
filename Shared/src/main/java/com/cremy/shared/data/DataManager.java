@@ -6,6 +6,7 @@ import com.cremy.shared.data.local.TaskServiceLocal;
 import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.remote.AuthService;
+import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,16 +27,19 @@ public class DataManager {
     //region DI
     private final TaskService taskService;
     private final TaskServiceLocal taskServiceLocal;
+    private final BucketService bucketService;
     private final AuthService authService;
     private Context appContext;
 
     @Inject
     public DataManager(TaskService _service,
                        TaskServiceLocal _serviceLocal,
+                       BucketService _bucketService,
                        AuthService _authService,
                        Context _context) {
         this.taskService = _service;
         this.taskServiceLocal = _serviceLocal;
+        this.bucketService = _bucketService;
         this.authService = _authService;
         this.appContext = _context;
     }
@@ -70,12 +74,12 @@ public class DataManager {
     //endregion
 
     //region Bucket
-    public void addBucketListener(ValueEventListener _valueEventListener) {
-        this.taskService.addBucketListener(_valueEventListener);
+    public void startBucketListening(ValueEventListener _valueEventListener) {
+        this.bucketService.startListening(_valueEventListener);
     }
 
-    public void removeBucketListener(ValueEventListener _valueEventListener) {
-        this.taskService.removeBucketListener(_valueEventListener);
+    public void stopBucketListening(ValueEventListener _valueEventListener) {
+        this.bucketService.stopListening(_valueEventListener);
     }
     //endregion
 

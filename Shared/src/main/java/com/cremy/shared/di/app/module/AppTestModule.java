@@ -6,9 +6,9 @@ import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
 import com.cremy.shared.data.DataManager;
-import com.cremy.shared.data.ServiceFactory;
 import com.cremy.shared.data.local.TaskServiceLocal;
 import com.cremy.shared.data.remote.AuthService;
+import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 
@@ -48,6 +48,12 @@ public class AppTestModule {
         return Mockito.mock(TaskService.class);
     }
 
+    @Provides
+    @ApplicationScope
+    BucketService provideBucketService() {
+        return Mockito.mock(BucketService.class);
+    }
+
 
     @Provides
     @ApplicationScope
@@ -63,10 +69,7 @@ public class AppTestModule {
 
     @Provides
     @ApplicationScope
-    public DataManager provideDataHelper(TaskService _taskService,
-                                         TaskServiceLocal _taskServiceLocal,
-                                         AuthService _authService,
-                                         Context _context) {
+    public DataManager provideDataHelper() {
         return Mockito.mock(DataManager.class);
     }
     //endregion

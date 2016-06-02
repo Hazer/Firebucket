@@ -3,9 +3,7 @@ package com.cremy.shared.data.remote;
 import com.cremy.shared.data.model.Task;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -56,15 +54,5 @@ public class TaskService extends BaseFirebaseDatabaseService {
 
         Log.d(TAG, "Task removed.");
     }*/
-    //endregion
-
-    //region Bucket
-    public void addBucketListener(ValueEventListener _valueEventListener) {
-        this.childReference.addValueEventListener(_valueEventListener);
-    }
-
-    public void removeBucketListener(ValueEventListener _valueEventListener) {
-        this.childReference.removeEventListener(_valueEventListener);
-    }
     //endregion
 }

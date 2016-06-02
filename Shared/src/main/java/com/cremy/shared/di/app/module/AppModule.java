@@ -5,11 +5,11 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
-import com.cremy.shared.data.DataManager;
+import com.cremy.shared.data.ServiceFactory;
 import com.cremy.shared.data.local.TaskServiceLocal;
 import com.cremy.shared.data.remote.AuthService;
+import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.TaskService;
-import com.cremy.shared.data.ServiceFactory;
 import com.cremy.shared.di.scope.ApplicationScope;
 
 import dagger.Module;
@@ -47,6 +47,12 @@ public class AppModule {
 
     @Provides
     @ApplicationScope
+    BucketService provideBucketService() {
+        return ServiceFactory.makeBucketService();
+    }
+
+    @Provides
+    @ApplicationScope
     TaskServiceLocal provideTaskServiceLocal() {
         return ServiceFactory.makeTaskServiceLocal();
     }
@@ -57,17 +63,6 @@ public class AppModule {
         return ServiceFactory.makeAuthService();
     }
 
-    @Provides
-    @ApplicationScope
-    public DataManager provideDataHelper(TaskService _TaskService,
-                                         TaskServiceLocal _TaskServiceLocal,
-                                         AuthService _authService,
-                                         Context _context) {
-        return new DataManager(_TaskService,
-                _TaskServiceLocal,
-                _authService,
-                _context);
-    }
     //endregion
 
     //region SharedPreferences
