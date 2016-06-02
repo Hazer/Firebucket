@@ -1,7 +1,13 @@
 package com.cremy.shared.data.model;
 
+import android.content.Context;
+
+import com.cremy.shared.R;
+import com.google.firebase.database.Exclude;
+
 /**
- * No, I don't want to use Enums :)
+ * Nope, I don't want to use Enums :)
+ * https://developer.android.com/training/articles/memory.html#Overhead
  */
 public class TaskPriority {
 
@@ -52,6 +58,20 @@ public class TaskPriority {
 
     public void setLabel(String _label) {
         this.label = _label;
+    }
+
+    @Exclude
+    public int getColor(Context _context) {
+        switch (this.id) {
+            case PRIORITY_LOW_ID:
+                return _context.getResources().getColor(R.color.taskPriorityLow);
+            case PRIORITY_HIGH_ID:
+                return _context.getResources().getColor(R.color.taskPriorityHigh);
+            case PRIORITY_CRUCIAL_ID:
+                return _context.getResources().getColor(R.color.taskPriorityCrucial);
+            default:
+                return _context.getResources().getColor(R.color.taskPriorityNormal);
+        }
     }
 
     //endregion

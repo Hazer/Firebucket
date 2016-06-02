@@ -3,7 +3,8 @@
     <style name="BucketActivityItemHeaderTitle" parent="SingleLineTextView">
         <item name="android:layout_margin">@dimen/material_design_keyline_one</item>
         <item name="android:textColor">?colorPrimary</item>
-        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="BucketActivityItemTaskTitle" parent="SingleLineTextView">

@@ -34,7 +34,7 @@ public interface BucketMVP {
     interface Model {
         HashMap<String, Task> getTasks();
         boolean isEmpty();
-        ArrayList<Task> toList();
+        ArrayList<Task> toDisplayedList();
     }
     //endregion
 }

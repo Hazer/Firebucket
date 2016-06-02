@@ -48,7 +48,7 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
         if (this.isViewAttached()) {
             if (this.model != null) {
                 if (!this.model.isEmpty()) {
-                    this.view.showBucket(this.model.toList());
+                    this.view.showBucket(this.model.toDisplayedList());
                 } else {
                     this.view.showBucketEmpty();
                 }

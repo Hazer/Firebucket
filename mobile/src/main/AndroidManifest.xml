@@ -19,7 +19,7 @@
         </activity>
 
         <activity android:name=".ui.view.BucketActivity"
-            android:theme="@style/MainActivityTheme"></activity>
+            android:theme="@style/BucketActivityTheme"></activity>
 
         <activity android:name="com.cremy.firebucket.ui.view.LoginActivity"
             android:theme="@style/LoginActivityTheme"></activity>

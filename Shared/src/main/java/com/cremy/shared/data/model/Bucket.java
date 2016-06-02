@@ -4,7 +4,9 @@ import com.cremy.greenrobotutils.library.storage.gson.GSONBaseModel;
 import com.cremy.shared.mvp.BucketMVP;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.ListIterator;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -36,8 +38,30 @@ implements BucketMVP.Model{
     }
 
     @Override
-    public ArrayList<Task> toList() {
-        return new ArrayList<Task>(this.tasks.values()) ;
+    public ArrayList<Task> toDisplayedList() {
+
+        // 1. We first re-order the list given by Firebase (ordered by push generated id)
+        ArrayList<Task> orderedList = new ArrayList<Task>(this.tasks.values());
+        Collections.reverse(orderedList);
+
+        // TODO
+
+        String currentDeadline = new String();
+        ListIterator<Task> iterator = orderedList.listIterator();
+        while (iterator.hasNext()) {
+            final Task tempTask = iterator.next();
+            if (tempTask.getDisplayedDeadline()!=null) {
+                if (!currentDeadline.equals(tempTask.getDisplayedDeadline())) {
+                    currentDeadline = tempTask.getDisplayedDeadline();
+                    // We create a header type task (containing only a title)
+                    iterator.previous();
+                    iterator.add(new Task(currentDeadline));
+                }
+            }
+        }
+
+
+        return orderedList;
     }
 
 }
