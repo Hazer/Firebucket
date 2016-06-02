@@ -25,6 +25,10 @@ public class BucketTaskViewModel extends BaseObservable {
     public String getTaskTitle() {
         return this.model.getTitle();
     }
+
+    public int getTaskPriorityColor() {
+        return this.model.getPriority().getColor(this.context);
+    }
     //endregion
 
 }
