@@ -41,6 +41,7 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
 
     @Override
     public void loadBucket() {
+        this.dataManager.stopBucketListening(this);
         this.dataManager.startBucketListening(this);
     }
 
@@ -60,7 +61,7 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
                 }
             }
             else {
-                this.view.showError();
+                this.view.showBucketEmpty();
             }
         }
     }
@@ -70,11 +71,9 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     public void onDataChange(DataSnapshot _dataSnapshot) {
         this.checkViewAttached();
         try {
-            if (_dataSnapshot.exists()) {
-                Log.d(TAG, _dataSnapshot.toString());
-                this.model = _dataSnapshot.getValue(Bucket.class);
-                this.showBucket();
-            }
+            Log.d(TAG, _dataSnapshot.toString());
+            this.model = _dataSnapshot.getValue(Bucket.class);
+            this.showBucket();
         } catch (ClassCastException e) {
             e.printStackTrace();
             this.view.showError();

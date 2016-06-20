@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.ui.presenter.BucketPresenter;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -271,6 +273,9 @@ public class BucketActivity extends BaseActivity implements
         else {
             this.adapter.setItems(_tasks);
         }
+
+        this.recyclerView.setVisibility(View.VISIBLE);
+        this.placeholderLayout.setVisibility(View.GONE);
     }
 
     @Override
