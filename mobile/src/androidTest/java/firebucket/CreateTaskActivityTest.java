@@ -57,6 +57,8 @@ public class CreateTaskActivityTest {
 
         onView(withId(R.id.createTaskOptionItemPriority)).check(matches(isDisplayed()));
         onView(withId(R.id.createTaskOptionItemPrioritySubtitle)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.createTaskOptionItemPrioritySubtitle)).check(matches(isDisplayed()));
     }
     //endregion
 

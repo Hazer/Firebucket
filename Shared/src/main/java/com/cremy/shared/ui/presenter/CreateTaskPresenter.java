@@ -3,6 +3,7 @@ package com.cremy.shared.ui.presenter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.cremy.shared.App;
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.data.model.Task;
@@ -44,7 +45,7 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     @Override
     public void setTaskPriority(final int _idPriority) {
-        this.model.setPriority(new TaskPriority(_idPriority));
+        this.model.setPriority(new TaskPriority(this.view.getContext(), _idPriority));
     }
 
     @Override

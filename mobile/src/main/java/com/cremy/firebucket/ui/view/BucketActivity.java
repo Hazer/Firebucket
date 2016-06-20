@@ -64,7 +64,7 @@ public class BucketActivity extends BaseActivity implements
         this.nextCreateTask();
     }
     @OnClick(R.id.placeholderButton)
-    public void onClicklaceholderButton(View view) {
+    public void onClickPlaceholderButton(View view) {
         this.loadData();
     }
     //endregion

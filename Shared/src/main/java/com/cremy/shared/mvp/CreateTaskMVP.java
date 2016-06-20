@@ -21,6 +21,8 @@ public interface CreateTaskMVP {
 
         void updatePresenterTaskDeadline(Calendar _calendar);
         void updateViewTaskDeadline(Calendar _calendar);
+
+        void updateViewTaskPriority(int idPriority);
     }
     //endregion
 

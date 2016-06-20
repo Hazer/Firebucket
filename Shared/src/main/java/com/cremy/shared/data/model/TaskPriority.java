@@ -14,31 +14,21 @@ public class TaskPriority {
     //region Id's
     public final static int PRIORITY_LOW_ID = 0;
     public final static int PRIORITY_NORMAL_ID = 1;
-    public final static int PRIORITY_HIGH_ID = 3;
-    public final static int PRIORITY_CRUCIAL_ID = 4;
-    //endregion
-
-    //region Labels
-    public final static String PRIORITY_LOW_LABEL = "Low";
-    public final static String PRIORITY_NORMAL_LABEL = "Normal";
-    public final static String PRIORITY_HIGH_LABEL = "High";
-    public final static String PRIORITY_CRUCIAL_LABEL = "Crucial";
+    public final static int PRIORITY_HIGH_ID = 2;
+    public final static int PRIORITY_CRUCIAL_ID = 3;
     //endregion
 
     //region Variables
     private int id = PRIORITY_NORMAL_ID;
-    private String label = PRIORITY_NORMAL_LABEL;
+    private String label;
     //endregion
 
     //region Constructors
     public TaskPriority() {
     }
-    public TaskPriority(int _id) {
+    public TaskPriority(Context _context, int _id) {
         this.id = _id;
-    }
-    public TaskPriority(int _id, String _label) {
-        this.id = _id;
-        this.label = _label;
+        this.label = getResourceLabel(_context, _id);
     }
     //endregion
 
@@ -72,6 +62,11 @@ public class TaskPriority {
             default:
                 return _context.getResources().getColor(R.color.taskPriorityNormal);
         }
+    }
+
+    public static String getResourceLabel(Context _context, int _idPriority) {
+        String[] labels = _context.getResources().getStringArray(R.array.task_priority_labels);
+        return labels[_idPriority];
     }
 
     //endregion

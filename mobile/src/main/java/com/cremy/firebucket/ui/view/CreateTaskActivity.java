@@ -1,8 +1,10 @@
 package com.cremy.firebucket.ui.view;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -20,6 +22,7 @@ import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.util.KeyboardUtils;
 import com.cremy.shared.data.model.Task;
+import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.CreateTaskMVP;
 import com.cremy.shared.ui.presenter.CreateTaskPresenter;
 import com.cremy.shared.utils.CustomDateUtils;
@@ -49,6 +52,9 @@ DatePickerDialog.OnDateSetListener{
 
     @BindView(R.id.createTaskOptionItemDeadlineSubtitle)
     TextView createTaskOptionItemDeadlineSubtitle;
+
+    @BindView(R.id.createTaskOptionItemPrioritySubtitle)
+    TextView createTaskOptionItemPrioritySubtitle;
     //endregion
 
     //region Date
@@ -76,7 +82,16 @@ DatePickerDialog.OnDateSetListener{
 
     @OnClick(R.id.createTaskOptionItemPriority)
     public void clickCreateTaskOptionItemPriority() {
-        // todo
+        AlertDialog.Builder ad = new AlertDialog.Builder(this, 5);
+        ad.setTitle(getResources().getString(R.string.create_task_option_item_priority_title));
+        ad.setCancelable(true);
+        ad.setItems(R.array.task_priority_labels, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int idPriority) {
+                presenter.setTaskPriority(idPriority);
+                updateViewTaskPriority(idPriority);
+            }
+        });
+        ad.show();
     }
     //endregion
 
@@ -264,6 +279,11 @@ DatePickerDialog.OnDateSetListener{
     public void updateViewTaskDeadline(Calendar _calendar) {
         final String displayedDeadline = Task.getDisplayDate(this, _calendar);
         this.createTaskOptionItemDeadlineSubtitle.setText(displayedDeadline);
+    }
+
+    @Override
+    public void updateViewTaskPriority(int _idPriority) {
+        this.createTaskOptionItemPrioritySubtitle.setText(TaskPriority.getResourceLabel(CreateTaskActivity.this, _idPriority));
     }
 
 }
