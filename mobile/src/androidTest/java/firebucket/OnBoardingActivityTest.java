@@ -51,7 +51,7 @@ public class OnBoardingActivityTest {
 
         onView(withId(R.id.buttonLogin)).check(matches(isDisplayed()));
         onView(withId(R.id.linkRegister)).check(matches(isDisplayed()));
-
+        onView(withId(R.id.appLogo)).check(matches(isDisplayed()));
     }
     //endregion
 

@@ -11,6 +11,7 @@ import rx.Subscriber;
 
 /**
  * This handler allows to wrap the firebase listeners (OnSuccessListener, OnFailureListener, OnCompleteListener)
+ * With RxJava
  * @param <T>
  */
 public class FirebaseRxHandler<T>

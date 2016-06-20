@@ -12,6 +12,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_launcher_web"
+            android:layout_gravity="center_horizontal"/>
         <com.cremy.shared.ui.widget.FirebucketTextView
             style="@style/OnBoardingActivityTitle"
             android:text="@string/onboarding_title"

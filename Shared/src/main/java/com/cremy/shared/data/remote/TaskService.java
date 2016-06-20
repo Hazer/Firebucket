@@ -50,11 +50,6 @@ public class TaskService extends BaseFirebaseDatabaseService {
         _task.setId(key);
 
         // 3. We now set the new task
-/*
-        this.getChildReference().child(key)
-                .setValue(_task).addOnCompleteListener(_onCompleteListener);
-*/
-
         return Observable.create(new Observable.OnSubscribe<Void>() {
             @Override
             public void call(final Subscriber<? super Void> subscriber) {

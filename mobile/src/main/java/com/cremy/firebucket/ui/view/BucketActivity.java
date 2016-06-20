@@ -14,6 +14,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cremy.firebucket.R;
@@ -49,6 +50,8 @@ public class BucketActivity extends BaseActivity implements
 
     @BindView(R.id.placeholderLayout)
     FrameLayout placeholderLayout;
+    @BindView(R.id.placeholderImage)
+    ImageView placeholderImage;
     @BindView(R.id.placeholderTitle)
     TextView placeholderTitle;
     @BindView(R.id.placeholderButton)
@@ -284,6 +287,7 @@ public class BucketActivity extends BaseActivity implements
         this.hideLoading();
         this.recyclerView.setVisibility(View.GONE);
         this.placeholderLayout.setVisibility(View.VISIBLE);
+        this.placeholderImage.setImageDrawable(getResources().getDrawable(R.drawable.image_bucket_empty));
         this.placeholderButton.setText(getResources().getString(R.string.bucket_activity_placeholder_button_text));
         this.placeholderTitle.setText(getResources().getString(R.string.bucket_activity_placeholder_title_text_empty));
     }
@@ -293,6 +297,7 @@ public class BucketActivity extends BaseActivity implements
         this.hideLoading();
         this.recyclerView.setVisibility(View.GONE);
         this.placeholderLayout.setVisibility(View.VISIBLE);
+        this.placeholderImage.setImageDrawable(getResources().getDrawable(R.drawable.image_bucket_error));
         this.placeholderButton.setText(getResources().getString(R.string.bucket_activity_placeholder_button_text));
         this.placeholderTitle.setText(getResources().getString(R.string.bucket_activity_placeholder_title_text_error));
     }

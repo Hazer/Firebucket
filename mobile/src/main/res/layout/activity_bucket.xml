@@ -29,6 +29,15 @@
             android:orientation="vertical"
             android:layout_gravity="center"
             android:gravity="center">
+
+            <ImageView
+                android:id="@+id/placeholderImage"
+                style="@style/PlaceholderImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                tools:src="@drawable/image_bucket_empty"
+                android:layout_gravity="center_horizontal"/>
+
             <TextView
                 android:id="@+id/placeholderTitle"
                 style="@style/PlaceholderTitle"
