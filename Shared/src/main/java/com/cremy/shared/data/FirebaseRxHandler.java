@@ -31,6 +31,7 @@ public class FirebaseRxHandler<T>
                 .addOnCompleteListener(handler);
     }
 
+
     public static <T> void assignOnTaskWithoutCompletedListener(Subscriber<? super T> observer, Task<T> task) {
         FirebaseRxHandler handler = new FirebaseRxHandler(observer);
         task.addOnSuccessListener(handler)

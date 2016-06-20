@@ -180,7 +180,8 @@ public class BucketActivity extends BaseActivity implements
 
     @Override
     public void onLandscape() {
-        this.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+/*        this.recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));*/
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     @Override

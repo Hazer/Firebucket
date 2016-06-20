@@ -25,14 +25,14 @@ public interface CreateTaskMVP {
     //endregion
 
     //region Presenter
-    interface Presenter extends OnCompleteListener<Void> {
+    interface Presenter {
         void setTaskPriority(int _idPriority);
         void setTaskDeadline(Calendar _calendar);
         void setTaskTitle(String _title);
 
         void createTask();
         void onTaskCreatedSuccess();
-        void onTaskCreatedFail(Exception e);
+        void onTaskCreatedFail(Throwable e);
     }
     //endregion
 

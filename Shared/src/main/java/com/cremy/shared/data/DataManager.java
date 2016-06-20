@@ -67,9 +67,8 @@ public class DataManager {
     //endregion
 
     //region Task
-    public void writeTaskInDatabase(final Task _task,
-                                    OnCompleteListener _onCompleteListener) {
-        this.taskService.writeTaskInDatabase(_task, _onCompleteListener);
+    public Observable<Void> writeTaskInDatabase(final Task _task) {
+        return this.taskService.writeTaskInDatabase(_task);
     }
 
     public void removeTaskFromDatabase(final Task _task) {

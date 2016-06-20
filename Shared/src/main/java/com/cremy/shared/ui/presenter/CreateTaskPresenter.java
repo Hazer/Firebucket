@@ -10,10 +10,15 @@ import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.CreateTaskMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
+import com.google.firebase.auth.AuthResult;
 
 import java.util.Calendar;
 
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -55,17 +60,26 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     @Override
     public void createTask() {
-        this.dataManager.writeTaskInDatabase(this.model, this);
+        Observable<Void> createObservable =  this.dataManager.writeTaskInDatabase(this.model);
+        createObservable.observeOn(AndroidSchedulers.mainThread());
+        createObservable.subscribe(new Subscriber<Void>() {
+            @Override
+            public void onCompleted() {
+                onTaskCreatedSuccess();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                onTaskCreatedFail(e);
+            }
+
+            @Override
+            public void onNext(Void result) {
+                // no needed here
+            }
+        });
     }
 
-    @Override
-    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
-        if (task.isSuccessful()) {
-            this.onTaskCreatedSuccess();
-        } else {
-            this.onTaskCreatedFail(task.getException());
-        }
-    }
 
     @Override
     public void onTaskCreatedSuccess() {
@@ -75,7 +89,7 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     }
 
     @Override
-    public void onTaskCreatedFail(Exception e) {
+    public void onTaskCreatedFail(Throwable e) {
         checkViewAttached();
         CrashReporter.log("CreateTask: onTaskCreatedFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));
