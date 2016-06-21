@@ -1,6 +1,7 @@
 package com.cremy.shared.mvp;
 
 import com.cremy.shared.mvp.base.BaseMvpView;
+import com.cremy.shared.mvp.base.view.rx.IBaseRxActivity;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
@@ -9,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser;
 public interface LoginMVP {
 
     //region View
-    interface View extends BaseMvpView {
+    interface View extends BaseMvpView, IBaseRxActivity {
         void next();
         void previous();
         boolean checkForm();

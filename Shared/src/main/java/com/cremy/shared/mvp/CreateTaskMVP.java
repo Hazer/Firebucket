@@ -2,6 +2,7 @@ package com.cremy.shared.mvp;
 
 import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.base.BaseMvpView;
+import com.cremy.shared.mvp.base.view.rx.IBaseRxActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 import java.util.Calendar;
@@ -12,7 +13,7 @@ import java.util.Calendar;
 public interface CreateTaskMVP {
 
     //region View
-    interface View extends BaseMvpView {
+    interface View extends BaseMvpView, IBaseRxActivity {
         void createTask();
         void next();
 

@@ -1,6 +1,7 @@
 package com.cremy.shared.ui.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
@@ -9,12 +10,17 @@ import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
+import com.trello.rxlifecycle.ActivityEvent;
+import com.trello.rxlifecycle.RxLifecycle;
 
 import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
+import rx.subjects.BehaviorSubject;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -37,8 +43,17 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     //region Login/Auth
     @Override
     public void signInUser(String email, String password) {
+
         Observable<AuthResult> authObservable = this.dataManager.signInWithEmailAndPassword(email, password);
         authObservable.observeOn(AndroidSchedulers.mainThread());
+        authObservable.subscribeOn(Schedulers.io());
+        authObservable.doOnUnsubscribe(new Action0() {
+            @Override
+            public void call() {
+                Log.i(TAG, "Unsubscribing subscription from onDestroy()");
+            }
+        });
+        authObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
         authObservable.subscribe(new Subscriber<AuthResult>() {
             @Override
             public void onCompleted() {
@@ -69,16 +84,6 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
         checkViewAttached();
         CrashReporter.log("Login: onAuthFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_signin));
-    }
-    //endregion
-
-    //region Other
-    private String usernameFromEmail(String email) {
-        if (email.contains("@")) {
-            return email.split("@")[0];
-        } else {
-            return email;
-        }
     }
     //endregion
 }

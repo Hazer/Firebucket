@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 
 import com.cremy.firebucket.BuildConfig;
 import com.cremy.firebucket.R;
-import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.shared.data.model.User;
 import com.cremy.shared.mvp.LoginMVP;
@@ -25,9 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends BaseActivity implements
+public class LoginActivity extends BaseRxActivity implements
         LoginMVP.View {
-
 
     //region View binding
     @BindView(R.id.rootViewLogin)
@@ -109,7 +108,6 @@ public class LoginActivity extends BaseActivity implements
         this.detachFromPresenter();
         super.onDestroy();
     }
-
     //endregion
 
 

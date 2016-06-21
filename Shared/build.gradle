@@ -55,9 +55,10 @@ dependencies {
     apt "com.android.databinding:compiler:$rootProject.ANDROID_DATA_BINDING_VERSION"
     //endregion
 
-    //region rxJava and rxAndroid
+    //region RxJava, RxAndroid and RxLifecycle
     compile "io.reactivex:rxandroid:$rootProject.RXANDROID_VERSION"
     compile "io.reactivex:rxjava:$rootProject.RXJAVA_VERSION"
+    compile "com.trello:rxlifecycle:$rootProject.RXLIFECYCLE_VERSION"
     //endregion
 
     //region GreenRobotUtils

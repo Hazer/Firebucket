@@ -2,6 +2,7 @@ package com.cremy.shared.ui.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.cremy.shared.App;
 import com.cremy.shared.R;
@@ -12,6 +13,7 @@ import com.cremy.shared.mvp.CreateTaskMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
 import com.google.firebase.auth.AuthResult;
+import com.trello.rxlifecycle.ActivityEvent;
 
 import java.util.Calendar;
 
@@ -20,6 +22,8 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -63,6 +67,14 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     public void createTask() {
         Observable<Void> createObservable =  this.dataManager.writeTaskInDatabase(this.model);
         createObservable.observeOn(AndroidSchedulers.mainThread());
+        createObservable.subscribeOn(Schedulers.io());
+        createObservable.doOnUnsubscribe(new Action0() {
+            @Override
+            public void call() {
+                Log.i(TAG, "Unsubscribing subscription from onDestroy()");
+            }
+        });
+        createObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
         createObservable.subscribe(new Subscriber<Void>() {
             @Override
             public void onCompleted() {
