@@ -56,6 +56,7 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     public void setTaskDeadline(Calendar _calender) {
         this.model.setDeadline(_calender.getTime().toString());
         this.model.setDisplayedDeadline(Task.getDisplayDate(this.appContext, _calender));
+        this.model.setMillisDeadline(_calender.getTimeInMillis());
     }
 
     @Override

@@ -42,9 +42,7 @@ implements BucketMVP.Model{
 
         // 1. We first re-order the list given by Firebase (ordered by push generated id)
         ArrayList<Task> orderedList = new ArrayList<Task>(this.tasks.values());
-        Collections.reverse(orderedList);
-
-        // TODO
+        Collections.sort(orderedList);
 
         String currentDeadline = new String();
         ListIterator<Task> iterator = orderedList.listIterator();

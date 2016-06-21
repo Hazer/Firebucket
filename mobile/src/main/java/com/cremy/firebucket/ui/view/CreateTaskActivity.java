@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.util.KeyboardUtils;
@@ -35,7 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CreateTaskActivity extends BaseActivity implements
+public class CreateTaskActivity extends BaseRxActivity implements
         CreateTaskMVP.View,
 DatePickerDialog.OnDateSetListener{
     public ProgressDialog progress;

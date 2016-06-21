@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.shared.data.model.User;
 import com.cremy.shared.mvp.RegisterMVP;
@@ -24,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity implements
+public class RegisterActivity extends BaseRxActivity implements
         RegisterMVP.View {
 
 

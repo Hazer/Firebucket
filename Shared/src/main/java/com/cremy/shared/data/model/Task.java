@@ -10,7 +10,7 @@ import com.google.firebase.database.Exclude;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Task implements CreateTaskMVP.Model {
+public class Task implements CreateTaskMVP.Model, Comparable<Task> {
 
     //region Variables
     private String id;
@@ -18,6 +18,7 @@ public class Task implements CreateTaskMVP.Model {
     private TaskPriority priority = new TaskPriority();
     private String deadline = CustomDateUtils.getNow();
     private String displayedDeadline;
+    private long millisDeadline;
     //endregion
 
     //region Constructors
@@ -66,6 +67,14 @@ public class Task implements CreateTaskMVP.Model {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void setMillisDeadline(long millisDeadline) {
+        this.millisDeadline = millisDeadline;
+    }
+
+    public long getMillisDeadline() {
+        return millisDeadline;
+    }
     //endregion
 
     //region Utils
@@ -93,6 +102,13 @@ public class Task implements CreateTaskMVP.Model {
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, d MMM");
             return dateFormat.format(_calendarInstance.getTime());
         }
+    }
+    //endregion
+
+    //region Comparable
+    @Override
+    public int compareTo(Task another) {
+        return this.millisDeadline < another.getMillisDeadline() ? -1 : (this.millisDeadline == another.getMillisDeadline() ? 0 : 1);
     }
     //endregion
 }
