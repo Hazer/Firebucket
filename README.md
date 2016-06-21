@@ -19,7 +19,7 @@ This project is nothing more than a way to put into practice what I've learn.
 * Firebase
 * Dependency Injection (Dagger 2)
 * ButterKnife
-* RxJava
+* RxJava, RxAndroid and RxLifecycle
 * Jackson
 
 ## Pattern
