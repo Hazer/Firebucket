@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MaterialDesignTheme.ToolBar" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:layout_height">@dimen/material_design_toolbar_height</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+
+    <style name="MaterialDesignTheme.ToolBarPrimary" parent="MaterialDesignTheme.ToolBar">
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:textColorPrimaryInverse">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    <style name="MaterialDesignTheme.ToolBarPrimary.Title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

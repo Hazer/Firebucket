@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.BaseObservable;
 
 import com.cremy.shared.data.model.Task;
+import com.cremy.shared.data.model.TaskPriority;
 
 public class BucketTaskViewModel extends BaseObservable {
 
@@ -28,6 +29,9 @@ public class BucketTaskViewModel extends BaseObservable {
 
     public int getTaskPriorityColor() {
         return this.model.getPriority().getColor(this.context);
+    }
+    public String getTaskPriorityLabel() {
+        return this.model.getPriority().getLabel();
     }
     //endregion
 }

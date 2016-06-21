@@ -20,7 +20,7 @@ public class TaskPriority {
 
     //region Variables
     private int id = PRIORITY_NORMAL_ID;
-    private String label;
+    private String label = "Normal";
     //endregion
 
     //region Constructors

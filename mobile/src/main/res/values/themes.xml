@@ -22,7 +22,7 @@
     </style>
 
 
-    <style name="BucketActivityTheme" parent="AppTheme">
+    <style name="BucketActivityTheme" parent="AppTheme.NoActionBar">
         <!-- I set my background here and not in the view XML so
          the rendering will not draw the background twice -->
         <item name="android:windowBackground">@android:color/white</item>

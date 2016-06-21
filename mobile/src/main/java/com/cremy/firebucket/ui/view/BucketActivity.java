@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
@@ -45,6 +46,10 @@ public class BucketActivity extends BaseActivity implements
     //region View binding
     @BindView(R.id.rootViewMain)
     FrameLayout rootViewMain;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.toolbarTitle)
+    TextView toolbarTitle;
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
@@ -210,7 +215,8 @@ public class BucketActivity extends BaseActivity implements
 
     @Override
     public void setUpToolbar() {
-
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
     }
 
     @Override
