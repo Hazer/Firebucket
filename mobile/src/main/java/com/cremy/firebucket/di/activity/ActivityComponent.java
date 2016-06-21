@@ -2,6 +2,7 @@ package com.cremy.firebucket.di.activity;
 
 import com.cremy.firebucket.ui.view.BucketActivity;
 import com.cremy.firebucket.ui.view.CreateTaskActivity;
+import com.cremy.firebucket.ui.view.LaunchScreen;
 import com.cremy.firebucket.ui.view.LoginActivity;
 import com.cremy.firebucket.ui.view.OnBoardingActivity;
 import com.cremy.firebucket.ui.view.RegisterActivity;

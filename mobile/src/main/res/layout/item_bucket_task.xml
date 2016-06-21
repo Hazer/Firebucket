@@ -12,29 +12,35 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/item"
-        tools:background="@android:color/white">
-
-        <View
-            android:layout_width="5dp"
-            android:layout_height="75dp"
-            android:layout_gravity="left"
-            android:background="@{viewModel.getTaskPriorityColor}"
-            tools:background="@color/taskPriorityNormal"/>
+        tools:background="@android:color/white"
+        android:padding="@dimen/material_design_keyline_one">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/material_design_keyline_one">
+            android:orientation="vertical">
             <TextView
                 style="@style/BucketActivityItemTaskTitle"
                 android:text="@{viewModel.getTaskTitle}"
                 tools:text="Item title"/>
 
-            <TextView
-                style="@style/BucketActivityItemTaskSubtitle"
-                android:text="@{viewModel.getTaskPriorityLabel}"
-                tools:text="Item subtitle"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.cremy.shared.utils.RoundedCornerLayout
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginRight="@dimen/material_design_keyline_two"
+                    android:background="@{viewModel.getTaskPriorityColor}"
+                    tools:background="@color/taskPriorityNormal"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    style="@style/BucketActivityItemTaskSubtitle"
+                    android:text="@{viewModel.getTaskPriorityLabel}"
+                    tools:text="Item subtitle"/>
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 </layout>

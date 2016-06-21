@@ -9,6 +9,6 @@
     <string name="error_login_invalid_password">Please provide a valid password</string>
 
 <!--    Create Task-->
-    <string name="error_create_task_date_picking_too_early">You can\'t come back in the past.</string>
+    <string name="error_create_task_date_picking_too_early">Only Marty McFly can come back in the past.</string>
     <string name="error_create_task_invalid_title">Please, provide a title for the task.</string>
 </resources>
