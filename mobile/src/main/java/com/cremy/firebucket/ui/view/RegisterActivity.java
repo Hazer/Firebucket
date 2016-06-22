@@ -1,5 +1,6 @@
 package com.cremy.firebucket.ui.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,14 +28,11 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseRxActivity implements
         RegisterMVP.View {
-
+    public ProgressDialog progress;
 
     //region View binding
     @BindView(R.id.rootViewRegister)
     FrameLayout rootViewRegister;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
 
     @BindView(R.id.registerForm)
     LinearLayout registerForm;
@@ -141,14 +139,14 @@ public class RegisterActivity extends BaseRxActivity implements
 
     @Override
     public void showLoading() {
-        this.progressBar.setVisibility(View.VISIBLE);
-        this.registerForm.setVisibility(View.GONE);
+        progress = ProgressDialog.show(this, getResources().getString(R.string.general_progress_dialog_title), getResources().getString(R.string.general_progress_dialog_content), true);
     }
 
     @Override
     public void hideLoading() {
-        this.progressBar.setVisibility(View.GONE);
-        this.registerForm.setVisibility(View.VISIBLE);
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 
     @Override

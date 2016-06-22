@@ -1,5 +1,6 @@
 package com.cremy.firebucket.ui.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.cremy.firebucket.BuildConfig;
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
+import com.cremy.greenrobotutils.library.util.KeyboardUtils;
 import com.cremy.shared.data.model.User;
 import com.cremy.shared.mvp.LoginMVP;
 import com.cremy.shared.ui.presenter.LoginPresenter;
@@ -27,13 +29,11 @@ import butterknife.OnClick;
 
 public class LoginActivity extends BaseRxActivity implements
         LoginMVP.View {
+    public ProgressDialog progress;
 
     //region View binding
     @BindView(R.id.rootViewLogin)
     FrameLayout rootViewLogin;
-
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
 
     @BindView(R.id.loginForm)
     LinearLayout loginForm;
@@ -138,14 +138,14 @@ public class LoginActivity extends BaseRxActivity implements
 
     @Override
     public void showLoading() {
-        this.progressBar.setVisibility(View.VISIBLE);
-        this.loginForm.setVisibility(View.GONE);
+        progress = ProgressDialog.show(this, getResources().getString(R.string.general_progress_dialog_title), getResources().getString(R.string.general_progress_dialog_content), true);
     }
 
     @Override
     public void hideLoading() {
-        this.progressBar.setVisibility(View.GONE);
-        this.loginForm.setVisibility(View.VISIBLE);
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 
     @Override
