@@ -33,17 +33,8 @@ This project is nothing more than a way to put into practice what I've learn.
 * **Shared**: this module host the code shared by the three module above
 * **SharedTest**: contain very specific testing classes used by all the modules
 
-## Testing
-* **Espresso** for instrumented testing
-* **Mockito** to mock some classes such as the *DataManager*
-* **Harmcrest** to create custom assertions for the tests
-* **JUnit**, because JUnit
+## RxJava wrapping & RxLifeCycle
+__Work in progress...__
 
 ## Android Wear 2.0
-__Work in progress...__
-
-## Android TV
-__Work in progress...__
-
-## Testing
-__Work in progress...__
+__Coming soon...__
