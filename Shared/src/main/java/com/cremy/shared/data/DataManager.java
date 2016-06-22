@@ -16,6 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.Single;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -46,13 +47,13 @@ public class DataManager {
     //endregion
 
     //region Auth
-    public Observable<AuthResult> createUserWithEmailAndPassword(final String _email,
+    public Single<AuthResult> createUserWithEmailAndPassword(final String _email,
                                                final String _password) {
         return this.authService.createUserWithEmailAndPassword(_email, _password);
     }
 
-    public Observable<AuthResult> signInWithEmailAndPassword(final String _email,
-                                                             final String _password) {
+    public Single<AuthResult> signInWithEmailAndPassword(final String _email,
+                                                         final String _password) {
         return this.authService.signInWithEmailAndPassword(_email, _password);
     }
 
@@ -67,7 +68,7 @@ public class DataManager {
     //endregion
 
     //region Task
-    public Observable<Void> writeTaskInDatabase(final Task _task) {
+    public Single<Void> writeTaskInDatabase(final Task _task) {
         return this.taskService.writeTaskInDatabase(_task);
     }
 

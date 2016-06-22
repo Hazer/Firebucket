@@ -14,6 +14,7 @@ public interface LoginMVP {
         void next();
         void previous();
         boolean checkForm();
+        void signInUser();
     }
     //endregion
 

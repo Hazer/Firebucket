@@ -11,30 +11,30 @@ import rx.Subscriber;
 
 /**
  * This handler allows to wrap the firebase listeners (OnSuccessListener, OnFailureListener, OnCompleteListener)
- * With RxJava
+ * With a RxJava Subscriber
  * @param <T>
  */
-public class FirebaseRxHandler<T>
+public class FirebaseRxSubscriberWrapper<T>
         implements OnSuccessListener<T>,
         OnFailureListener,
         OnCompleteListener<T> {
 
     private final Subscriber<? super T> subscriber;
 
-    private FirebaseRxHandler(Subscriber<? super T> observer) {
+    private FirebaseRxSubscriberWrapper(Subscriber<? super T> observer) {
         this.subscriber = observer;
     }
 
     public static <T> void assignOnTask(Subscriber<? super T> observer, Task<T> task) {
-        FirebaseRxHandler handler = new FirebaseRxHandler(observer);
-        task.addOnSuccessListener(handler)
-                .addOnFailureListener(handler)
-                .addOnCompleteListener(handler);
+        FirebaseRxSubscriberWrapper wrapper = new FirebaseRxSubscriberWrapper(observer);
+        task.addOnSuccessListener(wrapper)
+                .addOnFailureListener(wrapper)
+                .addOnCompleteListener(wrapper);
     }
 
 
     public static <T> void assignOnTaskWithoutCompletedListener(Subscriber<? super T> observer, Task<T> task) {
-        FirebaseRxHandler handler = new FirebaseRxHandler(observer);
+        FirebaseRxSubscriberWrapper handler = new FirebaseRxSubscriberWrapper(observer);
         task.addOnSuccessListener(handler)
                 .addOnFailureListener(handler);
     }

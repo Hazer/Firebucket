@@ -1,6 +1,6 @@
 package com.cremy.shared.data.remote;
 
-import com.cremy.shared.data.FirebaseRxHandler;
+import com.cremy.shared.data.FirebaseRxSubscriberSingleWrapper;
 import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.User;
 import com.google.firebase.auth.AuthResult;
@@ -11,7 +11,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
+import rx.Single;
+import rx.SingleSubscriber;
 
 /**
  * Created by remychantenay on 18/05/2016.
@@ -30,12 +31,12 @@ public class AuthService extends BaseFirebaseDatabaseService {
      * @param _email
      * @param _password
      */
-    public Observable<AuthResult> createUserWithEmailAndPassword(final String _email,
+    public Single<AuthResult> createUserWithEmailAndPassword(final String _email,
                                                final String _password) {
-        return Observable.create(new Observable.OnSubscribe<AuthResult>() {
+        return Single.create(new Single.OnSubscribe<AuthResult>() {
             @Override
-            public void call(final Subscriber<? super AuthResult> subscriber) {
-                FirebaseRxHandler.assignOnTask(subscriber, firebaseAuth.createUserWithEmailAndPassword(_email, _password));
+            public void call(final SingleSubscriber<? super AuthResult> subscriber) {
+                FirebaseRxSubscriberSingleWrapper.assignOnTask(subscriber, firebaseAuth.createUserWithEmailAndPassword(_email, _password));
             }
         });
     }
@@ -45,12 +46,12 @@ public class AuthService extends BaseFirebaseDatabaseService {
      * @param _email
      * @param _password
      */
-    public Observable<AuthResult> signInWithEmailAndPassword(final String _email,
+    public Single<AuthResult> signInWithEmailAndPassword(final String _email,
                                                              final String _password) {
-        return Observable.create(new Observable.OnSubscribe<AuthResult>() {
+        return Single.create(new Single.OnSubscribe<AuthResult>() {
             @Override
-            public void call(final Subscriber<? super AuthResult> subscriber) {
-                FirebaseRxHandler.assignOnTask(subscriber, firebaseAuth.signInWithEmailAndPassword(_email, _password));
+            public void call(final SingleSubscriber<? super AuthResult> subscriber) {
+                FirebaseRxSubscriberSingleWrapper.assignOnTask(subscriber, firebaseAuth.signInWithEmailAndPassword(_email, _password));
             }
         });
     }

@@ -16,6 +16,8 @@ import com.trello.rxlifecycle.ActivityEvent;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -43,20 +45,16 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     //region Registration/Auth
     @Override
     public void createUser(String email, String password) {
-        Observable<AuthResult> authObservable = this.dataManager.createUserWithEmailAndPassword(email, password);
-            authObservable.observeOn(AndroidSchedulers.mainThread());
-            authObservable.subscribeOn(Schedulers.io());
-            authObservable.doOnUnsubscribe(new Action0() {
-                @Override
-                public void call() {
-                    Log.i(TAG, "Unsubscribing subscription from onDestroy()");
-                }
-            });
-            authObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
-            authObservable.subscribe(new Subscriber<AuthResult>() {
+        Single<AuthResult> authSingle = this.dataManager.createUserWithEmailAndPassword(email, password);
+        authSingle.observeOn(AndroidSchedulers.mainThread());
+        authSingle.subscribeOn(Schedulers.io());
+        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
+        authSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
+        authSingle.subscribe(new SingleSubscriber<AuthResult>() {
+
             @Override
-            public void onCompleted() {
-                // Not needed here
+            public void onSuccess(AuthResult authResult) {
+                onAuthSuccess(authResult.getUser());
             }
 
             @Override
@@ -64,10 +62,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
                 onAuthFail(e);
             }
 
-            @Override
-            public void onNext(AuthResult authResult) {
-                onAuthSuccess(authResult.getUser());
-            }
         });
     }
 

@@ -34,7 +34,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 @RunWith(AndroidJUnit4.class)
 public class LoginActivityTest {
 
-
     //region Component and Rule set
     public final TestComponentRule component =
             new TestComponentRule(InstrumentationRegistry.getTargetContext());
@@ -79,56 +78,4 @@ public class LoginActivityTest {
         assert textInputLayoutPassword.getError().toString().equals(main.getActivity().getResources().getString(R.string.error_login_invalid_password));
     }
     //endregion
-
-    //region Invalid credentials
-    @Test
-    public void checkClickButtonWithInvalidCredentials() throws InterruptedException {
-
-/*        main.launchActivity(null);
-
-        // We prepare the IdlingResource for the firebase asynchronous auth call
-        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource("1");
-        Espresso.registerIdlingResources(firebaseAuthIdlingResource);
-
-        component.getMockDataHelper().signInWithEmailAndPassword(User.USER_TESTING_EMAIL,
-                User.USER_TESTING_PASSWORD_FAIL, new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                firebaseAuthIdlingResource.onStop();
-                assert !task.isSuccessful();
-            }
-        });
-
-        firebaseAuthIdlingResource.onStart();
-        Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);*/
-    }
-    //endregion
-
-    //region Valid credentials
-    @Test
-    public void checkClickButtonWithValidCredentials() throws InterruptedException {
-
-/*        main.launchActivity(null);
-
-        // We prepare the IdlingResource for the firebase asynchronous auth call
-        final FirebaseOperationIdlingResource firebaseAuthIdlingResource = new FirebaseOperationIdlingResource("2");
-        Espresso.registerIdlingResources(firebaseAuthIdlingResource);
-
-        component.getMockDataHelper().signInWithEmailAndPassword(User.USER_TESTING_EMAIL,
-                User.USER_TESTING_PASSWORD_SUCCESS, new OnCompleteListener() {
-            @Override
-            public void onComplete(@NonNull Task task) {
-                firebaseAuthIdlingResource.onStop();
-                assert task.isSuccessful();
-            }
-        });
-
-        firebaseAuthIdlingResource.onStart();
-        Espresso.unregisterIdlingResources(firebaseAuthIdlingResource);*/
-    }
-    //endregion
-
-
-
-
 }

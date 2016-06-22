@@ -16,6 +16,8 @@ import com.trello.rxlifecycle.RxLifecycle;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -44,30 +46,20 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     @Override
     public void signInUser(String email, String password) {
 
-        Observable<AuthResult> authObservable = this.dataManager.signInWithEmailAndPassword(email, password);
-        authObservable.observeOn(AndroidSchedulers.mainThread());
-        authObservable.subscribeOn(Schedulers.io());
-        authObservable.doOnUnsubscribe(new Action0() {
+        Single<AuthResult> authSingle = this.dataManager.signInWithEmailAndPassword(email, password);
+        authSingle.observeOn(AndroidSchedulers.mainThread());
+        authSingle.subscribeOn(Schedulers.io());
+        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
+        authSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
+        authSingle.subscribe(new SingleSubscriber<AuthResult>() {
             @Override
-            public void call() {
-                Log.i(TAG, "Unsubscribing subscription from onDestroy()");
-            }
-        });
-        authObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
-        authObservable.subscribe(new Subscriber<AuthResult>() {
-            @Override
-            public void onCompleted() {
-                // Not needed here
+            public void onSuccess(AuthResult authResult) {
+                onAuthSuccess(authResult.getUser());
             }
 
             @Override
             public void onError(Throwable e) {
                 onAuthFail(e);
-            }
-
-            @Override
-            public void onNext(AuthResult authResult) {
-                onAuthSuccess(authResult.getUser());
             }
         });
     }
@@ -75,7 +67,6 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     @Override
     public void onAuthSuccess(FirebaseUser user) {
         checkViewAttached();
-        // We tell to the view to go next
         this.view.next();
     }
 

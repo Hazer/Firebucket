@@ -22,6 +22,7 @@ import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.util.KeyboardUtils;
+import com.cremy.greenrobotutils.library.util.NetworkUtils;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.CreateTaskMVP;
@@ -67,11 +68,16 @@ DatePickerDialog.OnDateSetListener{
     //region View events
     @OnClick(R.id.fabCreateTask)
     public void clickFabCreateTask() {
-        if (this.isTaskTitleValid()) {
-            this.presenter.setTaskTitle(createTaskTitleTextInputLayout.getEditText().getText().toString());
-            this.createTask();
+
+        if (NetworkUtils.isNetworkEnabled(this)) {
+            if (this.isTaskTitleValid()) {
+                this.presenter.setTaskTitle(createTaskTitleTextInputLayout.getEditText().getText().toString());
+                this.createTask();
+            } else {
+                this.showMessage(getResources().getString(R.string.error_create_task_invalid_title));
+            }
         } else {
-            this.showMessage(getResources().getString(R.string.error_create_task_invalid_title));
+            this.showNoNetwork();
         }
     }
 
@@ -209,7 +215,7 @@ DatePickerDialog.OnDateSetListener{
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        createTask();
+                        clickFabCreateTask();
                     }
                 }
         );

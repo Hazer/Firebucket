@@ -47,12 +47,7 @@ public class LoginActivity extends BaseRxActivity implements
     //region View events
     @OnClick(R.id.loginFormButton)
     public void clickLoginFormButton() {
-        if (this.checkForm()) {
-            this.showLoading();
-            final String email = this.loginFormEmailTextInputLayout.getEditText().getText().toString().trim();
-            final String password = this.loginFormPasswordTextInputLayout.getEditText().getText().toString().trim();
-            this.presenter.signInUser(email, password);
-        }
+        this.signInUser();
     }
     //endregion
 
@@ -204,6 +199,16 @@ public class LoginActivity extends BaseRxActivity implements
         }
 
         return true;
+    }
+
+    @Override
+    public void signInUser() {
+        if (this.checkForm()) {
+            this.showLoading();
+            final String email = this.loginFormEmailTextInputLayout.getEditText().getText().toString().trim();
+            final String password = this.loginFormPasswordTextInputLayout.getEditText().getText().toString().trim();
+            this.presenter.signInUser(email, password);
+        }
     }
 
 

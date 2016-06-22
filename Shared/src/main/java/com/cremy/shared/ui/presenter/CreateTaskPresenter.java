@@ -20,6 +20,8 @@ import java.util.Calendar;
 import javax.inject.Inject;
 
 import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
@@ -66,19 +68,15 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     @Override
     public void createTask() {
-        Observable<Void> createObservable =  this.dataManager.writeTaskInDatabase(this.model);
-        createObservable.observeOn(AndroidSchedulers.mainThread());
-        createObservable.subscribeOn(Schedulers.io());
-        createObservable.doOnUnsubscribe(new Action0() {
+        Single<Void> createSingle =  this.dataManager.writeTaskInDatabase(this.model);
+        createSingle.observeOn(AndroidSchedulers.mainThread());
+        createSingle.subscribeOn(Schedulers.io());
+        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
+        createSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
+        createSingle.subscribe(new SingleSubscriber<Void>() {
+
             @Override
-            public void call() {
-                Log.i(TAG, "Unsubscribing subscription from onDestroy()");
-            }
-        });
-        createObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
-        createObservable.subscribe(new Subscriber<Void>() {
-            @Override
-            public void onCompleted() {
+            public void onSuccess(Void value) {
                 onTaskCreatedSuccess();
             }
 
@@ -87,10 +85,6 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
                 onTaskCreatedFail(e);
             }
 
-            @Override
-            public void onNext(Void result) {
-                // no needed here
-            }
         });
     }
 
