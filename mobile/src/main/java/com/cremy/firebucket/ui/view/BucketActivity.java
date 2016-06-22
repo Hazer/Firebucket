@@ -121,7 +121,7 @@ public class BucketActivity extends BaseActivity implements
 
         this.loadData();
 
-        this.initRecyclerView();
+        this.setUpRecyclerView();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class BucketActivity extends BaseActivity implements
 
 
     @Override
-    public void initRecyclerView() {
+    public void setUpRecyclerView() {
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
 
             @Override
@@ -163,7 +163,7 @@ public class BucketActivity extends BaseActivity implements
                             // 1. We draw a rectangle with a filled color
                             Paint p = RecyclerViewUtils.drawRectOnSwipe(itemView,
                                     c,
-                                    adapter.getItem(viewHolder.getAdapterPosition()).getPriority().getColor(BucketActivity.this),
+                                    getResources().getColor(com.cremy.shared.R.color.green),
                                     dX);
 
                             if (dX > 0) // If RIGHT swiped

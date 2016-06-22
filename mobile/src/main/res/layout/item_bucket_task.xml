@@ -27,7 +27,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/material_design_keyline_three">
                 <com.cremy.shared.utils.RoundedCornerLayout
                     android:layout_width="10dp"
                     android:layout_height="10dp"

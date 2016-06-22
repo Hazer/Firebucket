@@ -8,4 +8,7 @@
 
     <string name="today">Today</string>
     <string name="tomorrow">Tomorrow</string>
+
+    <string name="priority">Priority: %1$s</string>
+
 </resources>

@@ -11,6 +11,7 @@
     <color name="transparent">#00000000</color>
     <color name="colorBlackOverlay">#64000000</color>
     <color name="colorBackground">#EEEEEE</color>
+    <color name="green">#4CAF50</color>
 
     <!--Task priorities-->
     <color name="taskPriorityLow">#4CAF50</color>

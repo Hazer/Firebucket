@@ -3,6 +3,7 @@ package com.cremy.firebucket.ui.viewModel;
 import android.content.Context;
 import android.databinding.BaseObservable;
 
+import com.cremy.firebucket.R;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.model.TaskPriority;
 
@@ -31,7 +32,7 @@ public class BucketTaskViewModel extends BaseObservable {
         return this.model.getPriority().getColor(this.context);
     }
     public String getTaskPriorityLabel() {
-        return this.model.getPriority().getLabel();
+        return context.getResources().getString(R.string.priority, this.model.getPriority().getLabel());
     }
     //endregion
 }

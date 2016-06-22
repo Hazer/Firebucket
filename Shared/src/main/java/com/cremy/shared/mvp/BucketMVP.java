@@ -16,7 +16,7 @@ public interface BucketMVP {
     interface View extends BaseMvpView {
         void nextCreateTask();
         void loadData();
-        void initRecyclerView();
+        void setUpRecyclerView();
 
         void showBucket(ArrayList<Task> _tasks);
         void showBucketEmpty();

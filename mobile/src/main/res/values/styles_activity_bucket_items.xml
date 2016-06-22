@@ -7,7 +7,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="BucketActivityItemTaskTitle" parent="SingleLineTextView">
+    <style name="BucketActivityItemTaskTitle" parent="MultiLineTextView">
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
