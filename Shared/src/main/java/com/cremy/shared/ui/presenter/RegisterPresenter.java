@@ -46,8 +46,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     @Override
     public void createUser(String email, String password) {
         Single<AuthResult> authSingle = this.dataManager.createUserWithEmailAndPassword(email, password);
-        authSingle.observeOn(AndroidSchedulers.mainThread());
-        authSingle.subscribeOn(Schedulers.io());
         // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
         authSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
         authSingle.subscribe(new SingleSubscriber<AuthResult>() {

@@ -10,31 +10,29 @@ import com.google.android.gms.tasks.Task;
 import rx.Subscriber;
 
 /**
- * This handler allows to wrap the firebase listeners (OnSuccessListener, OnFailureListener, OnCompleteListener)
- * With a RxJava Subscriber
+ * This handler allows to "wrap" the Firebase listeners (OnSuccessListener, OnFailureListener, OnCompleteListener)
+ * With a RxJava {@link Subscriber}
  * @param <T>
  */
-public class FirebaseRxSubscriberWrapper<T>
-        implements OnSuccessListener<T>,
-        OnFailureListener,
-        OnCompleteListener<T> {
+public class FirebaseRxSubscriber<T>
+        implements OnSuccessListener<T>, OnFailureListener, OnCompleteListener<T> {
 
     private final Subscriber<? super T> subscriber;
 
-    private FirebaseRxSubscriberWrapper(Subscriber<? super T> observer) {
+    private FirebaseRxSubscriber(Subscriber<? super T> observer) {
         this.subscriber = observer;
     }
 
-    public static <T> void assignOnTask(Subscriber<? super T> observer, Task<T> task) {
-        FirebaseRxSubscriberWrapper wrapper = new FirebaseRxSubscriberWrapper(observer);
+    public static <T> void initTask(Subscriber<? super T> observer, Task<T> task) {
+        FirebaseRxSubscriber wrapper = new FirebaseRxSubscriber(observer);
         task.addOnSuccessListener(wrapper)
                 .addOnFailureListener(wrapper)
                 .addOnCompleteListener(wrapper);
     }
 
 
-    public static <T> void assignOnTaskWithoutCompletedListener(Subscriber<? super T> observer, Task<T> task) {
-        FirebaseRxSubscriberWrapper handler = new FirebaseRxSubscriberWrapper(observer);
+    public static <T> void initTaskWithoutCompletedListener(Subscriber<? super T> observer, Task<T> task) {
+        FirebaseRxSubscriber handler = new FirebaseRxSubscriber(observer);
         task.addOnSuccessListener(handler)
                 .addOnFailureListener(handler);
     }
@@ -54,7 +52,7 @@ public class FirebaseRxSubscriberWrapper<T>
     }
 
     @Override
-    public void onFailure(@NonNull Exception e) {
+    public void onFailure(Exception e) {
         if (!subscriber.isUnsubscribed()) {
             subscriber.onError(e);
         }

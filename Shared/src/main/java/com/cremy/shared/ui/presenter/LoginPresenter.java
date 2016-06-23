@@ -47,8 +47,6 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     public void signInUser(String email, String password) {
 
         Single<AuthResult> authSingle = this.dataManager.signInWithEmailAndPassword(email, password);
-        authSingle.observeOn(AndroidSchedulers.mainThread());
-        authSingle.subscribeOn(Schedulers.io());
         // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
         authSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
         authSingle.subscribe(new SingleSubscriber<AuthResult>() {

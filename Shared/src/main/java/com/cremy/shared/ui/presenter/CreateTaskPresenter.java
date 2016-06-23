@@ -69,8 +69,6 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     @Override
     public void createTask() {
         Single<Void> createSingle =  this.dataManager.writeTaskInDatabase(this.model);
-        createSingle.observeOn(AndroidSchedulers.mainThread());
-        createSingle.subscribeOn(Schedulers.io());
         // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
         createSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
         createSingle.subscribe(new SingleSubscriber<Void>() {

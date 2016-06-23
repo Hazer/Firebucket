@@ -9,6 +9,7 @@ import com.google.firebase.database.Exclude;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class Task implements CreateTaskMVP.Model, Comparable<Task> {
 
@@ -19,6 +20,7 @@ public class Task implements CreateTaskMVP.Model, Comparable<Task> {
     private String deadline = CustomDateUtils.getNow();
     private String displayedDeadline;
     private long millisDeadline;
+    private HashMap<String, String> tags = null;
     //endregion
 
     //region Constructors
@@ -74,6 +76,10 @@ public class Task implements CreateTaskMVP.Model, Comparable<Task> {
 
     public long getMillisDeadline() {
         return millisDeadline;
+    }
+
+    public HashMap<String, String> getTags() {
+        return tags;
     }
     //endregion
 
