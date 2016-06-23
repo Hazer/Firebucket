@@ -17,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -335,6 +337,8 @@ DatePickerDialog.OnDateSetListener{
     //region Voice Recognition
     @Override
     public void startVoiceRecognition() {
+
+        // We start the speech recognizer intent
         this.speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         this.speechRecognizer.setRecognitionListener(this);
 
@@ -348,7 +352,12 @@ DatePickerDialog.OnDateSetListener{
 
     @Override
     public void onReadyForSpeech(Bundle params) {
-
+        // We start to animate the button
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0.5F, 1.2F, 0.5F, 1.2F, 1, 0.5F, 1, 0.5F);
+        scaleAnimation.setDuration(500);
+        scaleAnimation.setRepeatMode(ScaleAnimation.REVERSE);
+        scaleAnimation.setRepeatCount(10);
+        this.createTaskVoiceRecognitionButton.startAnimation(scaleAnimation);
     }
 
     @Override
@@ -368,12 +377,14 @@ DatePickerDialog.OnDateSetListener{
 
     @Override
     public void onEndOfSpeech() {
-
+        this.createTaskVoiceRecognitionButton.clearAnimation();
     }
 
     @Override
     public void onError(int error) {
-        SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, getResources().getString(R.string.error_create_task_voice_recognition_error_code, error));
+        if (error!=SpeechRecognizer.ERROR_SPEECH_TIMEOUT) {
+            SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, getResources().getString(R.string.error_create_task_voice_recognition_error_code, error));
+        }
     }
 
     @Override
