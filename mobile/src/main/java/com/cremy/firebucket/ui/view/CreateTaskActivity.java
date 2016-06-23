@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
@@ -27,6 +28,7 @@ import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.greenrobotutils.library.device.LocaleUtil;
+import com.cremy.greenrobotutils.library.permission.PermissionHelper;
 import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.util.KeyboardUtils;
@@ -85,7 +87,12 @@ DatePickerDialog.OnDateSetListener{
     //region View events
     @OnClick(R.id.createTaskVoiceRecognitionButton)
     public void clickCreateTaskVoiceRecognitionButton() {
-        this.startVoiceRecognition();
+        if (PermissionHelper.isRecordAudioPermissionGranted(this)) {
+            this.startVoiceRecognition();
+        }
+        else {
+            PermissionHelper.requestRecordAudioPermission(this);
+        }
     }
 
     @OnClick(R.id.fabCreateTask)
@@ -408,6 +415,19 @@ DatePickerDialog.OnDateSetListener{
     @Override
     public void onEvent(int eventType, Bundle params) {
 
+    }
+    //endregion
+
+    //region RECORD_AUDIO permission related
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        // If request is cancelled, the result arrays are empty.
+        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            this.startVoiceRecognition();
+        } else {
+            // Nothing to do
+        }
+        return;
     }
     //endregion
 }
