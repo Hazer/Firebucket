@@ -20,7 +20,7 @@ public class Task implements CreateTaskMVP.Model, Comparable<Task> {
     private String deadline = CustomDateUtils.getNow();
     private String displayedDeadline;
     private long millisDeadline;
-    private HashMap<String, String> tags = null;
+    private String tag = null;
     //endregion
 
     //region Constructors
@@ -78,10 +78,15 @@ public class Task implements CreateTaskMVP.Model, Comparable<Task> {
         return millisDeadline;
     }
 
-    public HashMap<String, String> getTags() {
-        return tags;
+    public String getTag() {
+        return tag;
     }
-    //endregion
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+//endregion
 
     //region Utils
 

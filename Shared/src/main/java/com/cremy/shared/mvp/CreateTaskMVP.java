@@ -24,6 +24,8 @@ public interface CreateTaskMVP {
         void updateViewTaskDeadline(Calendar _calendar);
 
         void updateViewTaskPriority(int idPriority);
+
+        void updateViewTaskTag(String _tag);
     }
     //endregion
 
@@ -32,6 +34,7 @@ public interface CreateTaskMVP {
         void setTaskPriority(int _idPriority);
         void setTaskDeadline(Calendar _calendar);
         void setTaskTitle(String _title);
+        void setTaskTag(String _tag);
 
         void createTask();
         void onTaskCreatedSuccess();

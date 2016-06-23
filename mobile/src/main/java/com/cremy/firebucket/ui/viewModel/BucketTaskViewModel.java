@@ -34,5 +34,11 @@ public class BucketTaskViewModel extends BaseObservable {
     public String getTaskPriorityLabel() {
         return context.getResources().getString(R.string.priority, this.model.getPriority().getLabel());
     }
+    public String getTaskTag() {
+        return this.model.getTag();
+    }
+    public boolean hasTag() {
+        return this.model.getTag()!=null;
+    }
     //endregion
 }

@@ -10,7 +10,7 @@ import com.google.android.gms.tasks.Task;
 import rx.Subscriber;
 
 /**
- * This handler allows to "wrap" the Firebase listeners (OnSuccessListener, OnFailureListener, OnCompleteListener)
+ * Allows to "wrap" the Firebase listeners (OnSuccessListener, OnFailureListener, OnCompleteListener)
  * With a RxJava {@link Subscriber}
  * @param <T>
  */

@@ -123,5 +123,35 @@
             </LinearLayout>
         </LinearLayout>
 
+
+        <LinearLayout
+            android:id="@+id/createTaskOptionItemTags"
+            style="@style/CreateTaskActivityOptionItemLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                style="@style/CreateTaskActivityOptionItemIcon"
+                android:src="@drawable/ic_tag_grey_400"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/material_design_keyline_one">
+                <TextView
+                    style="@style/CreateTaskActivityOptionItemTitle"
+                    android:text="@string/create_task_option_item_tags_title"/>
+
+                <TextView
+                    android:id="@+id/createTaskOptionItemTagsSubtitle"
+                    style="@style/CreateTaskActivityOptionItemSubtitle"
+                    android:text="@string/create_task_option_item_tags_value_default"/>
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -48,6 +48,10 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     private Task model = new Task();
 
+    @Override
+    public void setTaskTag(final String _tag) {
+        this.model.setTag(_tag);
+    }
 
     @Override
     public void setTaskPriority(final int _idPriority) {

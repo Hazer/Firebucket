@@ -10,7 +10,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * This handler allows to "wrap" the Firebase listeners (OnSuccessListener & OnFailureListener)
+ * Allows to "wrap" the Firebase listeners (OnSuccessListener & OnFailureListener)
  * with a RxJava {@link rx.SingleSubscriber}
  * @param <T>
  */
@@ -29,6 +29,13 @@ public class FirebaseRxSingle<T>
                 .addOnFailureListener(wrapper);
     }
 
+    /**
+     * Allows to build a {@link Single} object with a given Firebase {@link Task}
+     *
+     * @param task e.g. FirebaseAuth.getInstance().signInWithEmailAndPassword(String mail, String password)
+     * @param <T>
+     * @return
+     */
     public static <T> Single<T> getSingle(final Task<T> task) {
         return Single.create(new Single.OnSubscribe<T>() {
             @Override

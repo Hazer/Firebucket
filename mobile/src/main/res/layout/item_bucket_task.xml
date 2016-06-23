@@ -15,33 +15,51 @@
         tools:background="@android:color/white"
         android:padding="@dimen/material_design_keyline_one">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                style="@style/BucketActivityItemTaskTitle"
-                android:text="@{viewModel.getTaskTitle}"
-                tools:text="Item title"/>
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/material_design_keyline_three">
-                <com.cremy.shared.utils.RoundedCornerLayout
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_marginRight="@dimen/material_design_keyline_two"
-                    android:background="@{viewModel.getTaskPriorityColor}"
-                    tools:background="@color/taskPriorityNormal"
-                    android:layout_gravity="center_vertical"/>
-
+                android:orientation="vertical"
+                android:layout_toLeftOf="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
                 <TextView
-                    style="@style/BucketActivityItemTaskSubtitle"
-                    android:text="@{viewModel.getTaskPriorityLabel}"
-                    tools:text="Item subtitle"/>
+                    style="@style/BucketActivityItemTaskTitle"
+                    android:text="@{viewModel.getTaskTitle}"
+                    tools:text="Item title"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/material_design_keyline_three">
+                    <com.cremy.shared.utils.RoundedCornerLayout
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_marginRight="@dimen/material_design_keyline_two"
+                        android:background="@{viewModel.getTaskPriorityColor}"
+                        tools:background="@color/taskPriorityNormal"
+                        android:layout_gravity="center_vertical"/>
+
+                    <TextView
+                        style="@style/BucketActivityItemTaskSubtitle"
+                        android:text="@{viewModel.getTaskPriorityLabel}"
+                        tools:text="Item subtitle"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+
+            <TextView
+                style="@style/BucketActivityItemTaskTag"
+                android:text="@{viewModel.getTaskTag}"
+                android:visibility="@{viewModel.hasTag()?0:8}"
+                tools:visibility="visible"
+                tools:text="Tag"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/textView" />
+        </RelativeLayout>
     </FrameLayout>
 </layout>

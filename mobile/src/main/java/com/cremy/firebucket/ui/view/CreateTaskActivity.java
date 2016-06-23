@@ -57,6 +57,9 @@ DatePickerDialog.OnDateSetListener{
 
     @BindView(R.id.createTaskOptionItemPrioritySubtitle)
     TextView createTaskOptionItemPrioritySubtitle;
+
+    @BindView(R.id.createTaskOptionItemTagsSubtitle)
+    TextView createTaskOptionItemTagsSubtitle;
     //endregion
 
     //region Date
@@ -93,9 +96,23 @@ DatePickerDialog.OnDateSetListener{
         ad.setTitle(getResources().getString(R.string.create_task_option_item_priority_title));
         ad.setCancelable(true);
         ad.setItems(R.array.task_priority_labels, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int idPriority) {
-                presenter.setTaskPriority(idPriority);
-                updateViewTaskPriority(idPriority);
+            public void onClick(DialogInterface dialog, int index) {
+                presenter.setTaskPriority(index);
+                updateViewTaskPriority(index);
+            }
+        });
+        ad.show();
+    }
+    @OnClick(R.id.createTaskOptionItemTags)
+    public void clickCreateTaskOptionItemTags() {
+        AlertDialog.Builder ad = new AlertDialog.Builder(this, 5);
+        ad.setTitle(getResources().getString(R.string.create_task_option_item_tags_title));
+        ad.setCancelable(true);
+        ad.setItems(R.array.task_tags_labels, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int index) {
+                String[] tags = getResources().getStringArray(R.array.task_tags_labels);
+                presenter.setTaskTag(tags[index]);
+                updateViewTaskTag(tags[index]);
             }
         });
         ad.show();
@@ -293,4 +310,8 @@ DatePickerDialog.OnDateSetListener{
         this.createTaskOptionItemPrioritySubtitle.setText(TaskPriority.getResourceLabel(CreateTaskActivity.this, _idPriority));
     }
 
+    @Override
+    public void updateViewTaskTag(String _tag) {
+        this.createTaskOptionItemTagsSubtitle.setText(_tag);
+    }
 }

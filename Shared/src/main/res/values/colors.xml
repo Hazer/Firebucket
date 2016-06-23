@@ -5,13 +5,14 @@
     <color name="colorPrimaryDark">#a12f2f</color>
     <color name="colorAccent">#ffcb2b</color>
 
-
     <!--Other-->
     <color name="colorRipple">#e5e5e5</color>
     <color name="transparent">#00000000</color>
     <color name="colorBlackOverlay">#64000000</color>
     <color name="colorBackground">#EEEEEE</color>
     <color name="green">#4CAF50</color>
+    <color name="grey_100">#F5F5F5</color>
+    <color name="grey_400">#BDBDBD</color>
 
     <!--Task priorities-->
     <color name="taskPriorityLow">#4CAF50</color>
