@@ -80,95 +80,107 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/activity_create_task_extended_toolbar_height">
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/createTaskOptionItemDeadline"
             style="@style/CreateTaskActivityOptionItemLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                style="@style/CreateTaskActivityOptionItemIcon"
-                android:src="@drawable/ic_calendar_grey_400"/>
-
-
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/material_design_keyline_one">
-                <TextView
-                    style="@style/CreateTaskActivityOptionItemTitle"
-                    android:text="@string/create_task_option_item_deadline_title"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/createTaskOptionItemDeadlineSubtitle"
-                    style="@style/CreateTaskActivityOptionItemSubtitle"
-                    android:text="@string/create_task_option_item_deadline_value_default"/>
+                <ImageView
+                    style="@style/CreateTaskActivityOptionItemIcon"
+                    android:src="@drawable/ic_calendar_grey_400"/>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/material_design_keyline_one">
+                    <TextView
+                        style="@style/CreateTaskActivityOptionItemTitle"
+                        android:text="@string/create_task_option_item_deadline_title"/>
+
+                    <TextView
+                        android:id="@+id/createTaskOptionItemDeadlineSubtitle"
+                        style="@style/CreateTaskActivityOptionItemSubtitle"
+                        android:text="@string/create_task_option_item_deadline_value_default"/>
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/createTaskOptionItemPriority"
             style="@style/CreateTaskActivityOptionItemLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                style="@style/CreateTaskActivityOptionItemIcon"
-                android:src="@drawable/ic_priority_grey_400"/>
-
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/material_design_keyline_one">
-                <TextView
-                    style="@style/CreateTaskActivityOptionItemTitle"
-                    android:text="@string/create_task_option_item_priority_title"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/createTaskOptionItemPrioritySubtitle"
-                    style="@style/CreateTaskActivityOptionItemSubtitle"
-                    android:text="@string/create_task_option_item_priority_value_default"/>
+                <ImageView
+                    style="@style/CreateTaskActivityOptionItemIcon"
+                    android:src="@drawable/ic_priority_grey_400"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/material_design_keyline_one">
+                    <TextView
+                        style="@style/CreateTaskActivityOptionItemTitle"
+                        android:text="@string/create_task_option_item_priority_title"/>
+
+                    <TextView
+                        android:id="@+id/createTaskOptionItemPrioritySubtitle"
+                        style="@style/CreateTaskActivityOptionItemSubtitle"
+                        android:text="@string/create_task_option_item_priority_value_default"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
 
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/createTaskOptionItemTags"
             style="@style/CreateTaskActivityOptionItemLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-
-            <ImageView
-                style="@style/CreateTaskActivityOptionItemIcon"
-                android:src="@drawable/ic_tag_grey_400"/>
-
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/material_design_keyline_one">
-                <TextView
-                    style="@style/CreateTaskActivityOptionItemTitle"
-                    android:text="@string/create_task_option_item_tags_title"/>
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:id="@+id/createTaskOptionItemTagsSubtitle"
-                    style="@style/CreateTaskActivityOptionItemSubtitle"
-                    android:text="@string/create_task_option_item_tags_value_default"/>
+                <ImageView
+                    style="@style/CreateTaskActivityOptionItemIcon"
+                    android:src="@drawable/ic_tag_grey_400"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/material_design_keyline_one">
+                    <TextView
+                        style="@style/CreateTaskActivityOptionItemTitle"
+                        android:text="@string/create_task_option_item_tags_title"/>
+
+                    <TextView
+                        android:id="@+id/createTaskOptionItemTagsSubtitle"
+                        style="@style/CreateTaskActivityOptionItemSubtitle"
+                        android:text="@string/create_task_option_item_tags_value_default"/>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
+        </FrameLayout>
 
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>
