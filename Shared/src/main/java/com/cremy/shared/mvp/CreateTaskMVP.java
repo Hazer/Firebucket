@@ -1,5 +1,7 @@
 package com.cremy.shared.mvp;
 
+import android.speech.RecognitionListener;
+
 import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.base.BaseMvpView;
 import com.cremy.shared.mvp.base.view.rx.IBaseRxActivity;
@@ -13,7 +15,7 @@ import java.util.Calendar;
 public interface CreateTaskMVP {
 
     //region View
-    interface View extends BaseMvpView, IBaseRxActivity {
+    interface View extends BaseMvpView, IBaseRxActivity, RecognitionListener {
         void createTask();
         void next();
 
@@ -26,6 +28,8 @@ public interface CreateTaskMVP {
         void updateViewTaskPriority(int idPriority);
 
         void updateViewTaskTag(String _tag);
+
+        void startVoiceRecognition();
     }
     //endregion
 
@@ -37,6 +41,7 @@ public interface CreateTaskMVP {
         void setTaskTag(String _tag);
 
         void createTask();
+
         void onTaskCreatedSuccess();
         void onTaskCreatedFail(Throwable e);
     }

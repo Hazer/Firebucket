@@ -1,7 +1,6 @@
 <resources>
 
     <style name="CreateTaskActivityEditTextTitle" parent="TextAppearance.AppCompat">
-        <item name="android:layout_margin">@dimen/material_design_keyline_one</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/text_size_xxxlarge</item>
         <item name="android:maxLength">255</item>

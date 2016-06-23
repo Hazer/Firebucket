@@ -25,17 +25,34 @@
                 android:minHeight="?android:attr/actionBarSize"
                 android:background="?colorPrimary" />
 
-            <com.cremy.shared.ui.widget.FirebucketTextInputLayout
-                android:id="@+id/createTaskTitleTextInputLayout"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
-                <com.cremy.shared.ui.widget.FirebucketTextInputEditText
+                <com.cremy.shared.ui.widget.FirebucketTextInputLayout
+                    android:id="@+id/createTaskTitleTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/CreateTaskActivityEditTextTitle"
-                    android:hint="@string/hint_task_title" />
-            </com.cremy.shared.ui.widget.FirebucketTextInputLayout>
+                    android:layout_toLeftOf="@+id/createTaskVoiceRecognitionButton"
+                    android:layout_toStartOf="@+id/createTaskVoiceRecognitionButton">
+                    <com.cremy.shared.ui.widget.FirebucketTextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/material_design_keyline_one"
+                        style="@style/CreateTaskActivityEditTextTitle"
+                        android:hint="@string/hint_task_title" />
+                </com.cremy.shared.ui.widget.FirebucketTextInputLayout>
+
+                <ImageView
+                    android:id="@+id/createTaskVoiceRecognitionButton"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="@dimen/material_design_keyline_one"
+                    android:src="@drawable/ic_audio_record_white"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
 
 
         </FrameLayout>

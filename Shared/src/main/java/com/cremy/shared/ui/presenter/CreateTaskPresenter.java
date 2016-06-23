@@ -1,6 +1,10 @@
 package com.cremy.shared.ui.presenter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -15,6 +19,7 @@ import com.cremy.shared.utils.CrashReporter;
 import com.google.firebase.auth.AuthResult;
 import com.trello.rxlifecycle.ActivityEvent;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.inject.Inject;
@@ -33,7 +38,6 @@ import rx.schedulers.Schedulers;
 public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
         implements CreateTaskMVP.Presenter {
     private final static String TAG = "CreateTaskPresenter";
-
 
     //region DI
     DataManager dataManager;
@@ -89,7 +93,6 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
         });
     }
-
 
     @Override
     public void onTaskCreatedSuccess() {

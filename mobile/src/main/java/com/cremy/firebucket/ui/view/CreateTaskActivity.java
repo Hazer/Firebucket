@@ -6,19 +6,25 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
+import com.cremy.greenrobotutils.library.device.LocaleUtil;
 import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.util.KeyboardUtils;
@@ -29,6 +35,7 @@ import com.cremy.shared.mvp.CreateTaskMVP;
 import com.cremy.shared.ui.presenter.CreateTaskPresenter;
 import com.cremy.shared.utils.CustomDateUtils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.inject.Inject;
@@ -40,7 +47,9 @@ import butterknife.OnClick;
 public class CreateTaskActivity extends BaseRxActivity implements
         CreateTaskMVP.View,
 DatePickerDialog.OnDateSetListener{
+    private final static String TAG = "CreateTaskActivity";
     public ProgressDialog progress;
+    private SpeechRecognizer speechRecognizer;
 
     //region View binding
     @BindView(R.id.rootViewCreateTask)
@@ -51,6 +60,9 @@ DatePickerDialog.OnDateSetListener{
 
     @BindView(R.id.createTaskTitleTextInputLayout)
     TextInputLayout createTaskTitleTextInputLayout;
+
+    @BindView(R.id.createTaskVoiceRecognitionButton)
+    ImageView createTaskVoiceRecognitionButton;
 
     @BindView(R.id.createTaskOptionItemDeadlineSubtitle)
     TextView createTaskOptionItemDeadlineSubtitle;
@@ -69,6 +81,11 @@ DatePickerDialog.OnDateSetListener{
     //endregion
 
     //region View events
+    @OnClick(R.id.createTaskVoiceRecognitionButton)
+    public void clickCreateTaskVoiceRecognitionButton() {
+        this.startVoiceRecognition();
+    }
+
     @OnClick(R.id.fabCreateTask)
     public void clickFabCreateTask() {
 
@@ -314,4 +331,72 @@ DatePickerDialog.OnDateSetListener{
     public void updateViewTaskTag(String _tag) {
         this.createTaskOptionItemTagsSubtitle.setText(_tag);
     }
+
+    //region Voice Recognition
+    @Override
+    public void startVoiceRecognition() {
+        this.speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+        this.speechRecognizer.setRecognitionListener(this);
+
+        String deviceLocale = getResources().getConfiguration().locale.toString();
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, deviceLocale);
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1);
+
+        this.speechRecognizer.startListening(intent);
+    }
+
+    @Override
+    public void onReadyForSpeech(Bundle params) {
+
+    }
+
+    @Override
+    public void onBeginningOfSpeech() {
+
+    }
+
+    @Override
+    public void onRmsChanged(float rmsdB) {
+
+    }
+
+    @Override
+    public void onBufferReceived(byte[] buffer) {
+
+    }
+
+    @Override
+    public void onEndOfSpeech() {
+
+    }
+
+    @Override
+    public void onError(int error) {
+        SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, getResources().getString(R.string.error_create_task_voice_recognition_error_code, error));
+    }
+
+    @Override
+    public void onResults(Bundle results) {
+        Log.d(TAG, "onResults " + results);
+        ArrayList<String> data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        if (data!=null && data.size()>0) {
+            Log.e(TAG, "Result: "+data.get(0));
+            this.createTaskTitleTextInputLayout.getEditText().setText(data.get(0));
+        }
+        else {
+            SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, getResources().getString(R.string.error_create_task_voice_recognition));
+        }
+    }
+
+    @Override
+    public void onPartialResults(Bundle partialResults) {
+
+    }
+
+    @Override
+    public void onEvent(int eventType, Bundle params) {
+
+    }
+    //endregion
 }
