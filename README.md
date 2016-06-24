@@ -1,13 +1,15 @@
 # Firebucket (Work in progress...)
 ![Firebase](https://raw.githubusercontent.com/remychantenay/Firebucket/master/blob/header.jpg)
 
-Glimpse into the astonishing future of BaaS- [Firebase](https://www.firebase.com/) with a very simple bucket list app.
+Glimpse of the astonishing future of BaaS- [Firebase](https://www.firebase.com/) with a very simple bucket list app.
 
 ## Presentation
 Since it's interesting evolution from the [Google I/O 2016](https://developers.googleblog.com/2016/05/firebase-expands-to-become-unified-app.html)
 , I really wanted to play with Firebase to witness the potential as well as the limitations.
 
 This project is nothing more than a way to put into practice what I've learn.
+
+![Screenshots](https://raw.githubusercontent.com/remychantenay/Firebucket/master/blob/screenshots.jpg)
 
 ## Firebase modules used
 * Database
