@@ -60,7 +60,7 @@ public class AppModule {
     public FirebaseRemoteConfig provideFirebaseRemoteConfig() {
         FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-                .setDeveloperModeEnabled(BuildConfig.LOG)
+                .setDeveloperModeEnabled(BuildConfig.DEBUG)
                 // The cache will refresh more frequently in DEBUG mode
                 .build();
         firebaseRemoteConfig.setConfigSettings(configSettings);

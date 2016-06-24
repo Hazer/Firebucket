@@ -33,6 +33,7 @@ import com.cremy.greenrobotutils.library.ui.ActivityUtils;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.util.KeyboardUtils;
 import com.cremy.greenrobotutils.library.util.NetworkUtils;
+import com.cremy.shared.data.model.TagList;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.CreateTaskMVP;
@@ -131,17 +132,8 @@ DatePickerDialog.OnDateSetListener{
     }
     @OnClick(R.id.createTaskOptionItemTags)
     public void clickCreateTaskOptionItemTags() {
-        AlertDialog.Builder ad = new AlertDialog.Builder(this, 5);
-        ad.setTitle(getResources().getString(R.string.create_task_option_item_tags_title));
-        ad.setCancelable(true);
-        ad.setItems(R.array.task_tags_labels, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int index) {
-                String[] tags = getResources().getStringArray(R.array.task_tags_labels);
-                presenter.setTaskTag(tags[index]);
-                updateViewTaskTag(tags[index]);
-            }
-        });
-        ad.show();
+        this.showLoading();
+        this.presenter.getTagList();
     }
     //endregion
 
@@ -266,6 +258,7 @@ DatePickerDialog.OnDateSetListener{
 
     @Override
     public void showMessage(String _message) {
+        this.hideLoading();
         SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, _message);
     }
 
@@ -339,6 +332,20 @@ DatePickerDialog.OnDateSetListener{
     @Override
     public void updateViewTaskTag(String _tag) {
         this.createTaskOptionItemTagsSubtitle.setText(_tag);
+    }
+
+    @Override
+    public void displayTagListAlertDialog(final CharSequence[] tagList) {
+        AlertDialog.Builder ad = new AlertDialog.Builder(this, 5);
+        ad.setTitle(getResources().getString(R.string.create_task_option_item_tags_title));
+        ad.setCancelable(true);
+        ad.setItems(tagList, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int index) {
+                presenter.setTaskTag((String) tagList[index]);
+                updateViewTaskTag((String) tagList[index]);
+            }
+        });
+        ad.show();
     }
 
     //region Voice Recognition

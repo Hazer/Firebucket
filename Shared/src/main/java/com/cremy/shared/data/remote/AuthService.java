@@ -1,7 +1,5 @@
 package com.cremy.shared.data.remote;
 
-import com.cremy.shared.data.FirebaseRxSingle;
-import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.User;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -10,7 +8,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import javax.inject.Inject;
 
-import rx.Observable;
 import rx.Single;
 
 /**
@@ -32,7 +29,7 @@ public class AuthService extends BaseFirebaseDatabaseService {
      */
     public Single<AuthResult> createUserWithEmailAndPassword(final String _email,
                                                final String _password) {
-        return FirebaseRxSingle.getSingle(firebaseAuth.createUserWithEmailAndPassword(_email, _password));
+        return observeSingleValue(firebaseAuth.createUserWithEmailAndPassword(_email, _password));
     }
 
     /**
@@ -42,7 +39,7 @@ public class AuthService extends BaseFirebaseDatabaseService {
      */
     public Single<AuthResult> signInWithEmailAndPassword(final String _email,
                                                              final String _password) {
-        return FirebaseRxSingle.getSingle(firebaseAuth.signInWithEmailAndPassword(_email, _password));
+        return observeSingleValue(firebaseAuth.signInWithEmailAndPassword(_email, _password));
     }
 
     /**
@@ -59,7 +56,7 @@ public class AuthService extends BaseFirebaseDatabaseService {
      * @param _userId
      * @param _name
      */
-    public Observable<Bucket> writeUserInDatabase(final String _userId,
+    public Single<Void> writeUserInDatabase(final String _userId,
                                                   final String _name) {
 
         User user = new User(_name);
@@ -69,11 +66,7 @@ public class AuthService extends BaseFirebaseDatabaseService {
                 .child(FIREBASE_CHILD_KEY_USERS)
                 .child(_userId);
 
-        targetChild.setValue(user);
-        return observeSingleValue(targetChild, Bucket.class);
-
-/*        targetChild.addListenerForSingleValueEvent(_valueEventListener);
-        targetChild.setValue(user);*/
+        return observeSingleValue(targetChild.setValue(user));
     }
 
 }

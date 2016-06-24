@@ -8,6 +8,7 @@ import com.cremy.shared.data.DataManager;
 import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.RemoteConfigService;
+import com.cremy.shared.data.remote.TagListService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.app.module.AppModule;
 import com.cremy.shared.di.scope.ApplicationScope;
@@ -37,6 +38,7 @@ public interface AppComponent {
     TaskService provideTaskService();
     AuthService provideAuthService();
     BucketService provideBucketService();
+    TagListService provideTagListService();
     RemoteConfigService provideRemoteConfigService();
     //endregion
 

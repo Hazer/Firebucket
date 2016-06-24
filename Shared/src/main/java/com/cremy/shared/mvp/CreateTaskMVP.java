@@ -2,6 +2,7 @@ package com.cremy.shared.mvp;
 
 import android.speech.RecognitionListener;
 
+import com.cremy.shared.data.model.TagList;
 import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.base.BaseMvpView;
 import com.cremy.shared.mvp.base.view.rx.IBaseRxActivity;
@@ -29,6 +30,8 @@ public interface CreateTaskMVP {
 
         void updateViewTaskTag(String _tag);
 
+        void displayTagListAlertDialog(CharSequence[] tagList);
+
         void startVoiceRecognition();
     }
     //endregion
@@ -44,6 +47,10 @@ public interface CreateTaskMVP {
 
         void onTaskCreatedSuccess();
         void onTaskCreatedFail(Throwable e);
+
+        void getTagList();
+        void onGetTagListSuccess(TagList tagList);
+        void onGetTagListFail(Throwable e);
     }
     //endregion
 

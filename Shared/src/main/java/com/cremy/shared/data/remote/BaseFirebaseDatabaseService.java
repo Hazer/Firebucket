@@ -5,6 +5,9 @@ import android.util.Log;
 
 import com.cremy.shared.exceptions.FirebaseRxDataCastException;
 import com.cremy.shared.exceptions.FirebaseRxDataException;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +22,11 @@ import java.util.List;
 import java.util.Map;
 
 import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by remychantenay on 24/05/2016.
@@ -29,6 +36,7 @@ public class BaseFirebaseDatabaseService {
 
     public final static String FIREBASE_CHILD_KEY_USERS = "users";
     public final static String FIREBASE_CHILD_KEY_TASKS = "tasks";
+    public final static String FIREBASE_CHILD_KEY_TAGS = "tags";
 
     protected FirebaseDatabase firebaseDatabase;
     protected FirebaseAuth firebaseAuth;
@@ -46,10 +54,10 @@ public class BaseFirebaseDatabaseService {
 
 
     @NonNull
-    public static <T> Observable<T> observeSingleValue(@NonNull final Query query, @NonNull final Class<T> clazz) {
-        return Observable.create(new Observable.OnSubscribe<T>() {
+    public static <T> Single<T> observeSingleValue(@NonNull final Query query, @NonNull final Class<T> clazz) {
+        return Single.create(new Single.OnSubscribe<T>() {
             @Override
-            public void call(final Subscriber<? super T> subscriber) {
+            public void call(final SingleSubscriber<? super T> subscriber) {
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -57,16 +65,12 @@ public class BaseFirebaseDatabaseService {
                         T value = dataSnapshot.getValue(clazz);
                         if (value != null) {
                             if (!subscriber.isUnsubscribed()) {
-                                subscriber.onNext(value);
+                                subscriber.onSuccess(value);
                             }
                         } else {
                             if (!subscriber.isUnsubscribed()) {
                                 subscriber.onError(new FirebaseRxDataCastException("Unable to cast firebase data response to " + clazz.getSimpleName()));
                             }
-                        }
-
-                        if (!subscriber.isUnsubscribed()) {
-                            subscriber.onCompleted();
                         }
                     }
 
@@ -78,8 +82,35 @@ public class BaseFirebaseDatabaseService {
                     }
                 });
             }
-        });
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
     }
+
+    @NonNull
+    public static <T> Single<T> observeSingleValue(@NonNull final Task<T> task) {
+        return Single.create(new Single.OnSubscribe<T>() {
+            @Override
+            public void call(final SingleSubscriber<? super T> subscriber) {
+                task.addOnSuccessListener(new OnSuccessListener<T>() {
+                    @Override
+                    public void onSuccess(T result) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onSuccess(result);
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onError(e);
+                        }
+                    }
+                });
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
 
     @NonNull
     public static <T> Observable<List<T>> observeValuesList(@NonNull final Query query, @NonNull final Class<T> clazz) {

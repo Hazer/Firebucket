@@ -1,6 +1,5 @@
 package com.cremy.shared.data.remote;
 
-import com.cremy.shared.data.FirebaseRxSingle;
 import com.cremy.shared.data.model.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -47,8 +46,7 @@ public class TaskService extends BaseFirebaseDatabaseService {
         _task.setId(key);
 
         // 3. We now set the new task
-        return FirebaseRxSingle.getSingle(getChildReference().child(key)
-                .setValue(_task));
+        return observeSingleValue(getChildReference().child(key).setValue(_task));
     }
    /* *
      * Allows to remove a given task from the database

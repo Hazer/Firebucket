@@ -11,8 +11,7 @@ import java.util.ListIterator;
 /**
  * Created by remychantenay on 08/05/2016.
  */
-public final class Bucket extends GSONBaseModel
-implements BucketMVP.Model{
+public final class Bucket implements BucketMVP.Model{
 
 
     //region Variables

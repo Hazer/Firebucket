@@ -11,6 +11,7 @@ import android.util.Log;
 import com.cremy.shared.App;
 import com.cremy.shared.R;
 import com.cremy.shared.data.DataManager;
+import com.cremy.shared.data.model.TagList;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.CreateTaskMVP;
@@ -105,6 +106,39 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     public void onTaskCreatedFail(Throwable e) {
         checkViewAttached();
         CrashReporter.log("CreateTask: onTaskCreatedFail | "+ e.getMessage());
+        this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));
+    }
+
+    @Override
+    public void getTagList() {
+        Single<TagList> tagListSingle =  this.dataManager.getTagList();
+        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
+        tagListSingle.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
+        tagListSingle.subscribe(new SingleSubscriber<TagList>() {
+
+            @Override
+            public void onSuccess(TagList tagList) {
+                onGetTagListSuccess(tagList);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                onGetTagListFail(e);
+            }
+
+        });
+    }
+
+    @Override
+    public void onGetTagListSuccess(TagList tagList) {
+        checkViewAttached();
+        this.view.displayTagListAlertDialog(tagList.toDisplayedList());
+    }
+
+    @Override
+    public void onGetTagListFail(Throwable e) {
+        checkViewAttached();
+        CrashReporter.log("CreateTask: onGetTagListFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));
     }
 }

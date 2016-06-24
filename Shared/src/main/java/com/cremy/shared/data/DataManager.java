@@ -3,10 +3,12 @@ package com.cremy.shared.data;
 import android.content.Context;
 
 import com.cremy.shared.data.model.Bucket;
+import com.cremy.shared.data.model.TagList;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.BucketService;
 import com.cremy.shared.data.remote.RemoteConfigService;
+import com.cremy.shared.data.remote.TagListService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +32,7 @@ public class DataManager {
     private final BucketService bucketService;
     private final AuthService authService;
     private final RemoteConfigService remoteConfigService;
+    private final TagListService tagListService;
     private Context appContext;
 
     @Inject
@@ -37,11 +40,13 @@ public class DataManager {
                        BucketService _bucketService,
                        AuthService _authService,
                        RemoteConfigService _remoteConfigService,
+                       TagListService _tagListService,
                        Context _context) {
         this.taskService = _service;
         this.bucketService = _bucketService;
         this.authService = _authService;
         this.remoteConfigService = _remoteConfigService;
+        this.tagListService = _tagListService;
         this.appContext = _context;
     }
     //endregion
@@ -61,7 +66,7 @@ public class DataManager {
        return this.authService.ifUserExists();
     }
 
-    public Observable<Bucket> writeUserInDatabase(final String _userId,
+    public Single<Void> writeUserInDatabase(final String _userId,
                                     final String _name) {
         return this.authService.writeUserInDatabase(_userId, _name);
     }
@@ -106,6 +111,12 @@ public class DataManager {
 
     public Double getRemoteConfigDoubleValue(final String _key) {
         return this.remoteConfigService.getDouble(_key);
+    }
+    //endregion
+
+    //region Tags
+    public Single<TagList> getTagList() {
+        return this.tagListService.getTagList();
     }
     //endregion
 

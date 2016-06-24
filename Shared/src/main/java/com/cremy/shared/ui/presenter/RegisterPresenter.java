@@ -71,12 +71,14 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
         final String username = usernameFromEmail(user.getEmail());
 
         // 1. We'll write the new user into the database
-        Observable<Bucket> observable = this.dataManager.writeUserInDatabase(user.getUid(), username);
-        observable.observeOn(AndroidSchedulers.mainThread());
-        observable.subscribe(new Subscriber<Bucket>() {
+        Single<Void> single = this.dataManager.writeUserInDatabase(user.getUid(), username);
+        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
+        single.toObservable().compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
+        single.subscribe(new SingleSubscriber<Void>() {
+
             @Override
-            public void onCompleted() {
-                // Not needed here
+            public void onSuccess(Void value) {
+                view.next();
             }
 
             @Override
@@ -85,10 +87,6 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
                 view.showMessage(e.getMessage());
             }
 
-            @Override
-            public void onNext(Bucket bucket) {
-                view.next();
-            }
         });
     }
 
