@@ -2,11 +2,11 @@ package com.cremy.shared.data;
 
 import android.content.Context;
 
-import com.cremy.shared.data.local.TaskServiceLocal;
 import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.data.remote.BucketService;
+import com.cremy.shared.data.remote.RemoteConfigService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,21 +27,21 @@ public class DataManager {
 
     //region DI
     private final TaskService taskService;
-    private final TaskServiceLocal taskServiceLocal;
     private final BucketService bucketService;
     private final AuthService authService;
+    private final RemoteConfigService remoteConfigService;
     private Context appContext;
 
     @Inject
     public DataManager(TaskService _service,
-                       TaskServiceLocal _serviceLocal,
                        BucketService _bucketService,
                        AuthService _authService,
+                       RemoteConfigService _remoteConfigService,
                        Context _context) {
         this.taskService = _service;
-        this.taskServiceLocal = _serviceLocal;
         this.bucketService = _bucketService;
         this.authService = _authService;
+        this.remoteConfigService = _remoteConfigService;
         this.appContext = _context;
     }
     //endregion
@@ -87,15 +87,26 @@ public class DataManager {
     }
     //endregion
 
-    //region Local
-    /**
-     * Allows to save the recents locally
-     * @param _context
-     * @param _recents
-     */
-/*    public void setRecentMusicLocal(Context _context, Recents _recents) {
-        GSONBaseModel.saveAsync(_context, Recents.TAG, Recents.getType(), _recents);
-    }*/
+    //region Remote Config
+    public Single<Void> fetchRemoteConfigValues() {
+        return this.remoteConfigService.fetch();
+    }
+
+    public void activateFetched() {
+        this.remoteConfigService.activateFetched();
+    }
+
+    public boolean getRemoteConfigBooleanValue(final String _key) {
+        return this.remoteConfigService.getBoolean(_key);
+    }
+
+    public String getRemoteConfigStringValue(final String _key) {
+        return this.remoteConfigService.getString(_key);
+    }
+
+    public Double getRemoteConfigDoubleValue(final String _key) {
+        return this.remoteConfigService.getDouble(_key);
+    }
     //endregion
 
 }

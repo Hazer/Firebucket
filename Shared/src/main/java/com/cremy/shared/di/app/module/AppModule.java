@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
+import com.cremy.shared.BuildConfig;
+import com.cremy.shared.R;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import dagger.Module;
 import dagger.Provides;
@@ -49,6 +53,19 @@ public class AppModule {
     public FirebaseAuth provideFirebaseAuth() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         return firebaseAuth;
+    }
+
+    @Provides
+    @ApplicationScope
+    public FirebaseRemoteConfig provideFirebaseRemoteConfig() {
+        FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(BuildConfig.LOG)
+                // The cache will refresh more frequently in DEBUG mode
+                .build();
+        firebaseRemoteConfig.setConfigSettings(configSettings);
+        firebaseRemoteConfig.setDefaults(R.xml.remote_config_defaults);
+        return firebaseRemoteConfig;
     }
 
     //endregion

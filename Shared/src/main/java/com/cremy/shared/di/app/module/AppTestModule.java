@@ -5,11 +5,14 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.cremy.shared.App;
+import com.cremy.shared.BuildConfig;
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.data.remote.AuthService;
 import com.cremy.shared.di.scope.ApplicationScope;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 
 import org.mockito.Mockito;
 
@@ -54,6 +57,17 @@ public class AppTestModule {
     public FirebaseAuth provideFirebaseAuth() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         return firebaseAuth;
+    }
+
+    @Provides
+    @ApplicationScope
+    public FirebaseRemoteConfig provideFirebaseRemoteConfig() {
+        FirebaseRemoteConfig firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
+        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
+                .setDeveloperModeEnabled(BuildConfig.DEBUG)
+                .build();
+        firebaseRemoteConfig.setConfigSettings(configSettings);
+        return firebaseRemoteConfig;
     }
 
     @Provides

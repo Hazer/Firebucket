@@ -31,4 +31,5 @@ public interface ActivityComponent {
     void inject(RegisterActivity view);
     void inject(OnBoardingActivity view);
     void inject(CreateTaskActivity view);
+    void inject(LaunchScreen view);
 }

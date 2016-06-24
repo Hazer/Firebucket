@@ -75,6 +75,7 @@ dependencies {
     compile "com.google.firebase:firebase-database:$rootProject.PLAY_SERVICES_VERSION"
     compile "com.google.firebase:firebase-auth:$rootProject.PLAY_SERVICES_VERSION"
     compile "com.google.firebase:firebase-crash:$rootProject.PLAY_SERVICES_VERSION"
+    compile "com.google.firebase:firebase-config:$rootProject.PLAY_SERVICES_VERSION"
     //endregion
 
     //endregion

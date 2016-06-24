@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<defaultsMap>
+    <entry>
+        <key>is_database_write_accessible</key>
+        <value>true</value>
+    </entry>
+    <entry>
+        <key>info_latest_app_version_available</key>
+        <value>1.0</value>
+    </entry>
+</defaultsMap>

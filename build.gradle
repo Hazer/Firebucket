@@ -45,7 +45,7 @@ project.ext.RUNNER_VERSION = '0.4'
 project.ext.GLASSFISH_JAVAX_ANNOTATION = '10.0-b28'
 
 project.ext.WEAR_SUPPORT_VERSION = '1.4.0'
-project.ext.PLAY_SERVICES_VERSION = '9.0.0'
+project.ext.PLAY_SERVICES_VERSION = '9.0.2'
 
 project.ext.LEANBACK_SUPPORT_VERSION = '23.3.0'
 //endregion
