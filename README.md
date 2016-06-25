@@ -11,6 +11,9 @@ This project is nothing more than a way to put into practice what I've learn.
 
 ![Screenshots](https://raw.githubusercontent.com/remychantenay/Firebucket/master/blob/screenshots.jpg)
 
+## Download
+* [Google Play Store](https://play.google.com/store/apps/details?id=com.cremy.firebucket)
+
 ## Firebase modules used
 * Database
 * Crash reporting
@@ -40,3 +43,6 @@ __Work in progress...__
 
 ## Android Wear 2.0
 __Coming soon...__
+
+## Read More
+* [Read more about Firebucket on Medium](https://play.google.com/store/apps/details?id=com.cremy.firebucket)
