@@ -33,7 +33,7 @@ public final class Bucket implements BucketMVP.Model{
 
     @Override
     public boolean isEmpty() {
-        return this.tasks.isEmpty();
+        return (this.tasks == null || this.tasks.isEmpty());
     }
 
     @Override
