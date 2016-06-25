@@ -7,8 +7,8 @@
 -dontwarn
 -dontshrink
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
--libraryjars /Users/remychantenay/Documents/workspace/Firebucket/app/libs
--keepdirectories /Users/remychantenay/Documents/workspace/Firebucket/app/libs
+-libraryjars /Users/remychantenay/Documents/workspace/Firebucket/wear/libs
+-keepdirectories /Users/remychantenay/Documents/workspace/Firebucket/wear/libs
 #-keep public class * extends android.app.Activity
 #-keep public class * extends android.app.Application
 #-keep public class * extends android.app.Service

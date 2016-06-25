@@ -36,6 +36,7 @@ public class BaseFirebaseDatabaseService {
 
     public final static String FIREBASE_CHILD_KEY_USERS = "users";
     public final static String FIREBASE_CHILD_KEY_TASKS = "tasks";
+    public final static String FIREBASE_CHILD_KEY_TAG_LIST = "taglist";
     public final static String FIREBASE_CHILD_KEY_TAGS = "tags";
 
     protected FirebaseDatabase firebaseDatabase;

@@ -1,15 +1,12 @@
 package com.cremy.shared.data.remote;
 
 import com.cremy.shared.data.model.TagList;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import javax.inject.Inject;
 
-import rx.Observable;
 import rx.Single;
 
 /**
@@ -20,7 +17,7 @@ public class TagListService extends BaseFirebaseDatabaseService {
     public DatabaseReference getChildReference() {
         this.childReference = this.firebaseDatabase.
                 getReference()
-                .child(FIREBASE_CHILD_KEY_TAGS);
+                .child(FIREBASE_CHILD_KEY_TAG_LIST);
 
         return this.childReference;
     }

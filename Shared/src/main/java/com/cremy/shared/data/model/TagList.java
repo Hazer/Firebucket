@@ -2,6 +2,7 @@ package com.cremy.shared.data.model;
 
 import com.cremy.greenrobotutils.library.storage.gson.GSONBaseModel;
 import com.cremy.shared.mvp.BucketMVP;
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,13 +25,26 @@ public final class TagList {
     }
     //endregion
 
+    //region Getters and Setters
+    public HashMap<String, String> getTags() {
+        return tags;
+    }
+
+    public void setTags(HashMap<String, String> tags) {
+        this.tags = tags;
+    }
+    //endregion
+
+    @Exclude
     public boolean isEmpty() {
         return this.tags.isEmpty();
     }
 
-    public CharSequence[] toDisplayedList() {
+    @Exclude
+    public String[] toDisplayedList() {
         ArrayList<String> list = new ArrayList<String>(this.tags.values());
-        return (CharSequence[]) list.toArray();
+        String[] strings = list.toArray(new String[this.tags.size()]);
+        return strings;
     }
 
 }

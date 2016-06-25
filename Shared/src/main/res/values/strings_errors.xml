@@ -13,4 +13,5 @@
     <string name="error_create_task_invalid_title">Please, provide a title for the task.</string>
     <string name="error_create_task_voice_recognition_error_code">Oops, error %1$d</string>
     <string name="error_create_task_voice_recognition">Oops, something went wrong while trying to understand what you said.</string>
+    <string name="error_create_task_get_tags">Oops, something went wrong while trying to get the tags.</string>
 </resources>

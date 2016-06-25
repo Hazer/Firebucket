@@ -132,13 +132,16 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     @Override
     public void onGetTagListSuccess(TagList tagList) {
         checkViewAttached();
+        this.view.hideLoading();
         this.view.displayTagListAlertDialog(tagList.toDisplayedList());
     }
 
     @Override
     public void onGetTagListFail(Throwable e) {
         checkViewAttached();
+        e.printStackTrace();
         CrashReporter.log("CreateTask: onGetTagListFail | "+ e.getMessage());
-        this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));
+        this.view.hideLoading();
+        this.view.showMessage(this.appContext.getResources().getString(R.string.error_create_task_get_tags));
     }
 }

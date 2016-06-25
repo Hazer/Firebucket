@@ -258,7 +258,6 @@ DatePickerDialog.OnDateSetListener{
 
     @Override
     public void showMessage(String _message) {
-        this.hideLoading();
         SnackBarUtils.showSimpleSnackbar(this.rootViewCreateTask, _message);
     }
 
@@ -335,14 +334,14 @@ DatePickerDialog.OnDateSetListener{
     }
 
     @Override
-    public void displayTagListAlertDialog(final CharSequence[] tagList) {
+    public void displayTagListAlertDialog(final String[] tagList) {
         AlertDialog.Builder ad = new AlertDialog.Builder(this, 5);
         ad.setTitle(getResources().getString(R.string.create_task_option_item_tags_title));
         ad.setCancelable(true);
         ad.setItems(tagList, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int index) {
-                presenter.setTaskTag((String) tagList[index]);
-                updateViewTaskTag((String) tagList[index]);
+                presenter.setTaskTag(tagList[index]);
+                updateViewTaskTag(tagList[index]);
             }
         });
         ad.show();

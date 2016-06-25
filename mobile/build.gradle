@@ -19,7 +19,7 @@ android {
 }
 
 dependencies {
-    wearApp project(':wear')
+    //wearApp project(':wear')
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':Shared')

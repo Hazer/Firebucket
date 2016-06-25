@@ -30,7 +30,7 @@ public interface CreateTaskMVP {
 
         void updateViewTaskTag(String _tag);
 
-        void displayTagListAlertDialog(CharSequence[] tagList);
+        void displayTagListAlertDialog(String[] tagList);
 
         void startVoiceRecognition();
     }

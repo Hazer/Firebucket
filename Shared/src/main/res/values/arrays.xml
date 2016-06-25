@@ -6,13 +6,4 @@
         <item>High</item>
         <item>Crucial</item>
     </string-array>
-
-    <string-array name="task_tags_labels">
-        <item>Meeting</item>
-        <item>Work</item>
-        <item>Home</item>
-        <item>Goal</item>
-        <item>Fitness</item>
-        <item>Other</item>
-    </string-array>
 </resources>
