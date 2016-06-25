@@ -1,7 +1,7 @@
 # Firebucket (Work in progress...)
 ![Firebase](https://raw.githubusercontent.com/remychantenay/Firebucket/master/blob/header.jpg)
 
-Glimpse of the astonishing future of BaaS- [Firebase](https://www.firebase.com/) with a very simple bucket list app.
+A glimpse into the astonishing future of BaaS- [Firebase](https://www.firebase.com/) with a very simple bucket list app.
 
 ## Presentation
 Since it's interesting evolution from the [Google I/O 2016](https://developers.googleblog.com/2016/05/firebase-expands-to-become-unified-app.html)
