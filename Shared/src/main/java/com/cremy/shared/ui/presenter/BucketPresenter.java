@@ -100,7 +100,6 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     @Override
     public void logoutUser() {
         this.dataManager.logoutUser();
-
     }
 
     @Override

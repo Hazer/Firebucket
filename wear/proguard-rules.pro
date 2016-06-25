@@ -173,6 +173,34 @@
 -keepattributes Signature
 -keepattributes Exceptions
 
+# Apache legacy
+-keep class org.apache.http.** { *; }
+-dontwarn org.apache.http.**
+-keep class android.net.http.** { *; }
+-dontwarn android.net.http.**
+
+# Test dependencies
+-dontwarn org.mockito.**
+-dontwarn sun.reflect.**
+-dontwarn android.test.**
+
+-dontwarn org.hamcrest.**
+-dontwarn android.test.**
+-dontwarn android.support.test.**
+
+-keep class org.hamcrest.** {
+   *;
+}
+
+-keep class org.junit.** { *; }
+-dontwarn org.junit.**
+
+-keep class junit.** { *; }
+-dontwarn junit.**
+
+-keep class sun.misc.** { *; }
+-dontwarn sun.misc.**
+
 # Solution for NoClassDefFoundError (@ActionMenuView:getMenu:642) on SOME devices
 # https://github.com/google/iosched/issues/79
 # http://stackoverflow.com/questions/24809580/noclassdeffounderror-android-support-v7-internal-view-menu-menubuilder/27254191#27254191
