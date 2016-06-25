@@ -66,6 +66,10 @@ public class DataManager {
        return this.authService.ifUserExists();
     }
 
+    public void logoutUser() {
+        this.authService.logoutUser();
+    }
+
     public Single<Void> writeUserInDatabase(final String _userId,
                                     final String _name) {
         return this.authService.writeUserInDatabase(_userId, _name);
@@ -83,12 +87,8 @@ public class DataManager {
     //endregion
 
     //region Bucket
-    public void startBucketListening(ValueEventListener _valueEventListener) {
-        this.bucketService.startListening(_valueEventListener);
-    }
-
-    public void stopBucketListening(ValueEventListener _valueEventListener) {
-        this.bucketService.stopListening(_valueEventListener);
+    public Observable<Bucket> getBucket() {
+        return this.bucketService.getBucket();
     }
     //endregion
 

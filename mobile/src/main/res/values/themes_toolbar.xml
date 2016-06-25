@@ -17,7 +17,7 @@
     <style name="MaterialDesignTheme.ToolBarPrimary.Title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textSize">@dimen/text_size_xxlarge</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 

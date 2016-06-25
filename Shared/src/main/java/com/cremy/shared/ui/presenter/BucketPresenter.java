@@ -4,14 +4,22 @@ import android.util.Log;
 
 import com.cremy.shared.data.DataManager;
 import com.cremy.shared.data.model.Bucket;
+import com.cremy.shared.data.model.TagList;
 import com.cremy.shared.data.model.Task;
+import com.cremy.shared.exceptions.FirebaseRxDataException;
 import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.trello.rxlifecycle.ActivityEvent;
 
 import javax.inject.Inject;
+
+import rx.Observable;
+import rx.Single;
+import rx.SingleSubscriber;
+import rx.Subscriber;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -35,19 +43,64 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
 
     @Override
     public void detachView() {
-        this.dataManager.stopBucketListening(this);
         super.detachView();
     }
 
     @Override
     public void loadBucket() {
-        this.dataManager.stopBucketListening(this);
-        this.dataManager.startBucketListening(this);
+        Observable<Bucket> bucketObservable =  this.dataManager.getBucket();
+        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
+        bucketObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
+        bucketObservable.subscribe(new Subscriber<Bucket>() {
+            @Override
+            public void onCompleted() {
+                // Nothing to do here
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                onGetBucketFail(e);
+            }
+
+            @Override
+            public void onNext(Bucket bucket) {
+                onGetBucketSuccess(bucket);
+            }
+
+        });
+    }
+
+    @Override
+    public void onGetBucketSuccess(Bucket bucket) {
+        this.checkViewAttached();
+        this.model = bucket;
+        this.showBucket();
+    }
+
+    @Override
+    public void onGetBucketFail(Throwable e) {
+        checkViewAttached();
+        if (e instanceof FirebaseRxDataException) {
+            FirebaseRxDataException firebaseRxDataException = (FirebaseRxDataException) e;
+            // -3 Being Permission denied, it will happen on user logout
+            if (firebaseRxDataException.getError().getCode()==-3) {
+                return;
+            }
+        }
+
+        CrashReporter.log("BucketPresenter: onCancelled | "+ e.getMessage());
+        this.view.showMessage(e.getMessage());
     }
 
     @Override
     public void removeTask(Task _task) {
         this.dataManager.removeTaskFromDatabase(_task);
+    }
+
+    @Override
+    public void logoutUser() {
+        this.dataManager.logoutUser();
+
     }
 
     @Override
@@ -65,25 +118,4 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
             }
         }
     }
-
-    //region Firebase ValueEvent
-    @Override
-    public void onDataChange(DataSnapshot _dataSnapshot) {
-        this.checkViewAttached();
-        try {
-            Log.d(TAG, _dataSnapshot.toString());
-            this.model = _dataSnapshot.getValue(Bucket.class);
-            this.showBucket();
-        } catch (ClassCastException e) {
-            e.printStackTrace();
-            this.view.showError();
-        }
-    }
-
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-        CrashReporter.log("BucketPresenter: onCancelled | "+ databaseError.getMessage());
-        this.view.showMessage(databaseError.getMessage());
-    }
-    //endregion
 }

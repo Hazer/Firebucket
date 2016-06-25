@@ -1,5 +1,6 @@
 package com.cremy.firebucket.ui.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,15 @@ public class LaunchScreen extends BaseRxActivity implements
         this.presenter.detachView();
     }
     //endregion
+
+    /**
+     * Allows to start this activity
+     * @param _context
+     */
+    public static void startMe(Context _context) {
+        Intent intent = new Intent(_context, LaunchScreen.class);
+        _context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

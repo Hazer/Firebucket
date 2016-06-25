@@ -1,7 +1,9 @@
 package com.cremy.shared.mvp;
 
+import com.cremy.shared.data.model.Bucket;
 import com.cremy.shared.data.model.Task;
 import com.cremy.shared.mvp.base.BaseMvpView;
+import com.cremy.shared.mvp.base.view.rx.IBaseRxActivity;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -13,8 +15,9 @@ import java.util.HashMap;
 public interface BucketMVP {
 
     //region View
-    interface View extends BaseMvpView {
+    interface View extends BaseMvpView, IBaseRxActivity {
         void nextCreateTask();
+        void nextLogout();
         void loadData();
         void setUpRecyclerView();
 
@@ -25,10 +28,16 @@ public interface BucketMVP {
     //endregion
 
     //region Presenter
-    interface Presenter extends ValueEventListener {
+    interface Presenter {
         void loadBucket();
+        void onGetBucketSuccess(Bucket bucket);
+        void onGetBucketFail(Throwable e);
         void showBucket();
+
+
         void removeTask(Task _task);
+
+        void logoutUser();
     }
     //endregion
 

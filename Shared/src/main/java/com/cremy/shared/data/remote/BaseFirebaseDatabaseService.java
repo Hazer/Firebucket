@@ -53,7 +53,6 @@ public class BaseFirebaseDatabaseService {
         this.firebaseAuth = _firebaseAuth;
     }
 
-
     @NonNull
     public static <T> Single<T> observeSingleValue(@NonNull final Query query, @NonNull final Class<T> clazz) {
         return Single.create(new Single.OnSubscribe<T>() {
@@ -67,6 +66,39 @@ public class BaseFirebaseDatabaseService {
                         if (value != null) {
                             if (!subscriber.isUnsubscribed()) {
                                 subscriber.onSuccess(value);
+                            }
+                        } else {
+                            if (!subscriber.isUnsubscribed()) {
+                                subscriber.onError(new FirebaseRxDataCastException("Unable to cast firebase data response to " + clazz.getSimpleName()));
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        if (!subscriber.isUnsubscribed()) {
+                            subscriber.onError(new FirebaseRxDataException(error));
+                        }
+                    }
+                });
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io());
+    }
+
+    @NonNull
+    public static <T> Observable<T> observeValue(@NonNull final Query query, @NonNull final Class<T> clazz) {
+        return Observable.create(new Observable.OnSubscribe<T>() {
+            @Override
+            public void call(final Subscriber<? super T> subscriber) {
+                query.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Log.d(TAG, dataSnapshot.toString());
+                        T value = dataSnapshot.getValue(clazz);
+                        if (value != null) {
+                            if (!subscriber.isUnsubscribed()) {
+                                subscriber.onNext(value);
                             }
                         } else {
                             if (!subscriber.isUnsubscribed()) {

@@ -50,6 +50,13 @@ public class AuthService extends BaseFirebaseDatabaseService {
         return this.firebaseAuth.getCurrentUser()!=null;
     }
 
+    /**
+     * Allows to logout the current user
+     * @return
+     */
+    public void logoutUser() {
+        this.firebaseAuth.signOut();
+    }
 
     /**
      * Allows to write a user in the database

@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -20,9 +23,11 @@ import android.widget.TextView;
 
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
+import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.firebucket.ui.adapter.BucketAdapter;
 import com.cremy.firebucket.util.OrientationUtils;
 import com.cremy.firebucket.util.ui.widget.MaterialDesignFlatButton;
+import com.cremy.greenrobotutils.library.storage.gson.GSONHelper;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
 import com.cremy.greenrobotutils.library.ui.recyclerview.RecyclerViewUtils;
 import com.cremy.shared.data.model.Task;
@@ -39,7 +44,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class BucketActivity extends BaseActivity implements
+public class BucketActivity extends BaseRxActivity implements
         BucketMVP.View {
 
 
@@ -130,6 +135,34 @@ public class BucketActivity extends BaseActivity implements
         super.onDestroy();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_bucket, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+            int id = item.getItemId();
+            if (id == R.id.menu_action_overflow) {
+                View menuItemView = findViewById(R.id.menu_action_overflow);
+                PopupMenu popupMenu = new PopupMenu(this, menuItemView);
+                popupMenu.getMenuInflater().inflate(R.menu.menu_popup_bucket, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (item.getItemId() == R.id.menu_action_logout) {
+                            presenter.logoutUser();
+                            nextLogout();
+                        }
+                        return false;
+                    }
+                });
+
+                popupMenu.show();
+            }
+
+        return super.onOptionsItemSelected(item);
+    }
     //endregion
 
 
@@ -257,6 +290,12 @@ public class BucketActivity extends BaseActivity implements
     @Override
     public void nextCreateTask() {
         CreateTaskActivity.startMe(this);
+    }
+
+    @Override
+    public void nextLogout() {
+        this.closeActivity();
+        LaunchScreen.startMe(this);
     }
 
     @Override
