@@ -19,7 +19,8 @@
         </activity>
 
         <activity android:name=".ui.view.BucketActivity"
-            android:theme="@style/BucketActivityTheme"></activity>
+            android:theme="@style/BucketActivityTheme"
+            android:launchMode="singleInstance"></activity>
 
         <activity android:name="com.cremy.firebucket.ui.view.LoginActivity"
             android:theme="@style/LoginActivityTheme"></activity>
@@ -31,6 +32,21 @@
             android:theme="@style/OnBoardingActivityTheme"></activity>
         <activity android:name="com.cremy.firebucket.ui.view.CreateTaskActivity"
             android:theme="@style/CreateTaskActivityTheme"></activity>
+
+
+<!-- Firebase Messaging (FCM)-->
+        <service
+            android:name=".fcm.FirebucketMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name=".fcm.FirebucketInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
