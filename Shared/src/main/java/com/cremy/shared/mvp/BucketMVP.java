@@ -36,8 +36,10 @@ public interface BucketMVP {
 
 
         void removeTask(Task _task);
+        void removeTaskTracking(Task _task);
 
         void logoutUser();
+        void logoutUserTracking();
     }
     //endregion
 

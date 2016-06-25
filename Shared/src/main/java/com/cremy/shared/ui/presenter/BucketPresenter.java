@@ -1,5 +1,6 @@
 package com.cremy.shared.ui.presenter;
 
+import android.os.Bundle;
 import android.util.Log;
 
 import com.cremy.shared.data.DataManager;
@@ -10,6 +11,7 @@ import com.cremy.shared.exceptions.FirebaseRxDataException;
 import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -30,6 +32,10 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
 
     //region DI
     DataManager dataManager;
+
+    @Inject
+    FirebaseAnalytics firebaseAnalytics;
+
     @Inject
     public BucketPresenter(DataManager _dataManager) {
         dataManager = _dataManager;
@@ -94,12 +100,28 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
 
     @Override
     public void removeTask(Task _task) {
+        this.removeTaskTracking(_task);
+
         this.dataManager.removeTaskFromDatabase(_task);
     }
 
     @Override
+    public void removeTaskTracking(Task _task) {
+        Bundle bundle = new Bundle();
+        bundle.putString("task title", _task.getTitle());
+        firebaseAnalytics.logEvent("remove task", bundle);
+    }
+
+    @Override
     public void logoutUser() {
+        this.logoutUserTracking();
+
         this.dataManager.logoutUser();
+    }
+
+    @Override
+    public void logoutUserTracking() {
+        firebaseAnalytics.logEvent("logout", null);
     }
 
     @Override

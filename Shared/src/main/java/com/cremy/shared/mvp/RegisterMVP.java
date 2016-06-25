@@ -22,6 +22,9 @@ public interface RegisterMVP {
         void createUser(String email, String password);
         void onAuthSuccess(FirebaseUser user);
         void onAuthFail(Throwable e);
+
+        void onAuthSuccessTracking(FirebaseUser user);
+        void onAuthFailTracking(Throwable e);
     }
     //endregion
 

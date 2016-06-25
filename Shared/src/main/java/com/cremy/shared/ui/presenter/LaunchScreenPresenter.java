@@ -30,12 +30,12 @@ public class LaunchScreenPresenter extends BasePresenter<LaunchScreenMVP.View>
 
     //region DI
     DataManager dataManager;
+
+    @Inject
     Context appContext;
     @Inject
-    public LaunchScreenPresenter(DataManager _dataManager,
-                                 Context _appContext) {
+    public LaunchScreenPresenter(DataManager _dataManager) {
         this.dataManager = _dataManager;
-        this.appContext = _appContext;
     }
     //endregion
 

@@ -17,12 +17,10 @@ public class OnBoardingPresenter extends BasePresenter<OnBoardingMVP.View>
 
     //region DI
     DataManager dataManager;
-    Context appContext;
+
     @Inject
-    public OnBoardingPresenter(DataManager _dataManager,
-                               Context _appContext) {
+    public OnBoardingPresenter(DataManager _dataManager) {
         this.dataManager = _dataManager;
-        this.appContext = _appContext;
     }
     //endregion
 }

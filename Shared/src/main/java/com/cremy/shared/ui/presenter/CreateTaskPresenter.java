@@ -17,6 +17,7 @@ import com.cremy.shared.data.model.TaskPriority;
 import com.cremy.shared.mvp.CreateTaskMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.trello.rxlifecycle.ActivityEvent;
 
@@ -42,12 +43,17 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     //region DI
     DataManager dataManager;
-    Context appContext;
+
     @Inject
-    public CreateTaskPresenter(DataManager _dataManager,
-                               Context _appContext) {
+    Context appContext;
+
+    @Inject
+    FirebaseAnalytics firebaseAnalytics;
+
+
+    @Inject
+    public CreateTaskPresenter(DataManager _dataManager) {
         dataManager = _dataManager;
-        this.appContext = _appContext;
     }
     //endregion
 
@@ -97,6 +103,8 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     @Override
     public void onTaskCreatedSuccess() {
+        this.onTaskCreatedSuccessTracking();
+
         checkViewAttached();
         // 1. We tell to the view to go next
         this.view.next();
@@ -104,9 +112,25 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
 
     @Override
     public void onTaskCreatedFail(Throwable e) {
+        this.onTaskCreatedFailTracking(e);
+
         checkViewAttached();
         CrashReporter.log("CreateTask: onTaskCreatedFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_register));
+    }
+
+    @Override
+    public void onTaskCreatedSuccessTracking() {
+        Bundle bundle = new Bundle();
+        bundle.putString("task title", this.model.getTitle());
+        firebaseAnalytics.logEvent("login", bundle);
+    }
+
+    @Override
+    public void onTaskCreatedFailTracking(Throwable e) {
+        Bundle bundle = new Bundle();
+        bundle.putString("message", e.getMessage());
+        firebaseAnalytics.logEvent("create task fail", bundle);
     }
 
     @Override

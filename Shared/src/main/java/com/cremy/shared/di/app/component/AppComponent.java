@@ -12,6 +12,8 @@ import com.cremy.shared.data.remote.TagListService;
 import com.cremy.shared.data.remote.TaskService;
 import com.cremy.shared.di.app.module.AppModule;
 import com.cremy.shared.di.scope.ApplicationScope;
+import com.cremy.shared.ui.presenter.CreateTaskPresenter;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import dagger.Component;
 
@@ -26,7 +28,6 @@ public interface AppComponent {
 
     //region Injectors
     void inject(App app);
-    // TODO: Add presenters here
     //endregion
 
     //region Providers
@@ -34,12 +35,7 @@ public interface AppComponent {
     App provideApp();
     SharedPreferences provideSharedPreferences();
     DataManager provideDataManager();
-
-    TaskService provideTaskService();
-    AuthService provideAuthService();
-    BucketService provideBucketService();
-    TagListService provideTagListService();
-    RemoteConfigService provideRemoteConfigService();
+    FirebaseAnalytics provideFirebaseAnalytics();
     //endregion
 
 }

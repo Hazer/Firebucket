@@ -9,6 +9,7 @@ import com.cremy.firebucket.ui.view.RegisterActivity;
 import com.cremy.shared.di.activity.module.ActivityModule;
 import com.cremy.shared.di.app.component.AppComponent;
 import com.cremy.shared.di.scope.ActivityScope;
+import com.cremy.shared.ui.presenter.CreateTaskPresenter;
 
 import dagger.Component;
 
@@ -24,7 +25,7 @@ public interface ActivityComponent {
 
     /*
         !!! IMPORTANT !!!
-        Every activity must be referenced below
+        Activities must be referenced below
      */
     void inject(BucketActivity view);
     void inject(LoginActivity view);

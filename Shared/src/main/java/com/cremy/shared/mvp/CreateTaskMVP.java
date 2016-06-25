@@ -48,6 +48,9 @@ public interface CreateTaskMVP {
         void onTaskCreatedSuccess();
         void onTaskCreatedFail(Throwable e);
 
+        void onTaskCreatedSuccessTracking();
+        void onTaskCreatedFailTracking(Throwable e);
+
         void getTagList();
         void onGetTagListSuccess(TagList tagList);
         void onGetTagListFail(Throwable e);

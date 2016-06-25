@@ -1,6 +1,7 @@
 package com.cremy.shared.ui.presenter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.cremy.shared.R;
@@ -8,6 +9,7 @@ import com.cremy.shared.data.DataManager;
 import com.cremy.shared.mvp.LoginMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.trello.rxlifecycle.ActivityEvent;
@@ -33,12 +35,16 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
 
     //region DI
     DataManager dataManager;
-    Context appContext;
+
     @Inject
-    public LoginPresenter(DataManager _dataManager,
-                          Context _appContext) {
+    Context appContext;
+
+    @Inject
+    FirebaseAnalytics firebaseAnalytics;
+
+    @Inject
+    public LoginPresenter(DataManager _dataManager) {
         this.dataManager = _dataManager;
-        this.appContext = _appContext;
     }
     //endregion
 
@@ -64,15 +70,33 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
 
     @Override
     public void onAuthSuccess(FirebaseUser user) {
+        this.onAuthSuccessTracking(user);
+
         checkViewAttached();
         this.view.next();
     }
 
     @Override
     public void onAuthFail(Throwable e) {
+        this.onAuthFailTracking(e);
+
         checkViewAttached();
         CrashReporter.log("Login: onAuthFail | "+ e.getMessage());
         this.view.showMessage(this.appContext.getResources().getString(R.string.error_firebase_auth_signin));
+    }
+
+    @Override
+    public void onAuthSuccessTracking(FirebaseUser user) {
+        Bundle bundle = new Bundle();
+        bundle.putString("user uid", user.getUid());
+        firebaseAnalytics.logEvent("login", bundle);
+    }
+
+    @Override
+    public void onAuthFailTracking(Throwable e) {
+        Bundle bundle = new Bundle();
+        bundle.putString("message", e.getMessage());
+        firebaseAnalytics.logEvent("login fail", bundle);
     }
     //endregion
 }
