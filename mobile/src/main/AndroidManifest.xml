@@ -23,10 +23,12 @@
             android:launchMode="singleTask"></activity>
 
         <activity android:name="com.cremy.firebucket.ui.view.LoginActivity"
-            android:theme="@style/LoginActivityTheme"></activity>
+            android:theme="@style/LoginActivityTheme"
+            android:windowSoftInputMode="adjustResize"></activity>
 
         <activity android:name="com.cremy.firebucket.ui.view.RegisterActivity"
-            android:theme="@style/RegisterActivityTheme"></activity>
+            android:theme="@style/RegisterActivityTheme"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name="com.cremy.firebucket.ui.view.OnBoardingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/OnBoardingActivityTheme"></activity>
