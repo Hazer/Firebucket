@@ -28,6 +28,8 @@ dependencies {
     apt "com.jakewharton:butterknife-compiler:$rootProject.BUTTERKNIFE_VERSION"
     apt "com.android.databinding:compiler:$rootProject.ANDROID_DATA_BINDING_VERSION"
 
+    //compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
+
     // Testing
     androidTestCompile project(path: ':SharedTest')
 }
