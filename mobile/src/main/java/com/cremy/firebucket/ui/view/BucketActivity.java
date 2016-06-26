@@ -21,11 +21,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.cremy.firebucket.BuildConfig;
 import com.cremy.firebucket.R;
 import com.cremy.firebucket.mvp.base.view.BaseActivity;
 import com.cremy.firebucket.mvp.base.view.rx.BaseRxActivity;
 import com.cremy.firebucket.ui.adapter.BucketAdapter;
 import com.cremy.firebucket.util.OrientationUtils;
+import com.cremy.firebucket.util.ui.ViewServer;
 import com.cremy.firebucket.util.ui.widget.MaterialDesignFlatButton;
 import com.cremy.greenrobotutils.library.storage.gson.GSONHelper;
 import com.cremy.greenrobotutils.library.ui.SnackBarUtils;
@@ -127,12 +129,31 @@ public class BucketActivity extends BaseRxActivity implements
         this.loadData();
 
         this.setUpRecyclerView();
+
+        if (BuildConfig.LOG) {
+            ViewServer.get(this).addWindow(this);
+        }
     }
 
     @Override
     protected void onDestroy() {
         this.detachFromPresenter();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        if (BuildConfig.LOG) {
+            ViewServer.get(this).addWindow(this);
+            ViewServer.get(this).setFocusedWindow(this);
+        }
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        if (BuildConfig.LOG) {ViewServer.get(this).removeWindow(this);}
+        super.onStop();
     }
 
     @Override
