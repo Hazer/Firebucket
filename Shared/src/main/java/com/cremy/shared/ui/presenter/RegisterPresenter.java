@@ -110,7 +110,7 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     @Override
     public void onAuthSuccessTracking(FirebaseUser user) {
         Bundle bundle = new Bundle();
-        bundle.putString("user uid", user.getUid());
+        bundle.putString("user_uid", user.getUid());
         firebaseAnalytics.logEvent("register", bundle);
     }
 
@@ -118,7 +118,7 @@ public class RegisterPresenter extends BasePresenter<RegisterMVP.View>
     public void onAuthFailTracking(Throwable e) {
         Bundle bundle = new Bundle();
         bundle.putString("message", e.getMessage());
-        firebaseAnalytics.logEvent("register fail", bundle);
+        firebaseAnalytics.logEvent("register_fail", bundle);
     }
     //endregion
 

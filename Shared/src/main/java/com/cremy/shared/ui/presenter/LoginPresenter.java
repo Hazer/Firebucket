@@ -88,7 +88,7 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     @Override
     public void onAuthSuccessTracking(FirebaseUser user) {
         Bundle bundle = new Bundle();
-        bundle.putString("user uid", user.getUid());
+        bundle.putString("user_uid", user.getUid());
         firebaseAnalytics.logEvent("login", bundle);
     }
 
@@ -96,7 +96,7 @@ public class LoginPresenter extends BasePresenter<LoginMVP.View>
     public void onAuthFailTracking(Throwable e) {
         Bundle bundle = new Bundle();
         bundle.putString("message", e.getMessage());
-        firebaseAnalytics.logEvent("login fail", bundle);
+        firebaseAnalytics.logEvent("login_fail", bundle);
     }
     //endregion
 }

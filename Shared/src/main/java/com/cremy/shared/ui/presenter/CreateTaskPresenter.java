@@ -122,15 +122,15 @@ public final class CreateTaskPresenter extends BasePresenter<CreateTaskMVP.View>
     @Override
     public void onTaskCreatedSuccessTracking() {
         Bundle bundle = new Bundle();
-        bundle.putString("task title", this.model.getTitle());
-        firebaseAnalytics.logEvent("login", bundle);
+        bundle.putString("task_title", this.model.getTitle());
+        firebaseAnalytics.logEvent("create_task", bundle);
     }
 
     @Override
     public void onTaskCreatedFailTracking(Throwable e) {
         Bundle bundle = new Bundle();
         bundle.putString("message", e.getMessage());
-        firebaseAnalytics.logEvent("create task fail", bundle);
+        firebaseAnalytics.logEvent("create_task_fail", bundle);
     }
 
     @Override

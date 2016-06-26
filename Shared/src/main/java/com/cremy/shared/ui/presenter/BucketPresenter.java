@@ -108,8 +108,8 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     @Override
     public void removeTaskTracking(Task _task) {
         Bundle bundle = new Bundle();
-        bundle.putString("task title", _task.getTitle());
-        firebaseAnalytics.logEvent("remove task", bundle);
+        bundle.putString("task_title", _task.getTitle());
+        firebaseAnalytics.logEvent("remove_task", bundle);
     }
 
     @Override

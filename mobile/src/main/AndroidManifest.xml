@@ -20,7 +20,7 @@
 
         <activity android:name=".ui.view.BucketActivity"
             android:theme="@style/BucketActivityTheme"
-            android:launchMode="singleInstance"></activity>
+            android:launchMode="singleTask"></activity>
 
         <activity android:name="com.cremy.firebucket.ui.view.LoginActivity"
             android:theme="@style/LoginActivityTheme"></activity>
