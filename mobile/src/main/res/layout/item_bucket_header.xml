@@ -19,7 +19,6 @@
             android:text="@{viewModel.getHeaderTitle}"
             tools:text="Header title"/>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
