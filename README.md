@@ -5,7 +5,7 @@ A glimpse into the astonishing future of BaaS- [Firebase](https://www.firebase.c
 
 ## Presentation
 Since its interesting evolution from the [Google I/O 2016](https://developers.googleblog.com/2016/05/firebase-expands-to-become-unified-app.html)
-, I really wanted to play with Firebase to witness the potential as well as the limitations.
+, my goal was to play with Firebase to witness the potential as well as the limitations.
 
 This project is nothing more than a way to put into practice what I've learn.
 
