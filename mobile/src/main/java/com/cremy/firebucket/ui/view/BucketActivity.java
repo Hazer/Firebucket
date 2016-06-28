@@ -1,5 +1,6 @@
 package com.cremy.firebucket.ui.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -48,7 +49,7 @@ import butterknife.OnClick;
 
 public class BucketActivity extends BaseRxActivity implements
         BucketMVP.View {
-
+    public ProgressDialog progress;
 
     //region View binding
     @BindView(R.id.rootViewMain)
@@ -280,12 +281,15 @@ public class BucketActivity extends BaseRxActivity implements
 
     @Override
     public void showLoading() {
+        progress = ProgressDialog.show(this, getResources().getString(R.string.general_progress_dialog_title), getResources().getString(R.string.general_progress_dialog_content), true);
 
     }
 
     @Override
     public void hideLoading() {
-
+        if (progress != null) {
+            progress.dismiss();
+        }
     }
 
     @Override
