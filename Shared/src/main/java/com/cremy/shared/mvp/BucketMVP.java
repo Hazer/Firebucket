@@ -30,9 +30,9 @@ public interface BucketMVP {
     //region Presenter
     interface Presenter {
         void loadBucket();
-        void onGetBucketSuccess(Bucket bucket);
+        void onGetBucketSuccess(ArrayList<Task> tasks);
         void onGetBucketFail(Throwable e);
-        void showBucket();
+        void showBucket(ArrayList<Task> tasks);
 
 
         void removeTask(Task _task);

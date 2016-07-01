@@ -16,12 +16,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.trello.rxlifecycle.ActivityEvent;
 
+import java.util.ArrayList;
+import java.util.Observer;
+
 import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Single;
 import rx.SingleSubscriber;
 import rx.Subscriber;
+import rx.Subscription;
+import rx.functions.Func1;
 
 /**
  * Created by remychantenay on 08/05/2016.
@@ -42,22 +47,27 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     }
     //endregion
 
-    //region Model
-    BucketMVP.Model model;
-    //endregion
-
+    Subscription bucketSubscription;
 
     @Override
     public void detachView() {
+        if (this.bucketSubscription!=null) {
+            this.bucketSubscription.unsubscribe();
+        }
         super.detachView();
     }
 
     @Override
     public void loadBucket() {
-        Observable<Bucket> bucketObservable =  this.dataManager.getBucket();
-        // https://github.com/trello/RxLifecycle/issues/39#issuecomment-144194621
-        bucketObservable.compose(this.view.bindUntilEvent(ActivityEvent.DESTROY));
-        bucketObservable.subscribe(new Subscriber<Bucket>() {
+        bucketSubscription = this.dataManager.getBucket()
+                // We use the Map operator to add the feed headers before emitting the result
+                .map(new Func1<Bucket, ArrayList<Task>>() {
+            @Override
+            public ArrayList<Task> call(Bucket bucket) {
+                return bucket.toDisplayedList();
+            }
+        })
+        .subscribe(new Subscriber<ArrayList<Task>>() {
             @Override
             public void onCompleted() {
                 // Nothing to do here
@@ -69,18 +79,16 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
             }
 
             @Override
-            public void onNext(Bucket bucket) {
-                onGetBucketSuccess(bucket);
+            public void onNext(ArrayList<Task> tasks) {
+                onGetBucketSuccess(tasks);
             }
-
         });
     }
 
     @Override
-    public void onGetBucketSuccess(Bucket bucket) {
+    public void onGetBucketSuccess(ArrayList<Task> tasks) {
         this.checkViewAttached();
-        this.model = bucket;
-        this.showBucket();
+        this.showBucket(tasks);
     }
 
     @Override
@@ -125,11 +133,11 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
     }
 
     @Override
-    public void showBucket() {
+    public void showBucket(ArrayList<Task> tasks) {
         if (this.isViewAttached()) {
-            if (this.model != null) {
-                if (!this.model.isEmpty()) {
-                    this.view.showBucket(this.model.toDisplayedList());
+            if (tasks != null) {
+                if (!tasks.isEmpty()) {
+                    this.view.showBucket(tasks);
                 } else {
                     this.view.showBucketEmpty();
                 }

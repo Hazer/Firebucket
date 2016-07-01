@@ -340,6 +340,7 @@ public class BucketActivity extends BaseRxActivity implements
 
     @Override
     public void showBucket(ArrayList<Task> _tasks) {
+        this.hideLoading();
         if (this.adapter==null) {
             this.adapter = new BucketAdapter(this, _tasks);
             this.recyclerView.setAdapter(this.adapter);
