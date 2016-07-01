@@ -11,6 +11,7 @@ import com.cremy.shared.exceptions.FirebaseRxDataException;
 import com.cremy.shared.mvp.BucketMVP;
 import com.cremy.shared.mvp.base.presenter.BasePresenter;
 import com.cremy.shared.utils.CrashReporter;
+import com.cremy.shared.utils.rx.RxUtil;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,6 +68,9 @@ public final class BucketPresenter extends BasePresenter<BucketMVP.View>
                 return bucket.toDisplayedList();
             }
         })
+        // We use the Compose operator to add the schedulers
+        // We make sure we use it after using the map operator
+        .compose(RxUtil.<ArrayList<Task>>applySchedulers())
         .subscribe(new Subscriber<ArrayList<Task>>() {
             @Override
             public void onCompleted() {
