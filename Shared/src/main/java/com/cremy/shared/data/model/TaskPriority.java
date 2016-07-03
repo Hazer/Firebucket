@@ -1,6 +1,7 @@
 package com.cremy.shared.data.model;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import com.cremy.shared.R;
 import com.google.firebase.database.Exclude;
@@ -54,13 +55,13 @@ public class TaskPriority {
     public int getColor(Context _context) {
         switch (this.id) {
             case PRIORITY_LOW_ID:
-                return _context.getResources().getColor(R.color.taskPriorityLow);
+                return ContextCompat.getColor(_context, R.color.taskPriorityLow);
             case PRIORITY_HIGH_ID:
-                return _context.getResources().getColor(R.color.taskPriorityHigh);
+                return ContextCompat.getColor(_context, R.color.taskPriorityHigh);
             case PRIORITY_CRUCIAL_ID:
-                return _context.getResources().getColor(R.color.taskPriorityCrucial);
+                return ContextCompat.getColor(_context, R.color.taskPriorityCrucial);
             default:
-                return _context.getResources().getColor(R.color.taskPriorityNormal);
+                return ContextCompat.getColor(_context, R.color.taskPriorityNormal);
         }
     }
 

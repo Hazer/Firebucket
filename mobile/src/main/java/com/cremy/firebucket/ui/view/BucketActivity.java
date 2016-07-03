@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
@@ -218,7 +219,7 @@ public class BucketActivity extends BaseRxActivity implements
                             // 1. We draw a rectangle with a filled color
                             Paint p = RecyclerViewUtils.drawRectOnSwipe(itemView,
                                     c,
-                                    getResources().getColor(com.cremy.shared.R.color.green),
+                                    ContextCompat.getColor(BucketActivity.this, R.color.green),
                                     dX);
 
                             if (dX > 0) // If RIGHT swiped
