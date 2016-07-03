@@ -36,7 +36,7 @@ This project is nothing more than a way to put into practice what I've learn.
 ## Structure
 * **mobile**: contain all the code specific to the mobile application only
 * **wear**: code specific to the wearable devices (Android Wear 2.0)
-* **Shared**: this module host the code shared by the three module above
+* **Shared**: this module host the code shared by the two module above
 * **SharedTest**: contain very specific testing classes used by all the modules
 
 ## Android Wear 2.0
